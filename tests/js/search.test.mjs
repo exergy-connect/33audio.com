@@ -76,3 +76,8 @@ test("formats ohms", () => {
   assert.equal(formatOhms(4320), "4.32 kΩ");
   assert.equal(formatOhms(19.7), "19.7 Ω");
 });
+
+test("the tighter tolerance hint wins unless a percentage is typed", () => {
+  assert.equal(heuristicIntent("precision resistor for a feedback network").maxTolerance, 0.1);
+  assert.equal(heuristicIntent("1% precision feedback resistor").maxTolerance, 1);
+});

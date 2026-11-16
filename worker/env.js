@@ -13,6 +13,13 @@ export function json(data, status = 200, headers = {}) {
   });
 }
 
+// Workers clocks only advance across I/O, so these durations measure awaited I/O such as KV and cache calls.
+export function serverTiming(entries) {
+  return entries
+    .map(([name, dur, desc]) => `${name}${desc ? `;desc="${String(desc).replace(/"/g, "'")}"` : ""};dur=${Math.max(0, Number(dur) || 0)}`)
+    .join(", ");
+}
+
 export async function readStock(env) {
   if (!env.STOCK) return null;
   return env.STOCK.get(STOCK_KEY, "json");

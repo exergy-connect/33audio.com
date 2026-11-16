@@ -1,4 +1,4 @@
-import { json } from "../../worker/env.js";
+import { json, serverTiming } from "../../worker/env.js";
 import { MAX_QUERY, normalizeQuery, searchCatalog } from "../../worker/search.js";
 
 const CACHE_SECONDS = 300;
@@ -30,14 +30,18 @@ export async function onRequestGet({ request, env, waitUntil }) {
 
   const cache = caches.default;
   const key = cacheKey(request, query);
+  const t0 = Date.now();
   const hit = query ? await cache.match(key) : null;
+  const lookup = Date.now() - t0;
   if (hit) {
     const response = new Response(hit.body, hit);
     response.headers.set("X-Search-Cache", "HIT");
+    response.headers.set("Server-Timing", serverTiming([["cache", lookup, "HIT"]]));
     return response;
   }
 
   let catalog;
+  const t1 = Date.now();
   try {
     catalog = await loadCatalog(env, request);
   } catch (error) {
@@ -45,6 +49,7 @@ export async function onRequestGet({ request, env, waitUntil }) {
     return json({ error: "catalog_unavailable" }, 503);
   }
 
+  const catalogMs = Date.now() - t1;
   const result = await searchCatalog({ q: query, catalog, env });
   env.SEARCH_EVENTS?.writeDataPoint({
     blobs: [result.mode, result.fallback_reason ? "fallback" : "ok", query.toLowerCase().slice(0, 96)],
@@ -60,5 +65,6 @@ export async function onRequestGet({ request, env, waitUntil }) {
     "X-Search-Cache": "MISS",
   });
   if (cacheable) waitUntil(cache.put(key, response.clone()));
+  response.headers.set("Server-Timing", serverTiming([["cache", lookup, "MISS"], ["catalog", catalogMs, "ASSETS catalog.json"], ["search", result.took_ms, result.mode]]));
   return response;
 }

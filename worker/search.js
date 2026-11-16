@@ -77,6 +77,7 @@ export function parseTolerance(text) {
 export function heuristicIntent(q) {
   const text = normalizeQuery(q);
   const intent = { ohms: parseResistance(text), maxTolerance: parseTolerance(text), series: null, family: null, minVoltage: null, minPower: null, use: null, reasons: [] };
+  const explicitTolerance = intent.maxTolerance != null;
   const series = text.match(/\b(MM177|MM215|MS151|MS176)\b/i);
   if (series) intent.series = series[1].toUpperCase();
   const family = text.match(/\b(?:type\s*)?(MM|MS)\b/i);
@@ -92,7 +93,7 @@ export function heuristicIntent(q) {
     intent.use ??= hint.use;
     if (hint.minVoltage) intent.minVoltage = Math.max(intent.minVoltage ?? 0, hint.minVoltage);
     if (hint.minPower) intent.minPower = Math.max(intent.minPower ?? 0, hint.minPower);
-    if (hint.maxTolerance && intent.maxTolerance == null) intent.maxTolerance = hint.maxTolerance;
+    if (hint.maxTolerance && !explicitTolerance) intent.maxTolerance = Math.min(intent.maxTolerance ?? Infinity, hint.maxTolerance);
     if (hint.defaultOhms && intent.ohms == null) intent.ohms = hint.defaultOhms;
     intent.reasons.push(hint.reason);
   }
