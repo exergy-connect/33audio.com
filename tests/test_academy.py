@@ -81,7 +81,8 @@ class AcademyBuildTests(unittest.TestCase):
         index = json.loads((PROPOSALS / "index.json").read_text(encoding="utf-8"))
         self.assertEqual(html.count("Pending lab.net extension"), len(index["proposals"]))
         for proposal in index["proposals"]:
-            self.assertIn(f"network/labnet/proposals/{proposal['slug']}.md", html)
+            self.assertTrue(proposal.get("issue_url"), proposal["slug"])
+            self.assertIn(proposal["issue_url"], html)
         self.assertIn("Pending lab.net extension", self.page("explore/security/"))
 
     def test_real_dataset_gets_real_badge(self):

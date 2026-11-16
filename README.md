@@ -245,7 +245,7 @@ node academy/tools/lab-check.mjs --shop http://127.0.0.1:8788 --academy http://1
 
 The delivery topic's request paths run on [lab.net](https://github.com/exergy-connect/lab.net) (private). `network/labnet/anycast-edge.xp` and `anycast-edge-failover.xp` are lab.net topologies of a visitor, an ISP, transit, and two Cloudflare edge locations announcing one anycast prefix. They are run with lab.net's own engine at commit `06c71623`. `academy/tools/labnet-path.mjs` calls lab.net's `loadLab`, `startSimCluster`, and `runValidation` and keeps the hops and routing tables. The recorded runs and PCAPNG captures are in `academy/data/labnet/`. lab.net is deterministic, so CI regenerates and diffs them when a `LABNET_TOKEN` secret (read access to lab.net) exists, and also runs lab.net's GitHub Action on both files. Each figure links "Open this lab in lab.net", which opens the topology in the public browser build at exergy-connect.com.
 
-lab.net does not yet model link delay, HTTP, filters, load balancers, caches, rate limits, or traffic sources. `network/labnet/proposals/` has one minimal extension proposal per gap, and the Academy marks the dependent sections as pending. `network/labnet/proposals/index.json` holds each proposal's issue URL. When a URL is set, the pending notes link the issue instead of the draft.
+lab.net does not yet model link delay, HTTP, filters, load balancers, caches, rate limits, or traffic sources. `network/labnet/proposals/` has one minimal extension proposal per gap, and the Academy marks the dependent sections as pending. `network/labnet/proposals/index.json` maps each proposal to its lab.net issue, and the pending notes link those issues.
 
 ### Deploy the Academy
 

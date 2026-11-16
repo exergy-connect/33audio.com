@@ -32,7 +32,7 @@ The `labnet` job in `academy.yml` needs a `LABNET_TOKEN` secret: a fine-grained 
 
 ## What lab.net cannot model yet
 
-Each gap below has a minimal extension drafted in lab.net's conventions: node containers like `bgp`, link settings like `bandwidth_bps`, `validation.actions`, and `validate:` steps. The Academy marks dependent sections as pending and links them.
+Each gap below has a minimal extension drafted in lab.net's conventions: node containers like `bgp`, link settings like `bandwidth_bps`, `validation.actions`, and `validate:` steps. The Academy marks dependent sections as pending and links the filed lab.net issue.
 
 ::: pending 01-link-delay Request latency per path.
 
