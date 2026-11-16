@@ -15,7 +15,9 @@ head_sampling_rate = 1
 
 [vars]
 DEPLOYMENT = "local"
-# CF_ACCOUNT_ID = "your account id"  (with the ANALYTICS_API_TOKEN secret, enables /api/telemetry)
+# Optional: CRAWLER_HOST = "33audio-com.pages.dev" (must match the shop binding)
+# With ANALYTICS_API_TOKEN, enables /api/telemetry and /api/crawler-analytics.
+CF_ACCOUNT_ID = "5667a04062adaa67fc4d9a20c5bda391"
 
 # Workers Rate Limiting binding. namespace_id is any integer unique within the account.
 [[ratelimits]]

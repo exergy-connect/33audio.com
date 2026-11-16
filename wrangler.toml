@@ -10,6 +10,7 @@ compatibility_date = "2026-11-16"
 
 [vars]
 CHECKOUT_ENABLED = "false"
+CRAWLER_HOST = "33audio-com.pages.dev"
 
 # Create with: npx wrangler@4.162.0 kv namespace create STOCK
 # then paste the returned id here and under [[env.production.kv_namespaces]].
@@ -21,8 +22,13 @@ id = "9e033d84ee184be09a355006d8243430"
 binding = "SEARCH_EVENTS"
 dataset = "caddock_search"
 
+[[analytics_engine_datasets]]
+binding = "CRAWLER_EVENTS"
+dataset = "caddock_crawlers"
+
 [env.production.vars]
 CHECKOUT_ENABLED = "false"
+CRAWLER_HOST = "33audio-com.pages.dev"
 
 [[env.production.kv_namespaces]]
 binding = "STOCK"
@@ -31,6 +37,10 @@ id = "9e033d84ee184be09a355006d8243430"
 [[env.production.analytics_engine_datasets]]
 binding = "SEARCH_EVENTS"
 dataset = "caddock_search"
+
+[[env.production.analytics_engine_datasets]]
+binding = "CRAWLER_EVENTS"
+dataset = "caddock_crawlers"
 
 [env.production.ai]
 binding = "AI"
