@@ -12,7 +12,8 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 
 from catalog import ASSETS, DATA, DOCS
-from catalog.purchase import flatten, match_listings, resistance_label, resolve_purchase
+from catalog.fees import estimate, from_cents, to_cents
+from catalog.purchase import configured_flow_url, flatten, match_listings, resistance_label, resolve_purchase
 
 TEMPLATES = Path(__file__).resolve().parent / "templates"
 
@@ -78,13 +79,10 @@ def lastmod(catalog: dict) -> str | None:
 def reset_output(docs: Path) -> None:
     docs.mkdir(parents=True, exist_ok=True)
     for child in list(docs.iterdir()):
-        if child.name == ".nojekyll":
-            continue
         if child.is_dir():
             shutil.rmtree(child)
         else:
             child.unlink()
-    (docs / ".nojekyll").write_bytes(b"")
 
 
 def copy_assets(docs: Path, asset_dir: Path) -> None:
@@ -96,7 +94,7 @@ def copy_assets(docs: Path, asset_dir: Path) -> None:
     for item in source.iterdir():
         if item.is_file():
             shutil.copy2(item, dest / item.name)
-    for name in ("styles.css", "search.js", "favicon.svg"):
+    for name in ("styles.css", "search.js", "favicon.svg", "checkout.js", "fees.js"):
         shutil.copy2(TEMPLATES / name, docs / name)
 
 
@@ -134,6 +132,12 @@ def head(title: str, description: str, canonical: str, depth: int, og_type: str,
 <meta name="twitter:description" content="{escape(description)}">
 <link rel="icon" href="{escape(rel(depth, 'favicon.svg'))}" type="image/svg+xml">
 <link rel="stylesheet" href="{escape(rel(depth, 'styles.css'))}">
+<script>
+try {{
+  var flow = localStorage.getItem("33audio-payment-flow");
+  if (flow === "ebay" || flow === "stripe" || flow === "paypal") document.documentElement.setAttribute("data-payment-flow", flow);
+}} catch (e) {{}}
+</script>
 {extra}
 </head>
 """
@@ -168,12 +172,21 @@ def header(site: dict, depth: int, current: str) -> str:
         <button type="submit">Search</button>
       </div>
     </form>
+    <div class="payment-switch">
+      <label class="payment-label" for="payment-flow">Checkout demo</label>
+      <select id="payment-flow" data-payment-select>
+        <option value="ebay">eBay</option>
+        <option value="stripe">Stripe</option>
+        <option value="paypal">PayPal</option>
+      </select>
+      <a href="{escape(rel(depth, 'fees/'))}">Selling costs</a>
+    </div>
   </div>
 </header>
 """
 
 
-def footer(site: dict, catalog: dict) -> str:
+def footer(site: dict, catalog: dict, depth: int) -> str:
     listing = catalog["listing"]
     region = listing.get("region_note") or "USA orders only."
     source = catalog["source_url"]
@@ -182,12 +195,13 @@ def footer(site: dict, catalog: dict) -> str:
     <p>33audio · {escape(site['location']['label'])} · {escape(site['email'])}</p>
     <p>{escape(region)} Catalog price ${escape(catalog['unit_price'])} each. {escape(site['shipping']['summary'])}. Mail order is a PayPal invoice from Mark. eBay prices and shipping are on the listing.</p>
     <p>Inventory is taken from the <a href="{escape(source)}">33audio Caddock listing</a>. {escape(catalog.get('legend') or '')}</p>
+    <p><a href="{escape(rel(depth, 'fees/'))}">Selling costs</a></p>
   </div>
 </footer>
 """
 
 
-def layout(title: str, description: str, canonical: str, rel_path: str, body: str, site: dict, catalog: dict, current: str, og_type: str = "website", extra_head: str = "", search: bool = False) -> str:
+def layout(title: str, description: str, canonical: str, rel_path: str, body: str, site: dict, catalog: dict, current: str, og_type: str = "website", extra_head: str = "", search: bool = False, extra_scripts: str = "") -> str:
     depth = depth_of(rel_path)
     script = f'<script src="{escape(rel(depth, "search.js"))}" defer></script>' if search else ""
     return (
@@ -195,8 +209,10 @@ def layout(title: str, description: str, canonical: str, rel_path: str, body: st
         + "<body>\n"
         + header(site, depth, current)
         + f'<main id="content" class="wrap">\n{body}\n</main>\n'
-        + footer(site, catalog)
+        + footer(site, catalog, depth)
+        + f'<script src="{escape(rel(depth, "checkout.js"))}" defer></script>'
         + script
+        + extra_scripts
         + "\n</body>\n</html>\n"
     )
 
@@ -239,30 +255,46 @@ def datasheet_link(site: dict, family: str, depth: int) -> str:
     return f'<p><a href="{escape(rel(depth, sheet["file"]))}">{escape(sheet["label"])}</a></p>'
 
 
-def buy_html(decision: dict) -> str:
-    buttons = [
-        f'<a class="button primary" href="{escape(decision["primary_href"])}">'
-        f'{escape(decision["primary_label"])}</a>'
-    ]
-    if decision["mode"] == "checkout":
-        buttons.append(
-            f'<a class="button secondary" href="{escape(decision["ebay_href"])}">On eBay</a>'
+def flow_button(flow: str, label: str, href: str | None, note: str) -> str:
+    if href:
+        control = (
+            f'<a class="button primary" data-flow="{escape(flow)}" href="{escape(href)}">{escape(label)}</a>'
         )
-    buttons.append(
-        f'<a class="button secondary" href="{escape(decision["ask_href"])}">{escape(decision["ask_label"])}</a>'
-    )
+    else:
+        control = (
+            f'<button type="button" class="button primary is-demo" data-flow="{escape(flow)}" disabled>'
+            f'{escape(label)} <span class="demo-tag">demo, not yet active</span></button>'
+        )
+    return control + f'<p class="fine buy-note" data-flow="{escape(flow)}">{escape(note)}</p>'
+
+
+def buy_html(decision: dict, part: dict, site: dict) -> str:
+    stripe = configured_flow_url(site, part, "stripe")
+    paypal = configured_flow_url(site, part, "paypal")
+    stripe_label = (site.get("payment_flows") or {}).get("stripe", {}).get("label") or "Pay with Stripe"
+    paypal_label = (site.get("payment_flows") or {}).get("paypal", {}).get("label") or "Pay with PayPal"
+    controls = [
+        flow_button("ebay", decision["primary_label"], decision["ebay_href"], decision["primary_note"]),
+        flow_button(
+            "stripe",
+            stripe_label,
+            stripe,
+            "Opens the Stripe Payment Link for this part." if stripe else "No Stripe Payment Link is configured yet. This control is a demo, not a checkout.",
+        ),
+        flow_button(
+            "paypal",
+            paypal_label,
+            paypal,
+            "Opens the PayPal checkout link for this part." if paypal else "No PayPal checkout URL is configured yet. This control is a demo, not a checkout.",
+        ),
+        f'<a class="button secondary" href="{escape(decision["ask_href"])}">{escape(decision["ask_label"])}</a>',
+    ]
     listing = decision.get("listing") or {}
     extra = ""
     if listing.get("title"):
-        price = ""
-        if listing.get("price"):
-            price = f' Listing price ${escape(str(listing["price"]))}.'
-        extra = f'<p class="fine">Matched listing: {escape(listing["title"])}.{price}</p>'
-    return (
-        f'<div class="buy">{"".join(buttons)}</div>'
-        f'<p class="fine">{escape(decision["primary_note"])}</p>'
-        + extra
-    )
+        price = f' Listing price ${escape(str(listing["price"]))}.' if listing.get("price") else ""
+        extra = f'<p class="fine">Matched eBay listing: {escape(listing["title"])}.{price}</p>'
+    return f'<div class="buy">{"".join(controls)}</div>{extra}'
 
 
 def fact_items(catalog: dict) -> str:
@@ -416,7 +448,7 @@ def render_home(catalog: dict, site: dict, ebay: dict, origin: str) -> str:
 <div data-search-live hidden></div>
 <div class="series-grid">{''.join(cards)}</div>
 <h2>Ordering</h2>
-<p>Buy on eBay from the <a href="{escape(store)}">33audio store</a> ({escape(feedback_text(site, ebay))}). Each part page opens a matched listing when the eBay sync has one, or a search of that store. {escape(payment)} The catalog price is ${escape(catalog['unit_price'])} each. {escape(site['shipping']['summary'])}.</p>
+<p>Buy on eBay from the <a href="{escape(store)}">33audio store</a> ({escape(feedback_text(site, ebay))}). Each part page opens a matched listing when the eBay sync has one, or a search of that store. The checkout demo menu switches that Buy button to Stripe or PayPal when you want to compare. {escape(payment)} The catalog price is ${escape(catalog['unit_price'])} each. {escape(site['shipping']['summary'])}. <a href="{escape(rel(0, 'fees/'))}">Selling costs</a> compares the published fees.</p>
 {nrnd_html(site, 'MM')}
 {fact_items(catalog)}
 """
@@ -520,7 +552,7 @@ def render_part(series: dict, part: dict, decision: dict, catalog: dict, site: d
 <p class="eyebrow">Caddock {escape(series['id'])} · Micronox film · NOS</p>
 <h1 class="part">{escape(part['id'])}</h1>
 <p class="lede">{escape(label)} · {escape(part['tolerance'])} ({escape(part['tolerance_code'])})</p>
-{buy_html(decision)}
+{buy_html(decision, part, site)}
 <dl class="spec">
   <div><dt>Resistance</dt><dd>{escape(label)} <span class="muted">({escape(part['resistance'])})</span></dd></div>
   <div><dt>Tolerance</dt><dd>{escape(tolerance_sentence(series, part))}</dd></div>
@@ -536,6 +568,73 @@ def render_part(series: dict, part: dict, decision: dict, catalog: dict, site: d
 <p class="related">{''.join(others)}</p>
 """
     return layout(title, description, page_url, path + "index.html", body, site, catalog, "", og_type="product", extra_head=scripts)
+
+
+def render_fees(catalog: dict, site: dict, origin: str) -> str:
+    costs = site["selling_costs"]
+    example = costs["example"]
+    totals = estimate(
+        to_cents(example["item_price"]),
+        to_cents(example["shipping"]),
+        int(example["quantity"]),
+        costs,
+    )
+    buyer = from_cents(totals["total_cents"])
+    cards = [
+        ("eBay", totals["ebay_cents"], costs["ebay"]["category_note"], costs["ebay"]["source_url"], costs["ebay"]["source_label"]),
+        ("Stripe", totals["stripe_cents"], costs["stripe"]["note"], costs["stripe"]["source_url"], costs["stripe"]["source_label"]),
+        ("PayPal Checkout", totals["paypal_cents"], costs["paypal"]["note"], costs["paypal"]["source_url"], costs["paypal"]["source_label"]),
+    ]
+    card_html = []
+    for name, fee, note, url, label in cards:
+        kept = from_cents(totals["total_cents"] - fee)
+        card_html.append(
+            f'<article class="fee-card"><h2>{escape(name)}</h2>'
+            f'<p class="fee-amount">${escape(from_cents(fee))}</p>'
+            f'<p>Fee on ${escape(buyer)}. About ${escape(kept)} remains after this fee, before postage the seller pays the carrier.</p>'
+            f'<p class="fine">{escape(note)} <a href="{escape(url)}">{escape(label)}</a>. Checked {escape(costs["checked_on"])}.</p></article>'
+        )
+    payload = {
+        "ebay": {key: costs["ebay"][key] for key in (
+            "final_value_percent", "cap", "above_cap_percent", "order_threshold",
+            "per_order_fee_at_or_under_threshold", "per_order_fee_over_threshold",
+        )},
+        "stripe": {"percent": costs["stripe"]["percent"], "fixed": costs["stripe"]["fixed"]},
+        "paypal": {"percent": costs["paypal"]["percent"], "fixed": costs["paypal"]["fixed"]},
+    }
+    paypal_updated = costs["paypal"].get("page_updated")
+    updated = f" PayPal's page says it was last updated {paypal_updated}." if paypal_updated else ""
+    title = "Selling costs for a $10 Caddock resistor | 33audio"
+    description = (
+        f"Compare published US fees for a ${example['item_price']} part plus "
+        f"${example['shipping']} shipping: eBay, Stripe, and PayPal Checkout."
+    )
+    body = f"""
+<p class="eyebrow">Demo comparison · checked {escape(costs['checked_on'])}</p>
+<h1>Selling costs</h1>
+<p class="lede">What a published US fee schedule would take from a ${escape(example['item_price'])} resistor plus ${escape(example['shipping'])} shipping. This is not a quote for 33audio's account.</p>
+<p>Buyer pays <strong>${escape(buyer)}</strong> in this example. Quantity is {int(example['quantity'])}. Sales tax is left out. eBay's fee base includes sales tax when eBay collects it.</p>
+<div class="fee-grid">{''.join(card_html)}</div>
+<h2>Calculator</h2>
+<p>Shipping here is entered once per order, matching 33audio's flat rate. The eBay $7,500 step is published as calculated per item; this calculator applies it to the order total, which is exact for a one-item order.</p>
+<form class="calc" data-fee-form>
+  <label>Item price, USD <input name="price" type="number" min="0" step="0.01" value="{escape(example['item_price'])}" inputmode="decimal"></label>
+  <label>Shipping, USD <input name="shipping" type="number" min="0" step="0.01" value="{escape(example['shipping'])}" inputmode="decimal"></label>
+  <label>Quantity <input name="quantity" type="number" min="1" step="1" value="{int(example['quantity'])}"></label>
+</form>
+<dl class="spec" data-fee-result></dl>
+<h2>Sources</h2>
+<ul class="facts">
+  <li><a href="{escape(costs['ebay']['source_url'])}">{escape(costs['ebay']['source_label'])}</a>. Most categories without a Store: {escape(costs['ebay']['final_value_percent'])}% up to ${escape(costs['ebay']['cap'])}, then {escape(costs['ebay']['above_cap_percent'])}%. Per order ${escape(costs['ebay']['per_order_fee_at_or_under_threshold'])} at or under ${escape(costs['ebay']['order_threshold'])}, ${escape(costs['ebay']['per_order_fee_over_threshold'])} over that. Checked {escape(costs['ebay']['checked_on'])}.</li>
+  <li><a href="{escape(costs['stripe']['source_url'])}">{escape(costs['stripe']['source_label'])}</a>. {escape(costs['stripe']['percent'])}% + ${escape(costs['stripe']['fixed'])} per successful domestic card charge. Checked {escape(costs['stripe']['checked_on'])}.</li>
+  <li><a href="{escape(costs['paypal']['source_url'])}">{escape(costs['paypal']['source_label'])}</a>. PayPal Checkout {escape(costs['paypal']['percent'])}% + ${escape(costs['paypal']['fixed'])} for a domestic USD payment.{escape(updated)} Checked {escape(costs['paypal']['checked_on'])}.</li>
+</ul>
+""" + '<script type="application/json" id="fee-rates">' + json_ld(payload) + "</script>\n"
+    script = '<script src="../fees.js" defer></script>'
+    return layout(
+        title, description, abs_url(origin, "fees/"), "fees/index.html", body,
+        site, catalog, "fees/", extra_scripts=script,
+    )
 
 
 def write_search_index(docs: Path, parts: list[dict]) -> None:
@@ -579,9 +678,6 @@ def write_robots(docs: Path, origin: str) -> None:
 
 def validate(docs: Path, catalog: dict, site: dict, origin: str) -> None:
     errors = []
-    nojekyll = docs / ".nojekyll"
-    if not nojekyll.is_file() or nojekyll.read_bytes() != b"":
-        errors.append("docs/.nojekyll must exist and be empty")
     if site.get("custom_domain"):
         if (docs / "CNAME").read_text(encoding="utf-8").strip() != str(site["custom_domain"]).strip():
             errors.append("CNAME missing for custom_domain")
@@ -627,9 +723,11 @@ def validate(docs: Path, catalog: dict, site: dict, origin: str) -> None:
         if "schema.org" not in str(offer.get("availability")):
             errors.append(f"bad availability for {part['id']}")
         if site["purchase"]["mode"] == "ebay":
-            primary = re.search(r'class="button primary" href="([^"]+)"', text)
+            primary = re.search(r'data-flow="ebay" href="([^"]+)"', text)
             if not primary or "ebay.com" not in primary.group(1):
                 errors.append(f"primary buy is not eBay for {part['id']}")
+        if not configured_flow_url(site, part, "stripe") and "demo, not yet active" not in text:
+            errors.append(f"missing Stripe demo state for {part['id']}")
         if f"mailto:{site['email']}" not in text:
             errors.append(f"missing ask link for {part['id']}")
         if part["id"] not in text:
@@ -638,7 +736,7 @@ def validate(docs: Path, catalog: dict, site: dict, origin: str) -> None:
     locs = [node.text for node in sitemap.iter() if node.tag.endswith("loc")]
     if len(locs) != len(set(locs)):
         errors.append("duplicate sitemap URLs")
-    expected = 2 + len(catalog["series"]) + len(parts)
+    expected = 3 + len(catalog["series"]) + len(parts)
     if len(locs) != expected:
         errors.append(f"sitemap has {len(locs)} URLs, expected {expected}")
     if not all(loc and loc.startswith(origin) for loc in locs):
@@ -661,7 +759,10 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
         (docs / "CNAME").write_text(str(site["custom_domain"]).strip() + "\n", encoding="utf-8")
     matches = match_listings(catalog, ebay.get("listings") or [])
     parts = flatten(catalog)
-    paths = ["", "catalog/"]
+    paths = ["", "catalog/", "fees/"]
+    fees_page = docs / "fees" / "index.html"
+    fees_page.parent.mkdir(parents=True, exist_ok=True)
+    fees_page.write_text(render_fees(catalog, site, origin), encoding="utf-8")
     (docs / "index.html").write_text(render_home(catalog, site, ebay, origin), encoding="utf-8")
     (docs / "catalog").mkdir(parents=True, exist_ok=True)
     (docs / "catalog" / "index.html").write_text(render_catalog(catalog, site, origin), encoding="utf-8")

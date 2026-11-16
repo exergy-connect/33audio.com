@@ -32,6 +32,59 @@
     "source_url": "https://www.caddock.com/online-catalog/mrktg-lit/TypeMM.pdf",
     "source_label": "Caddock Type MM datasheet"
   },
+  "payment_flows": {
+    "stripe": {
+      "label": "Pay with Stripe",
+      "url": "",
+      "parts": {}
+    },
+    "paypal": {
+      "label": "Pay with PayPal",
+      "url": "",
+      "parts": {}
+    }
+  },
+  "selling_costs": {
+    "checked_on": "2026-11-16",
+    "example": {
+      "item_price": "10.00",
+      "shipping": "6.35",
+      "quantity": 1
+    },
+    "ebay": {
+      "source_url": "https://www.ebay.com/sellercenter/selling/seller-fees",
+      "source_label": "eBay Seller Center: Seller fees",
+      "checked_on": "2026-11-16",
+      "verified": true,
+      "category_note": "Published rate for most categories, without an eBay Store. Exceptions apply, and a resistor's actual category can differ.",
+      "base_note": "The final value fee uses the total amount of the sale, including item price and shipping collected. eBay also includes sales tax when it collects tax. This comparison leaves sales tax out.",
+      "final_value_percent": "13.6",
+      "cap": "7500.00",
+      "above_cap_percent": "2.35",
+      "order_threshold": "10.00",
+      "per_order_fee_at_or_under_threshold": "0.30",
+      "per_order_fee_over_threshold": "0.40"
+    },
+    "stripe": {
+      "source_url": "https://stripe.com/pricing",
+      "source_label": "Stripe pricing",
+      "checked_on": "2026-11-16",
+      "verified": true,
+      "note": "Standard pricing for a successful domestic card transaction. Manually entered cards, international cards, and custom pricing are different.",
+      "percent": "2.9",
+      "fixed": "0.30"
+    },
+    "paypal": {
+      "source_url": "https://www.paypal.com/us/business/paypal-business-fees",
+      "source_label": "PayPal US merchant fees",
+      "checked_on": "2026-11-16",
+      "page_updated": "2026-11-04",
+      "verified": true,
+      "note": "Standard rate for receiving a domestic PayPal Checkout payment in USD. PayPal publishes a different rate for standard credit and debit card payments (2.99% + $0.49).",
+      "percent": "3.49",
+      "fixed": "0.49"
+    }
+  },
   "purchase": {
     "mode": "ebay",
     "ask": {

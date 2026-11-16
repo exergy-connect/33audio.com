@@ -34,12 +34,16 @@ The scheduled workflow fetches the live listing again and overwrites `data/catal
 
 ## Buy buttons
 
-`data/site.json` → `purchase.mode` is the one switch.
+The site defaults to eBay. A checkout demo menu on every page switches the Buy button among eBay, Stripe, and PayPal and stores the choice in the browser.
 
-- `ebay` (current): **Buy on eBay** opens the matched Browse API listing when there is one. Otherwise it opens a search of the seller’s listings: `https://www.ebay.com/sch/i.html?_ssn=33audiomarko&_nkw=...`. The store front is `https://www.ebay.com/str/33audiomarko`.
-- `checkout`: set `purchase.checkout.url` to an `https` template. Placeholders include `{part_id}`, `{series}`, `{resistance}`, and `{query}`. **Buy** then goes there (PayPal or Stripe). **On eBay** stays as the extra link.
+- eBay opens the matched Browse API listing, or a search of `33audiomarko` when none is matched.
+- Stripe and PayPal use `payment_flows` in `data/site.json`. Set `url` to an `https` template (`{part_id}`, `{series}`, `{resistance}`, `{query}`). A `parts` object can override that template for one part id. An empty URL shows a disabled “demo, not yet active” control instead of a link.
 
 **Ask about this part** always emails `mark@33audio.com` with the part id in the subject.
+
+## Selling costs
+
+`/fees/` compares published US rates for a $10 part plus $6.35 shipping, with a calculator. The rates and source URLs live in `data/site.json` under `selling_costs`. Update them there when the fee pages change.
 
 ## eBay secrets
 
@@ -56,13 +60,13 @@ Locally, export the same variables before `python -m catalog ebay`. A missing se
 2. In the repo settings, open **Pages**.
 3. Deploy from branch `main`, folder `/docs`.
 
-`docs/.nojekyll` is empty on purpose so GitHub Pages serves the files as-is and does not run Jekyll. The site generator rewrites that empty file on every build. The refresh workflow does not delete `docs/` or `.nojekyll`.
+`docs/.nojekyll` is an empty file so GitHub Pages serves the files as-is and does not run Jekyll. The site generator writes it on every build.
 
 The canonical origin in `data/site.json` is `https://exergy-connect.github.io/33audio.com` until a domain is chosen. Leave `custom_domain` as `null`. When the hostname is decided, set `custom_domain` to it (and point `canonical_origin` at `https://` that host), then rebuild. The generator writes `docs/CNAME` only in that case. No `CNAME` file is published while the decision is open.
 
 ## Local preview
 
-Python 3.11 or newer. The tools use the standard library only.
+Python 3.15. The tools use the standard library only. The refresh workflow installs it with `actions/setup-python@v7` (`python-version: '3.15'`).
 
 ```bash
 python -m catalog parse
@@ -79,4 +83,4 @@ python -m unittest discover -s tests -v
 
 ## Refresh workflow
 
-`.github/workflows/refresh.yml` runs every day and on manual dispatch. It parses the listing, syncs eBay when the two secrets exist, rebuilds `docs/`, checks that `.nojekyll` is still an empty file, and commits any changes.
+`.github/workflows/refresh.yml` runs every day and on manual dispatch. It parses the listing, syncs eBay when the two secrets exist, rebuilds `docs/`, and commits any changes.

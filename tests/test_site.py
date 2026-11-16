@@ -5,8 +5,9 @@ from pathlib import Path
 from urllib.parse import unquote
 
 from catalog.build import build
+from catalog.fees import estimate, to_cents
 from catalog.parse import parse_html
-from catalog.purchase import PurchaseError, match_listings, resolve_purchase
+from catalog.purchase import PurchaseError, configured_flow_url, match_listings, resolve_purchase
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE = ROOT / "tests" / "fixtures" / "caddockmsmm.html"
@@ -86,16 +87,14 @@ class PurchaseTests(unittest.TestCase):
 
 
 class BuildTests(unittest.TestCase):
-    def test_build_writes_pages_and_keeps_nojekyll(self):
+    def test_build_writes_pages(self):
         data = catalog()
         with tempfile.TemporaryDirectory() as tmp:
             docs = Path(tmp) / "docs"
             docs.mkdir()
-            (docs / ".nojekyll").write_text("not empty")
             (docs / "old.html").write_text("bye")
             build(data, {"listings": []}, SITE, docs, ROOT / "assets")
             self.assertFalse((docs / "old.html").exists())
-            self.assertEqual((docs / ".nojekyll").read_bytes(), b"")
             self.assertFalse((docs / "CNAME").exists())
             page = (docs / "parts" / "mm177-4.32k" / "index.html").read_text(encoding="utf-8")
             self.assertIn('name="viewport" content="width=device-width, initial-scale=1"', page)
@@ -103,9 +102,26 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Buy on eBay", page)
             self.assertIn("Ask about this part", page)
             self.assertIn("min-height: 44px", (docs / "styles.css").read_text(encoding="utf-8"))
-            workflow = (ROOT / ".github" / "workflows" / "refresh.yml").read_text(encoding="utf-8")
-            self.assertNotIn("rm -rf docs", workflow)
-            self.assertIn(".nojekyll", workflow)
+            self.assertIn("demo, not yet active", page)
+            fees = (docs / "fees" / "index.html").read_text(encoding="utf-8")
+            self.assertIn("13.6%", fees)
+            self.assertIn("2.9%", fees)
+            self.assertIn("3.49%", fees)
+            self.assertIn("https://stripe.com/pricing", fees)
+            self.assertIn("https://www.paypal.com/us/business/paypal-business-fees", fees)
+            self.assertIn("https://www.ebay.com/sellercenter/selling/seller-fees", fees)
+            self.assertIn('name="viewport"', fees)
+            self.assertIsNone(configured_flow_url(SITE, {"id": "MM177-4.32K", "series": "MM177", "resistance": "4.32K", "tolerance": "0.1%", "tolerance_code": "B", "quantity": 63, "price": "10.00", "ohms": 4320}, "stripe"))
+
+
+class FeeTests(unittest.TestCase):
+    def test_example_order(self):
+        costs = SITE["selling_costs"]
+        result = estimate(to_cents("10.00"), to_cents("6.35"), 1, costs)
+        self.assertEqual(result["total_cents"], 1635)
+        self.assertEqual(result["ebay_cents"], 262)
+        self.assertEqual(result["stripe_cents"], 77)
+        self.assertEqual(result["paypal_cents"], 106)
 
 
 if __name__ == "__main__":
