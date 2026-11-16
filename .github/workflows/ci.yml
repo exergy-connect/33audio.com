@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.15'
+
+      - name: Test
+        run: python -m unittest discover -s tests -v
+
+      - name: Rebuild docs/ and check it is committed
+        run: |
+          python -m catalog build
+          if [ -n "$(git status --porcelain -- docs)" ]; then
+            git status --short -- docs
+            echo "docs/ is out of date. Run 'python -m catalog build' and commit the result."
+            exit 1
+          fi
