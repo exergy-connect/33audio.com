@@ -122,13 +122,6 @@
       "leftAs": 64520,
       "rightAs": 13335,
       "state": "established"
-    },
-    {
-      "left": "cf_iah",
-      "right": "cf_dfw",
-      "leftAs": 13335,
-      "rightAs": 13335,
-      "state": "idle"
     }
   ],
   "results": [

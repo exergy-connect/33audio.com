@@ -75,7 +75,7 @@ After the site is public:
 [xYang](https://github.com/exergy-connect/xYang) (`pip install -r requirements-schema.txt`) turns the models into the files under `docs/schema/`:
 
 - `catalog.schema.json` and `source-listing.schema.json`: JSON Schema 2020-12 with `x-yang` metadata.
-- `context.jsonld`: JSON-LD context built from the extensions, with terms scoped by position.
+- `context.jsonld`: JSON-LD context exported by xYang from the extensions, with terms scoped by position. URI-valued leaves use the portable `jl:iri-value` extension in `model/xyang-jsonld.yang`.
 - `vocab.jsonld` and `README.md`: every term with its description, schema.org mapping, Wikidata match, and unit.
 
 `docs/catalog.json` points at the schema and context with `$schema` and `@context`. Part pages add a JSON-LD node in this vocabulary with the same `@id` as their schema.org Product, and `llms.txt` links the vocabulary.
@@ -85,7 +85,7 @@ python -m catalog schema          # regenerate docs/schema and validate
 python -m catalog schema --check  # fail if docs/schema is stale or a catalog does not validate
 ```
 
-The check validates `docs/catalog.json` with xYang and with the generated JSON Schema, and `data/catalog.json` with xYang in native JSON mode, because hand-edited `ohms` values are plain numbers. `.github/workflows/schema.yml` runs it on pushes that touch the model and commits the regenerated files. The daily refresh runs `--check` after rebuilding. `python -m catalog build` leaves `docs/schema/` in place.
+The check validates `docs/catalog.json` with xYang and with the generated JSON Schema, and `data/catalog.json` with both validators in native JSON mode, because hand-edited `ohms` values are plain numbers. `.github/workflows/schema.yml` runs it on pushes that touch the model and commits the regenerated files. The daily refresh runs `--check` after rebuilding. `python -m catalog build` leaves `docs/schema/` in place.
 
 ## Selling costs
 

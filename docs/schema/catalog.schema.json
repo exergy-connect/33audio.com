@@ -9,6 +9,18 @@
     "prefix": "c33",
     "organization": "33audio",
     "contact": "Mark, mark@33audio.com, Houston, TX",
+    "imports": {
+      "jl": {
+        "module": "xyang-jsonld",
+        "namespace": "https://exergy-connect.github.io/xYang/jsonld#",
+        "prefix": "jl",
+        "extension": {
+          "iri-value": {
+            "description": "Coerce this leaf's values to IRIs with JSON-LD @type: @id."
+          }
+        }
+      }
+    },
     "extension": {
       "schema-org-class": {
         "argument": "class",
@@ -84,6 +96,9 @@
       "x-yang": {
         "type": "leaf",
         "extensions": [
+          {
+            "name": "jl:iri-value"
+          },
           {
             "name": "c33:schema-org-property",
             "argument": "isBasedOn"
@@ -181,6 +196,9 @@
             "type": "leaf",
             "extensions": [
               {
+                "name": "jl:iri-value"
+              },
+              {
                 "name": "c33:schema-org-property",
                 "argument": "sameAs"
               }
@@ -204,7 +222,11 @@
       "additionalProperties": false,
       "required": [
         "name"
-      ]
+      ],
+      "patternProperties": {
+        "^@[A-Za-z]+$": true,
+        "^\\$[A-Za-z]+$": true
+      }
     },
     "shipping": {
       "type": "object",
@@ -296,7 +318,11 @@
         "currency",
         "per",
         "country"
-      ]
+      ],
+      "patternProperties": {
+        "^@[A-Za-z]+$": true,
+        "^\\$[A-Za-z]+$": true
+      }
     },
     "series": {
       "type": "array",
@@ -416,6 +442,9 @@
               "type": "leaf",
               "extensions": [
                 {
+                  "name": "jl:iri-value"
+                },
+                {
                   "name": "c33:schema-org-property",
                   "argument": "subjectOf"
                 }
@@ -425,12 +454,17 @@
         },
         "additionalProperties": false,
         "required": [
+          "name",
           "family",
           "product_line",
           "film",
           "default_tolerance",
           "not_recommended_for_new_designs"
-        ]
+        ],
+        "patternProperties": {
+          "^@[A-Za-z]+$": true,
+          "^\\$[A-Za-z]+$": true
+        }
       },
       "description": "Caddock models in the catalog, with ratings from Caddock datasheets.",
       "x-yang": {
@@ -582,7 +616,11 @@
             "required": [
               "value",
               "unit"
-            ]
+            ],
+            "patternProperties": {
+              "^@[A-Za-z]+$": true,
+              "^\\$[A-Za-z]+$": true
+            }
           },
           "tolerance": {
             "type": "object",
@@ -630,7 +668,11 @@
             "required": [
               "percent",
               "code"
-            ]
+            ],
+            "patternProperties": {
+              "^@[A-Za-z]+$": true,
+              "^\\$[A-Za-z]+$": true
+            }
           },
           "condition": {
             "type": "string",
@@ -714,6 +756,9 @@
               "type": "leaf",
               "extensions": [
                 {
+                  "name": "jl:iri-value"
+                },
+                {
                   "name": "c33:schema-org-class",
                   "argument": "Offer"
                 }
@@ -723,6 +768,7 @@
         },
         "additionalProperties": false,
         "required": [
+          "part_number",
           "manufacturer",
           "series",
           "condition",
@@ -730,7 +776,11 @@
           "price",
           "currency",
           "url"
-        ]
+        ],
+        "patternProperties": {
+          "^@[A-Za-z]+$": true,
+          "^\\$[A-Za-z]+$": true
+        }
       },
       "description": "One stocked resistor value.",
       "x-yang": {
@@ -803,5 +853,9 @@
       ],
       "description": "Tolerance letter as printed on the 33audio listing."
     }
+  },
+  "patternProperties": {
+    "^@[A-Za-z]+$": true,
+    "^\\$[A-Za-z]+$": true
   }
 }

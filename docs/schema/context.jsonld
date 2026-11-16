@@ -1,160 +1,166 @@
 {
   "@context": {
     "@version": 1.1,
-    "schema": "https://schema.org/",
-    "c33": "https://exergy-connect.github.io/33audio.com/schema/vocab#",
-    "wd": "http://www.wikidata.org/entity/",
+    "@vocab": "https://exergy-connect.github.io/33audio.com/schema/vocab#",
+    "audio33-catalog": {
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#",
+      "@prefix": true
+    },
+    "xyang-jsonld": {
+      "@id": "https://exergy-connect.github.io/xYang/jsonld#",
+      "@prefix": true
+    },
     "currency": {
-      "@id": "schema:priceCurrency"
+      "@id": "https://schema.org/priceCurrency"
     },
     "unit_price": {
-      "@id": "schema:price"
+      "@id": "https://schema.org/price"
     },
     "region_note": {
-      "@id": "schema:eligibleRegion"
+      "@id": "https://schema.org/eligibleRegion"
     },
     "provenance": {
-      "@id": "c33:provenance"
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#provenance"
     },
     "source_url": {
-      "@id": "schema:isBasedOn",
+      "@id": "https://schema.org/isBasedOn",
       "@type": "@id"
     },
     "seller": {
-      "@id": "schema:seller",
+      "@id": "https://schema.org/seller",
       "@context": {
         "name": {
-          "@id": "schema:name"
+          "@id": "https://schema.org/name"
         },
         "email": {
-          "@id": "schema:email"
+          "@id": "https://schema.org/email"
         },
         "locality": {
-          "@id": "schema:addressLocality"
+          "@id": "https://schema.org/addressLocality"
         },
         "region": {
-          "@id": "schema:addressRegion"
+          "@id": "https://schema.org/addressRegion"
         },
         "country": {
-          "@id": "schema:addressCountry"
+          "@id": "https://schema.org/addressCountry"
         },
         "ebay_store": {
-          "@id": "schema:sameAs",
+          "@id": "https://schema.org/sameAs",
           "@type": "@id"
         },
         "ebay_seller": {
-          "@id": "schema:alternateName"
+          "@id": "https://schema.org/alternateName"
         }
       }
     },
     "shipping": {
-      "@id": "schema:shippingDetails",
+      "@id": "https://schema.org/shippingDetails",
       "@context": {
         "amount": {
-          "@id": "schema:shippingRate"
+          "@id": "https://schema.org/shippingRate"
         },
         "currency": {
-          "@id": "schema:currency"
+          "@id": "https://schema.org/currency"
         },
         "per": {
-          "@id": "c33:per"
+          "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#per"
         },
         "country": {
-          "@id": "schema:shippingDestination"
+          "@id": "https://schema.org/shippingDestination"
         },
         "summary": {
-          "@id": "schema:description"
+          "@id": "https://schema.org/description"
         }
       }
     },
     "series": {
-      "@id": "c33:series",
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#series",
       "@context": {
         "name": {
-          "@id": "schema:model"
+          "@id": "https://schema.org/model"
         },
         "family": {
-          "@id": "c33:family"
+          "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#family"
         },
         "product_line": {
-          "@id": "schema:category"
+          "@id": "https://schema.org/category"
         },
         "film": {
-          "@id": "c33:film"
+          "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#film"
         },
         "power_rating": {
-          "@id": "c33:power_rating"
+          "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#power_rating"
         },
         "voltage_rating": {
-          "@id": "c33:voltage_rating"
+          "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#voltage_rating"
         },
         "default_tolerance": {
-          "@id": "c33:default_tolerance"
+          "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#default_tolerance"
         },
         "not_recommended_for_new_designs": {
-          "@id": "c33:not_recommended_for_new_designs"
+          "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#not_recommended_for_new_designs"
         },
         "datasheet": {
-          "@id": "schema:subjectOf",
+          "@id": "https://schema.org/subjectOf",
           "@type": "@id"
         }
       }
     },
     "parts": {
-      "@id": "schema:itemListElement",
+      "@id": "https://schema.org/itemListElement",
       "@context": {
         "part_number": {
-          "@id": "schema:mpn"
+          "@id": "https://schema.org/mpn"
         },
         "manufacturer": {
-          "@id": "schema:manufacturer"
+          "@id": "https://schema.org/manufacturer"
         },
         "series": {
-          "@id": "schema:model"
+          "@id": "https://schema.org/model"
         },
         "resistance": {
-          "@id": "schema:additionalProperty",
+          "@id": "https://schema.org/additionalProperty",
           "@context": {
             "value": {
-              "@id": "schema:value"
+              "@id": "https://schema.org/value"
             },
             "unit": {
-              "@id": "schema:unitText"
+              "@id": "https://schema.org/unitText"
             },
             "label": {
-              "@id": "schema:name"
+              "@id": "https://schema.org/name"
             }
           }
         },
         "tolerance": {
-          "@id": "c33:tolerance",
+          "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#tolerance",
           "@context": {
             "percent": {
-              "@id": "schema:value"
+              "@id": "https://schema.org/value"
             },
             "code": {
-              "@id": "c33:code"
+              "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#code"
             }
           }
         },
         "condition": {
-          "@id": "c33:condition"
+          "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#condition"
         },
         "quantity": {
-          "@id": "schema:inventoryLevel"
+          "@id": "https://schema.org/inventoryLevel"
         },
         "price": {
-          "@id": "schema:price"
+          "@id": "https://schema.org/price"
         },
         "currency": {
-          "@id": "schema:priceCurrency"
+          "@id": "https://schema.org/priceCurrency"
         },
         "url": {
-          "@id": "schema:url",
+          "@id": "https://schema.org/url",
           "@type": "@id"
         },
         "ebay_listing": {
-          "@id": "c33:ebay_listing",
+          "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#ebay_listing",
           "@type": "@id"
         }
       }

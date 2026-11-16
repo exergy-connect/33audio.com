@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from decimal import Decimal
 from pathlib import Path
 
 from catalog import DATA, DOCS, ROOT
@@ -18,10 +19,6 @@ SCHEMA_DIR = DOCS / "schema"
 CATALOG_MODULE = MODEL_DIR / "audio33-catalog.yang"
 SOURCE_MODULE = MODEL_DIR / "audio33-source-listing.yang"
 EXT_PREFIX = "c33:"
-SCHEMA_ORG = "https://schema.org/"
-WIKIDATA = "http://www.wikidata.org/entity/"
-NON_MODEL_KEYS = ("$schema", "@context")
-LINK_LEAVES = {"url", "datasheet", "ebay_store", "ebay_listing", "source_url"}
 
 
 def _xyang():
@@ -40,13 +37,10 @@ def site_origin() -> str:
     return str(site["canonical_origin"]).rstrip("/")
 
 
-def generate_schema(module_path: Path, schema_url: str) -> dict:
+def generate_schema(module_path: Path, schema_url: str, *, native: bool = False) -> dict:
     xyang = _xyang()
     module = xyang.parse_yang_file(module_path, include_path=(str(MODEL_DIR),))
-    schema = xyang.generate_json_schema(module)
-    # xYang uses the YANG namespace as $id; publish the schema under its own URL and keep the namespace in x-yang.
-    schema["$id"] = schema_url
-    return schema
+    return xyang.generate_json_schema(module, schema_id=schema_url, native_json=native)
 
 
 def extensions(node: dict) -> dict[str, list[str]]:
@@ -64,34 +58,6 @@ def _object_schema(node: dict) -> dict | None:
     return node if isinstance(node.get("properties"), dict) else None
 
 
-def _term(name: str, node: dict) -> dict:
-    ext = extensions(node)
-    prop = (ext.get("schema-org-property") or [None])[0]
-    term: dict = {"@id": f"schema:{prop}" if prop else f"c33:{name}"}
-    if name in LINK_LEAVES:
-        term["@type"] = "@id"
-    children = _object_schema(node)
-    if children is not None:
-        term["@context"] = _context_body(children)
-    return term
-
-
-def _context_body(obj: dict) -> dict:
-    return {name: _term(name, child) for name, child in obj["properties"].items()}
-
-
-def build_context(schema: dict) -> dict:
-    namespace = schema["x-yang"]["namespace"]
-    body = {
-        "@version": 1.1,
-        "schema": SCHEMA_ORG,
-        "c33": namespace,
-        "wd": WIKIDATA,
-    }
-    body.update(_context_body(schema))
-    return {"@context": body}
-
-
 def walk(schema: dict, path: str = ""):
     for name, node in (schema.get("properties") or {}).items():
         here = f"{path}/{name}"
@@ -99,35 +65,6 @@ def walk(schema: dict, path: str = ""):
         child = _object_schema(node)
         if child is not None:
             yield from walk(child, here)
-
-
-def build_vocab(schema: dict) -> dict:
-    graph = []
-    for path, name, node in walk(schema):
-        ext = extensions(node)
-        prop = (ext.get("schema-org-property") or [None])[0]
-        entry: dict = {
-            "@id": f"schema:{prop}" if prop else f"c33:{name}",
-            "c33:path": path,
-            "rdfs:comment": " ".join(str(node.get("description", "")).split()),
-        }
-        if ext.get("schema-org-class"):
-            entry["c33:valueClass"] = [f"schema:{cls}" for cls in ext["schema-org-class"]]
-        if ext.get("wikidata"):
-            entry["skos:closeMatch"] = [f"wd:{item}" for item in ext["wikidata"]]
-        if ext.get("unit-code"):
-            entry["schema:unitCode"] = ext["unit-code"][0]
-        graph.append(entry)
-    return {
-        "@context": {
-            "schema": SCHEMA_ORG,
-            "c33": schema["x-yang"]["namespace"],
-            "wd": WIKIDATA,
-            "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-            "skos": "http://www.w3.org/2004/02/skos/core#",
-        },
-        "@graph": graph,
-    }
 
 
 def render_readme(schema: dict, origin: str) -> str:
@@ -171,20 +108,19 @@ def dumps(data: dict) -> str:
 
 def artifacts(origin: str) -> dict[str, str]:
     catalog_schema = generate_schema(CATALOG_MODULE, f"{origin}/schema/catalog.schema.json")
-    source_schema = generate_schema(SOURCE_MODULE, f"{origin}/schema/source-listing.schema.json")
+    source_schema = generate_schema(SOURCE_MODULE, f"{origin}/schema/source-listing.schema.json", native=True)
+    xyang = _xyang()
+    module = xyang.parse_yang_file(CATALOG_MODULE, include_path=(str(MODEL_DIR),))
     return {
+        "xyang-jsonld.yang": (MODEL_DIR / "xyang-jsonld.yang").read_text(encoding="utf-8"),
         "catalog.schema.json": dumps(catalog_schema),
         "source-listing.schema.json": dumps(source_schema),
-        "context.jsonld": dumps(build_context(catalog_schema)),
-        "vocab.jsonld": dumps(build_vocab(catalog_schema)),
+        "context.jsonld": dumps(xyang.generate_jsonld_context(module)),
+        "vocab.jsonld": dumps(xyang.generate_jsonld_vocab(module)),
         "README.md": render_readme(catalog_schema, origin),
         "audio33-catalog.yang": CATALOG_MODULE.read_text(encoding="utf-8"),
         "audio33-source-listing.yang": SOURCE_MODULE.read_text(encoding="utf-8"),
     }
-
-
-def strip_non_model(document: dict) -> dict:
-    return {key: value for key, value in document.items() if key not in NON_MODEL_KEYS}
 
 
 def validate_with_xyang(module_path: Path, document: dict, native: bool) -> list[str]:
@@ -198,33 +134,11 @@ def validate_with_json_schema(schema: dict, document: dict) -> list[str]:
         import jsonschema
     except ImportError as error:
         raise SystemExit("jsonschema is required for --check: pip install jsonschema") from error
+    # JSON decimal constraints need exact arithmetic (24.9 is a multiple of 0.001).
+    schema = json.loads(json.dumps(schema), parse_float=Decimal)
+    document = json.loads(json.dumps(document), parse_float=Decimal)
     validator = jsonschema.Draft202012Validator(schema)
     return [f"/{'/'.join(str(p) for p in err.absolute_path)}: {err.message}" for err in validator.iter_errors(document)]
-
-
-def missing_list_keys(schema: dict, document: object, path: str = "") -> list[str]:
-    """Report list entries without their key leaves.
-
-    xYang 1.0.3 accepts such entries and its JSON Schema leaves keys out of `required`.
-    """
-    problems = []
-    if not isinstance(document, dict):
-        return problems
-    for name, node in (schema.get("properties") or {}).items():
-        value = document.get(name)
-        if value is None:
-            continue
-        here = f"{path}/{name}"
-        if node.get("type") == "array" and isinstance(node.get("items"), dict):
-            keys = str((node.get("x-yang") or {}).get("key") or "").split()
-            for index, entry in enumerate(value if isinstance(value, list) else []):
-                for key in keys:
-                    if not isinstance(entry, dict) or key not in entry:
-                        problems.append(f"{here}/{index}: missing list key '{key}'")
-                problems += missing_list_keys(node["items"], entry, f"{here}/{index}")
-        elif isinstance(node.get("properties"), dict):
-            problems += missing_list_keys(node, value, here)
-    return problems
 
 
 def check(origin: str) -> list[str]:
@@ -239,15 +153,14 @@ def check(origin: str) -> list[str]:
         problems.append("docs/catalog.json $schema does not point at the published schema")
     if public.get("@context") != f"{origin}/schema/context.jsonld":
         problems.append("docs/catalog.json @context does not point at the published context")
-    body = strip_non_model(public)
+    body = public
     problems += [f"docs/catalog.json (xYang) {e}" for e in validate_with_xyang(CATALOG_MODULE, body, native=False)]
     schema = json.loads(expected["catalog.schema.json"])
     problems += [f"docs/catalog.json (JSON Schema) {e}" for e in validate_with_json_schema(schema, body)]
-    problems += [f"docs/catalog.json {e}" for e in missing_list_keys(schema, body)]
     source = json.loads((DATA / "catalog.json").read_text(encoding="utf-8"))
     problems += [f"data/catalog.json (xYang native) {e}" for e in validate_with_xyang(SOURCE_MODULE, source, native=True)]
     source_schema = json.loads(expected["source-listing.schema.json"])
-    problems += [f"data/catalog.json {e}" for e in missing_list_keys(source_schema, source)]
+    problems += [f"data/catalog.json (JSON Schema native) {e}" for e in validate_with_json_schema(source_schema, source)]
     return problems
 
 

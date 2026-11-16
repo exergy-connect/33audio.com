@@ -37,12 +37,14 @@ topology:
       device: frr
       bgp:
         as: 13335
+        domain: iah
         advertise:
           - ipv4: 192.0.2.0/24
     cf_dfw:
       device: frr
       bgp:
         as: 13335
+        domain: dfw
         advertise:
           - ipv4: 192.0.2.0/24
     web_iah:

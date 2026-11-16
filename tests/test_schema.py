@@ -65,27 +65,31 @@ class XyangSchemaTests(unittest.TestCase):
 
     def test_context_maps_terms_by_position(self):
         context = json.loads(self.artifacts["context.jsonld"])["@context"]
-        self.assertEqual(context["currency"]["@id"], "schema:priceCurrency")
+        self.assertEqual(context["currency"]["@id"], "https://schema.org/priceCurrency")
         parts = context["parts"]["@context"]
-        self.assertEqual(parts["part_number"]["@id"], "schema:mpn")
-        self.assertEqual(parts["condition"]["@id"], "c33:condition")
-        self.assertEqual(parts["url"], {"@id": "schema:url", "@type": "@id"})
-        self.assertEqual(context["series"]["@context"]["name"]["@id"], "schema:model")
-        self.assertEqual(context["seller"]["@context"]["name"]["@id"], "schema:name")
-        self.assertEqual(context["shipping"]["@context"]["currency"]["@id"], "schema:currency")
-        self.assertNotIn("@vocab", context)
+        self.assertEqual(parts["part_number"]["@id"], "https://schema.org/mpn")
+        self.assertEqual(parts["condition"]["@id"], "https://exergy-connect.github.io/33audio.com/schema/vocab#condition")
+        self.assertEqual(parts["url"], {"@id": "https://schema.org/url", "@type": "@id"})
+        self.assertEqual(context["series"]["@context"]["name"]["@id"], "https://schema.org/model")
+        self.assertEqual(context["seller"]["@context"]["name"]["@id"], "https://schema.org/name")
+        self.assertEqual(context["shipping"]["@context"]["currency"]["@id"], "https://schema.org/currency")
+        for path in (("source_url",), ("seller", "ebay_store"), ("series", "datasheet"), ("parts", "ebay_listing")):
+            term = context[path[0]]
+            if len(path) == 2:
+                term = term["@context"][path[1]]
+            self.assertEqual(term["@type"], "@id")
 
     def test_vocab_links_wikidata_and_schema_org_classes(self):
-        graph = {node["c33:path"]: node for node in json.loads(self.artifacts["vocab.jsonld"])["@graph"]}
-        self.assertEqual(graph["/parts"]["skos:closeMatch"], ["wd:Q5321"])
-        self.assertEqual(graph["/parts"]["c33:valueClass"], ["schema:Product"])
-        self.assertEqual(graph["/parts/resistance/unit"]["skos:closeMatch"], ["wd:Q47083"])
-        self.assertEqual(graph["/parts/resistance/unit"]["schema:unitCode"], "OHM")
-        self.assertEqual(graph["/parts/condition"]["skos:closeMatch"], ["wd:Q907054"])
-        self.assertEqual(graph["/seller"]["c33:valueClass"], ["schema:Organization"])
+        graph = {node["@id"]: node for node in json.loads(self.artifacts["vocab.jsonld"])["@graph"]}
+        namespace = self.catalog_schema["x-yang"]["namespace"]
+        self.assertEqual(graph["https://schema.org/itemListElement"]["skos:closeMatch"], [{"@id": "http://www.wikidata.org/entity/Q5321"}])
+        self.assertEqual(graph["https://schema.org/itemListElement"]["rdfs:range"], {"@id": "https://schema.org/Product"})
+        self.assertEqual(graph["https://schema.org/unitText"]["schema:unitCode"], "OHM")
+        self.assertEqual(graph[namespace + "condition"]["skos:closeMatch"], [{"@id": "http://www.wikidata.org/entity/Q907054"}])
+        self.assertEqual(graph["https://schema.org/seller"]["rdfs:range"], {"@id": "https://schema.org/Organization"})
 
     def test_invalid_catalogs_are_rejected(self):
-        doc = self.schema.strip_non_model(json.loads((ROOT / "docs" / "catalog.json").read_text(encoding="utf-8")))
+        doc = json.loads((ROOT / "docs" / "catalog.json").read_text(encoding="utf-8"))
         bad_price = copy.deepcopy(doc)
         bad_price["parts"][0]["price"] = 10
         self.assertTrue(self.schema.validate_with_xyang(self.schema.CATALOG_MODULE, bad_price, native=False))
@@ -96,11 +100,25 @@ class XyangSchemaTests(unittest.TestCase):
         self.assertTrue(any("leafref" in e for e in errors))
         keyless = copy.deepcopy(doc)
         del keyless["parts"][0]["part_number"]
-        self.assertEqual(self.schema.missing_list_keys(self.catalog_schema, keyless), ["/parts/0: missing list key 'part_number'"])
+        self.assertTrue(self.schema.validate_with_xyang(self.schema.CATALOG_MODULE, keyless, native=False))
+        self.assertTrue(self.schema.validate_with_json_schema(self.catalog_schema, keyless))
 
     def test_source_listing_needs_native_json(self):
         source = json.loads((ROOT / "data" / "catalog.json").read_text(encoding="utf-8"))
         self.assertEqual(self.schema.validate_with_xyang(self.schema.SOURCE_MODULE, source, native=True), [])
+        schema = json.loads(self.artifacts["source-listing.schema.json"])
+        self.assertEqual(self.schema.validate_with_json_schema(schema, source), [])
+        imprecise = copy.deepcopy(source)
+        imprecise["series"][0]["parts"][0]["ohms"] = 24.9001
+        self.assertTrue(self.schema.validate_with_json_schema(schema, imprecise))
+        for path in (("series", 0, "id"), ("series", 0, "parts", 0, "id")):
+            keyless = copy.deepcopy(source)
+            entry = keyless
+            for key in path[:-1]:
+                entry = entry[key]
+            del entry[path[-1]]
+            self.assertTrue(self.schema.validate_with_xyang(self.schema.SOURCE_MODULE, keyless, native=True))
+            self.assertTrue(self.schema.validate_with_json_schema(schema, keyless))
         rfc = self.schema.validate_with_xyang(self.schema.SOURCE_MODULE, source, native=False)
         self.assertTrue(any("decimal64" in e for e in rfc))
 

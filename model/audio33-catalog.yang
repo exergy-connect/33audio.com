@@ -3,6 +3,8 @@ module audio33-catalog {
   namespace "https://exergy-connect.github.io/33audio.com/schema/vocab#";
   prefix c33;
 
+  import xyang-jsonld { prefix jl; }
+
   organization "33audio";
   contact "Mark, mark@33audio.com, Houston, TX";
   description
@@ -110,6 +112,7 @@ module audio33-catalog {
 
   leaf source_url {
     type string;
+    jl:iri-value;
     description "The 33audio page this catalog was parsed from.";
     c33:schema-org-property "isBasedOn";
   }
@@ -146,6 +149,7 @@ module audio33-catalog {
     }
     leaf ebay_store {
       type string;
+      jl:iri-value;
       description "33audio's eBay store front.";
       c33:schema-org-property "sameAs";
     }
@@ -254,6 +258,7 @@ module audio33-catalog {
     }
     leaf datasheet {
       type string;
+      jl:iri-value;
       description "Link to the datasheet these ratings come from.";
       c33:schema-org-property "subjectOf";
     }
@@ -375,6 +380,7 @@ module audio33-catalog {
     }
     leaf ebay_listing {
       type string;
+      jl:iri-value;
       description "An active eBay listing for this exact part, when one is matched.";
       c33:schema-org-class "Offer";
     }

@@ -1,285 +1,343 @@
 {
   "@context": {
+    "@version": 1.1,
     "schema": "https://schema.org/",
-    "c33": "https://exergy-connect.github.io/33audio.com/schema/vocab#",
-    "wd": "http://www.wikidata.org/entity/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "skos": "http://www.w3.org/2004/02/skos/core#"
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "wd": "http://www.wikidata.org/entity/"
   },
   "@graph": [
     {
-      "@id": "schema:priceCurrency",
-      "c33:path": "/currency",
-      "rdfs:comment": "Currency of every price in this document."
-    },
-    {
-      "@id": "schema:price",
-      "c33:path": "/unit_price",
-      "rdfs:comment": "Listing price per resistor, the same for every part."
-    },
-    {
-      "@id": "schema:eligibleRegion",
-      "c33:path": "/region_note",
-      "rdfs:comment": "Where 33audio sells, quoted from the listing."
-    },
-    {
-      "@id": "c33:provenance",
-      "c33:path": "/provenance",
-      "rdfs:comment": "Where the stock came from, quoted from the listing."
-    },
-    {
-      "@id": "schema:isBasedOn",
-      "c33:path": "/source_url",
-      "rdfs:comment": "The 33audio page this catalog was parsed from."
-    },
-    {
-      "@id": "schema:seller",
-      "c33:path": "/seller",
-      "rdfs:comment": "The business selling the parts.",
-      "c33:valueClass": [
-        "schema:Organization"
-      ]
-    },
-    {
-      "@id": "schema:name",
-      "c33:path": "/seller/name",
-      "rdfs:comment": "Business name."
-    },
-    {
-      "@id": "schema:email",
-      "c33:path": "/seller/email",
-      "rdfs:comment": "Contact and order email."
-    },
-    {
-      "@id": "schema:addressLocality",
-      "c33:path": "/seller/locality",
-      "rdfs:comment": "City the parts ship from."
-    },
-    {
-      "@id": "schema:addressRegion",
-      "c33:path": "/seller/region",
-      "rdfs:comment": "State the parts ship from."
-    },
-    {
-      "@id": "schema:addressCountry",
-      "c33:path": "/seller/country",
-      "rdfs:comment": "ISO 3166-1 alpha-2 country code of the seller."
-    },
-    {
-      "@id": "schema:sameAs",
-      "c33:path": "/seller/ebay_store",
-      "rdfs:comment": "33audio's eBay store front."
-    },
-    {
-      "@id": "schema:alternateName",
-      "c33:path": "/seller/ebay_seller",
-      "rdfs:comment": "eBay seller user name."
-    },
-    {
-      "@id": "schema:shippingDetails",
-      "c33:path": "/shipping",
-      "rdfs:comment": "Shipping terms for an order.",
-      "c33:valueClass": [
-        "schema:OfferShippingDetails"
-      ]
-    },
-    {
-      "@id": "schema:shippingRate",
-      "c33:path": "/shipping/amount",
-      "rdfs:comment": "Shipping charge per order."
-    },
-    {
-      "@id": "schema:currency",
-      "c33:path": "/shipping/currency",
-      "rdfs:comment": "Currency of the shipping charge."
-    },
-    {
-      "@id": "c33:per",
-      "c33:path": "/shipping/per",
-      "rdfs:comment": "What the shipping charge covers."
-    },
-    {
-      "@id": "schema:shippingDestination",
-      "c33:path": "/shipping/country",
-      "rdfs:comment": "ISO 3166-1 alpha-2 code of the only shipping destination."
-    },
-    {
-      "@id": "schema:description",
-      "c33:path": "/shipping/summary",
-      "rdfs:comment": "The shipping terms as one sentence."
-    },
-    {
-      "@id": "c33:series",
-      "c33:path": "/series",
-      "rdfs:comment": "Caddock models in the catalog, with ratings from Caddock datasheets.",
-      "c33:valueClass": [
-        "schema:ProductModel"
-      ]
-    },
-    {
-      "@id": "schema:model",
-      "c33:path": "/series/name",
-      "rdfs:comment": "Caddock model number."
-    },
-    {
-      "@id": "c33:family",
-      "c33:path": "/series/family",
-      "rdfs:comment": "Caddock resistor type."
-    },
-    {
-      "@id": "schema:category",
-      "c33:path": "/series/product_line",
-      "rdfs:comment": "Caddock product line name for this type, as on the datasheet."
-    },
-    {
-      "@id": "c33:film",
-      "c33:path": "/series/film",
-      "rdfs:comment": "Resistance film named on the Caddock datasheets."
-    },
-    {
-      "@id": "c33:power_rating",
-      "c33:path": "/series/power_rating",
-      "rdfs:comment": "Rated power in watts at +25 C from the Caddock datasheet. MS models are rated the same at +125 C.",
-      "skos:closeMatch": [
-        "wd:Q25236"
-      ],
-      "schema:unitCode": "WTT"
-    },
-    {
-      "@id": "c33:voltage_rating",
-      "c33:path": "/series/voltage_rating",
-      "rdfs:comment": "Maximum continuous working voltage from the Caddock datasheet.",
-      "skos:closeMatch": [
-        "wd:Q25250"
-      ],
-      "schema:unitCode": "VLT"
-    },
-    {
-      "@id": "c33:default_tolerance",
-      "c33:path": "/series/default_tolerance",
-      "rdfs:comment": "Tolerance of a part in this series unless its part number adds a letter."
-    },
-    {
-      "@id": "c33:not_recommended_for_new_designs",
-      "c33:path": "/series/not_recommended_for_new_designs",
-      "rdfs:comment": "True when Caddock marks the type Not Recommended for New Designs. Caddock says this of Type MM."
-    },
-    {
-      "@id": "schema:subjectOf",
-      "c33:path": "/series/datasheet",
-      "rdfs:comment": "Link to the datasheet these ratings come from."
-    },
-    {
-      "@id": "schema:itemListElement",
-      "c33:path": "/parts",
-      "rdfs:comment": "One stocked resistor value.",
-      "c33:valueClass": [
-        "schema:Product"
-      ],
-      "skos:closeMatch": [
-        "wd:Q5321"
-      ]
-    },
-    {
-      "@id": "schema:mpn",
-      "c33:path": "/parts/part_number",
-      "rdfs:comment": "33audio part id: series, resistance, and a tolerance letter only when the listing marks one, such as MM177-4.32K or MM177-665K-F."
-    },
-    {
-      "@id": "schema:manufacturer",
-      "c33:path": "/parts/manufacturer",
-      "rdfs:comment": "Resistor manufacturer."
-    },
-    {
-      "@id": "schema:model",
-      "c33:path": "/parts/series",
-      "rdfs:comment": "The Caddock model this part belongs to."
-    },
-    {
-      "@id": "schema:additionalProperty",
-      "c33:path": "/parts/resistance",
-      "rdfs:comment": "Nominal resistance as a number and a unit.",
-      "c33:valueClass": [
-        "schema:PropertyValue"
-      ],
-      "skos:closeMatch": [
-        "wd:Q25358"
-      ]
-    },
-    {
-      "@id": "schema:value",
-      "c33:path": "/parts/resistance/value",
-      "rdfs:comment": "Resistance in ohms."
-    },
-    {
-      "@id": "schema:unitText",
-      "c33:path": "/parts/resistance/unit",
-      "rdfs:comment": "Unit of value. Always ohm.",
-      "skos:closeMatch": [
-        "wd:Q47083"
-      ],
-      "schema:unitCode": "OHM"
-    },
-    {
-      "@id": "schema:name",
-      "c33:path": "/parts/resistance/label",
-      "rdfs:comment": "Human-readable value, such as 4.32 kΩ."
-    },
-    {
-      "@id": "c33:tolerance",
-      "c33:path": "/parts/tolerance",
-      "rdfs:comment": "Resistance tolerance.",
-      "c33:valueClass": [
-        "schema:PropertyValue"
-      ],
-      "skos:closeMatch": [
-        "wd:Q950292"
-      ]
-    },
-    {
-      "@id": "schema:value",
-      "c33:path": "/parts/tolerance/percent",
-      "rdfs:comment": "Tolerance in percent."
-    },
-    {
-      "@id": "c33:code",
-      "c33:path": "/parts/tolerance/code",
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#code",
+      "@type": "rdf:Property",
+      "rdfs:label": "code",
       "rdfs:comment": "Tolerance letter."
     },
     {
-      "@id": "c33:condition",
-      "c33:path": "/parts/condition",
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#condition",
+      "@type": "rdf:Property",
+      "rdfs:label": "condition",
       "rdfs:comment": "Item condition. schema.org has no NOS value, so this links to Wikidata instead.",
       "skos:closeMatch": [
-        "wd:Q907054"
+        {
+          "@id": "http://www.wikidata.org/entity/Q907054"
+        }
       ]
     },
     {
-      "@id": "schema:inventoryLevel",
-      "c33:path": "/parts/quantity",
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#default_tolerance",
+      "@type": "rdf:Property",
+      "rdfs:label": "default_tolerance",
+      "rdfs:comment": "Tolerance of a part in this series unless its part number adds a letter."
+    },
+    {
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#ebay_listing",
+      "@type": "rdf:Property",
+      "rdfs:label": "ebay_listing",
+      "rdfs:comment": "An active eBay listing for this exact part, when one is matched.",
+      "rdfs:range": {
+        "@id": "https://schema.org/Offer"
+      }
+    },
+    {
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#family",
+      "@type": "rdf:Property",
+      "rdfs:label": "family",
+      "rdfs:comment": "Caddock resistor type."
+    },
+    {
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#film",
+      "@type": "rdf:Property",
+      "rdfs:label": "film",
+      "rdfs:comment": "Resistance film named on the Caddock datasheets."
+    },
+    {
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#not_recommended_for_new_designs",
+      "@type": "rdf:Property",
+      "rdfs:label": "not_recommended_for_new_designs",
+      "rdfs:comment": "True when Caddock marks the type Not Recommended for New Designs.\n         Caddock says this of Type MM."
+    },
+    {
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#per",
+      "@type": "rdf:Property",
+      "rdfs:label": "per",
+      "rdfs:comment": "What the shipping charge covers."
+    },
+    {
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#power_rating",
+      "@type": "rdf:Property",
+      "rdfs:label": "power_rating",
+      "rdfs:comment": "Rated power in watts at +25 C from the Caddock datasheet. MS models are\n         rated the same at +125 C.",
+      "schema:unitCode": "WTT",
+      "skos:closeMatch": [
+        {
+          "@id": "http://www.wikidata.org/entity/Q25236"
+        }
+      ]
+    },
+    {
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#provenance",
+      "@type": "rdf:Property",
+      "rdfs:label": "provenance",
+      "rdfs:comment": "Where the stock came from, quoted from the listing."
+    },
+    {
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#series",
+      "@type": "rdf:Property",
+      "rdfs:label": "series",
+      "rdfs:comment": "Caddock models in the catalog, with ratings from Caddock datasheets.",
+      "rdfs:range": {
+        "@id": "https://schema.org/ProductModel"
+      }
+    },
+    {
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#tolerance",
+      "@type": "rdf:Property",
+      "rdfs:label": "tolerance",
+      "rdfs:comment": "Resistance tolerance.",
+      "rdfs:range": {
+        "@id": "https://schema.org/PropertyValue"
+      },
+      "skos:closeMatch": [
+        {
+          "@id": "http://www.wikidata.org/entity/Q950292"
+        }
+      ]
+    },
+    {
+      "@id": "https://exergy-connect.github.io/33audio.com/schema/vocab#voltage_rating",
+      "@type": "rdf:Property",
+      "rdfs:label": "voltage_rating",
+      "rdfs:comment": "Maximum continuous working voltage from the Caddock datasheet.",
+      "schema:unitCode": "VLT",
+      "skos:closeMatch": [
+        {
+          "@id": "http://www.wikidata.org/entity/Q25250"
+        }
+      ]
+    },
+    {
+      "@id": "https://schema.org/additionalProperty",
+      "@type": "rdf:Property",
+      "rdfs:label": "resistance",
+      "rdfs:comment": "Nominal resistance as a number and a unit.",
+      "rdfs:range": {
+        "@id": "https://schema.org/PropertyValue"
+      },
+      "skos:closeMatch": [
+        {
+          "@id": "http://www.wikidata.org/entity/Q25358"
+        }
+      ]
+    },
+    {
+      "@id": "https://schema.org/addressCountry",
+      "@type": "rdf:Property",
+      "rdfs:label": "country",
+      "rdfs:comment": "ISO 3166-1 alpha-2 country code of the seller."
+    },
+    {
+      "@id": "https://schema.org/addressLocality",
+      "@type": "rdf:Property",
+      "rdfs:label": "locality",
+      "rdfs:comment": "City the parts ship from."
+    },
+    {
+      "@id": "https://schema.org/addressRegion",
+      "@type": "rdf:Property",
+      "rdfs:label": "region",
+      "rdfs:comment": "State the parts ship from."
+    },
+    {
+      "@id": "https://schema.org/alternateName",
+      "@type": "rdf:Property",
+      "rdfs:label": "ebay_seller",
+      "rdfs:comment": "eBay seller user name."
+    },
+    {
+      "@id": "https://schema.org/category",
+      "@type": "rdf:Property",
+      "rdfs:label": "product_line",
+      "rdfs:comment": "Caddock product line name for this type, as on the datasheet."
+    },
+    {
+      "@id": "https://schema.org/currency",
+      "@type": "rdf:Property",
+      "rdfs:label": "currency",
+      "rdfs:comment": "Currency of the shipping charge."
+    },
+    {
+      "@id": "https://schema.org/description",
+      "@type": "rdf:Property",
+      "rdfs:label": "summary",
+      "rdfs:comment": "The shipping terms as one sentence."
+    },
+    {
+      "@id": "https://schema.org/eligibleRegion",
+      "@type": "rdf:Property",
+      "rdfs:label": "region_note",
+      "rdfs:comment": "Where 33audio sells, quoted from the listing."
+    },
+    {
+      "@id": "https://schema.org/email",
+      "@type": "rdf:Property",
+      "rdfs:label": "email",
+      "rdfs:comment": "Contact and order email."
+    },
+    {
+      "@id": "https://schema.org/inventoryLevel",
+      "@type": "rdf:Property",
+      "rdfs:label": "quantity",
       "rdfs:comment": "Quantity on the 33audio listing."
     },
     {
-      "@id": "schema:price",
-      "c33:path": "/parts/price",
-      "rdfs:comment": "Price per piece."
+      "@id": "https://schema.org/isBasedOn",
+      "@type": "rdf:Property",
+      "rdfs:label": "source_url",
+      "rdfs:comment": "The 33audio page this catalog was parsed from."
     },
     {
-      "@id": "schema:priceCurrency",
-      "c33:path": "/parts/currency",
-      "rdfs:comment": "Currency of price."
+      "@id": "https://schema.org/itemListElement",
+      "@type": "rdf:Property",
+      "rdfs:label": "parts",
+      "rdfs:comment": "One stocked resistor value.",
+      "rdfs:range": {
+        "@id": "https://schema.org/Product"
+      },
+      "skos:closeMatch": [
+        {
+          "@id": "http://www.wikidata.org/entity/Q5321"
+        }
+      ]
     },
     {
-      "@id": "schema:url",
-      "c33:path": "/parts/url",
+      "@id": "https://schema.org/manufacturer",
+      "@type": "rdf:Property",
+      "rdfs:label": "manufacturer",
+      "rdfs:comment": "Resistor manufacturer."
+    },
+    {
+      "@id": "https://schema.org/model",
+      "@type": "rdf:Property",
+      "rdfs:label": [
+        "name",
+        "series"
+      ],
+      "rdfs:comment": [
+        "Caddock model number.",
+        "The Caddock model this part belongs to."
+      ]
+    },
+    {
+      "@id": "https://schema.org/mpn",
+      "@type": "rdf:Property",
+      "rdfs:label": "part_number",
+      "rdfs:comment": "33audio part id: series, resistance, and a tolerance letter only when\n         the listing marks one, such as MM177-4.32K or MM177-665K-F."
+    },
+    {
+      "@id": "https://schema.org/name",
+      "@type": "rdf:Property",
+      "rdfs:label": [
+        "name",
+        "label"
+      ],
+      "rdfs:comment": [
+        "Business name.",
+        "Human-readable value, such as 4.32 kΩ."
+      ]
+    },
+    {
+      "@id": "https://schema.org/price",
+      "@type": "rdf:Property",
+      "rdfs:label": [
+        "unit_price",
+        "price"
+      ],
+      "rdfs:comment": [
+        "Listing price per resistor, the same for every part.",
+        "Price per piece."
+      ]
+    },
+    {
+      "@id": "https://schema.org/priceCurrency",
+      "@type": "rdf:Property",
+      "rdfs:label": "currency",
+      "rdfs:comment": [
+        "Currency of every price in this document.",
+        "Currency of price."
+      ]
+    },
+    {
+      "@id": "https://schema.org/sameAs",
+      "@type": "rdf:Property",
+      "rdfs:label": "ebay_store",
+      "rdfs:comment": "33audio's eBay store front."
+    },
+    {
+      "@id": "https://schema.org/seller",
+      "@type": "rdf:Property",
+      "rdfs:label": "seller",
+      "rdfs:comment": "The business selling the parts.",
+      "rdfs:range": {
+        "@id": "https://schema.org/Organization"
+      }
+    },
+    {
+      "@id": "https://schema.org/shippingDestination",
+      "@type": "rdf:Property",
+      "rdfs:label": "country",
+      "rdfs:comment": "ISO 3166-1 alpha-2 code of the only shipping destination."
+    },
+    {
+      "@id": "https://schema.org/shippingDetails",
+      "@type": "rdf:Property",
+      "rdfs:label": "shipping",
+      "rdfs:comment": "Shipping terms for an order.",
+      "rdfs:range": {
+        "@id": "https://schema.org/OfferShippingDetails"
+      }
+    },
+    {
+      "@id": "https://schema.org/shippingRate",
+      "@type": "rdf:Property",
+      "rdfs:label": "amount",
+      "rdfs:comment": "Shipping charge per order."
+    },
+    {
+      "@id": "https://schema.org/subjectOf",
+      "@type": "rdf:Property",
+      "rdfs:label": "datasheet",
+      "rdfs:comment": "Link to the datasheet these ratings come from."
+    },
+    {
+      "@id": "https://schema.org/unitText",
+      "@type": "rdf:Property",
+      "rdfs:label": "unit",
+      "rdfs:comment": "Unit of value. Always ohm.",
+      "schema:unitCode": "OHM",
+      "skos:closeMatch": [
+        {
+          "@id": "http://www.wikidata.org/entity/Q47083"
+        }
+      ]
+    },
+    {
+      "@id": "https://schema.org/url",
+      "@type": "rdf:Property",
+      "rdfs:label": "url",
       "rdfs:comment": "The part's page on the 33audio catalog site."
     },
     {
-      "@id": "c33:ebay_listing",
-      "c33:path": "/parts/ebay_listing",
-      "rdfs:comment": "An active eBay listing for this exact part, when one is matched.",
-      "c33:valueClass": [
-        "schema:Offer"
+      "@id": "https://schema.org/value",
+      "@type": "rdf:Property",
+      "rdfs:label": [
+        "value",
+        "percent"
+      ],
+      "rdfs:comment": [
+        "Resistance in ohms.",
+        "Tolerance in percent."
       ]
     }
   ]

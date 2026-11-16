@@ -129,7 +129,11 @@
         "D",
         "C",
         "B"
-      ]
+      ],
+      "patternProperties": {
+        "^@[A-Za-z]+$": true,
+        "^\\$[A-Za-z]+$": true
+      }
     },
     "listing": {
       "type": "object",
@@ -205,7 +209,11 @@
           }
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "patternProperties": {
+        "^@[A-Za-z]+$": true,
+        "^\\$[A-Za-z]+$": true
+      }
     },
     "series": {
       "type": "array",
@@ -296,8 +304,10 @@
                   }
                 },
                 "ohms": {
-                  "type": "string",
-                  "pattern": "^-?[0-9]+(\\.[0-9]+)?$",
+                  "type": "number",
+                  "multipleOf": 0.001,
+                  "minimum": -9223372036854776.0,
+                  "maximum": 9223372036854776.0,
                   "description": "Value in ohms.",
                   "x-yang": {
                     "type": "decimal64",
@@ -365,6 +375,7 @@
               },
               "additionalProperties": false,
               "required": [
+                "id",
                 "resistance",
                 "ohms",
                 "tolerance_code",
@@ -372,7 +383,11 @@
                 "tolerance_explicit",
                 "quantity",
                 "price"
-              ]
+              ],
+              "patternProperties": {
+                "^@[A-Za-z]+$": true,
+                "^\\$[A-Za-z]+$": true
+              }
             },
             "description": "One value line of the section.",
             "x-yang": {
@@ -384,10 +399,15 @@
         },
         "additionalProperties": false,
         "required": [
+          "id",
           "family",
           "default_tolerance_code",
           "default_tolerance"
-        ]
+        ],
+        "patternProperties": {
+          "^@[A-Za-z]+$": true,
+          "^\\$[A-Za-z]+$": true
+        }
       },
       "description": "One section of the listing.",
       "x-yang": {
@@ -397,5 +417,9 @@
       "minItems": 1
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "patternProperties": {
+    "^@[A-Za-z]+$": true,
+    "^\\$[A-Za-z]+$": true
+  }
 }
