@@ -1,0 +1,12 @@
+name = "caddock-33audio"
+pages_build_output_dir = "docs"
+compatibility_date = "2026-11-16"
+
+[vars]
+CHECKOUT_ENABLED = "false"
+
+# Create with: npx wrangler@4.162.0 kv namespace create STOCK
+# then paste the returned id here.
+[[kv_namespaces]]
+binding = "STOCK"
+id = "REPLACE_WITH_STOCK_KV_NAMESPACE_ID"
