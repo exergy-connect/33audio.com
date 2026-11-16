@@ -404,6 +404,11 @@ html[data-payment-flow="stripe"] .cart-mode-note { display: none; }
   .fee-grid { grid-template-columns: 1fr 1fr 1fr; }
 }
 
+.summary { max-width: 42rem; }
+.faq details { border-top: 1px solid var(--line); }
+.faq summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700; }
+.faq details p { margin-top: 0; }
+
 .site-footer {
   border-top: 1px solid var(--line);
   padding: 1.25rem 0 2rem;

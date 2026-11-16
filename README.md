@@ -46,6 +46,26 @@ The site defaults to eBay. A checkout demo menu on every page switches among thr
 
 Pages show stock as of the last build, then replace it with live quantities from `/api/stock` when that endpoint answers.
 
+## AI and search crawlers
+
+Every build writes these files at the site root:
+
+- `llms.txt` follows the [llms.txt](https://llmstxt.org/) convention: who 33audio is, the $10.00 price, $6.35 flat USA shipping, the eBay store, and a link to every series and part page.
+- `llms-full.txt` adds one plain-language sentence per part and the shared FAQ.
+- `catalog.md` and `catalog.json` are the same inventory as a Markdown table and as JSON. The footer links to them.
+
+Part pages start with that sentence and a short FAQ (Type MM versus Type MS, what NOS means on this site, and the uses named on the 1985 Caddock datasheets). The FAQ is also FAQPage JSON-LD. The answers stay inside the 33audio listing and those datasheets.
+
+`robots.txt` allows `GPTBot`, `OAI-SearchBot`, `ChatGPT-User`, `ClaudeBot`, `Claude-SearchBot`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended`, and `Bingbot`, and it still points at the sitemap. On Cloudflare, leave **Block AI bots** / **AI Crawl Control** off (allowed). That dashboard setting blocks these crawlers even when `robots.txt` allows them.
+
+### Search Console and Bing
+
+After the site is public:
+
+1. In [Google Search Console](https://search.google.com/search-console), add the site (the Cloudflare Pages URL, or the custom domain once it is chosen) and verify it.
+2. Open **Sitemaps** and submit `sitemap.xml` (the full URL is the one in `robots.txt`).
+3. In [Bing Webmaster Tools](https://www.bing.com/webmasters), add the same site. You can import it from Search Console, or verify it directly and submit the same sitemap URL.
+
 ## Selling costs
 
 `/fees/` compares published US rates for a $10 part plus $6.35 shipping, with a calculator. The rates and source URLs live in `data/site.json` under `selling_costs`. Update them there when the fee pages change.
