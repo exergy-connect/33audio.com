@@ -111,7 +111,8 @@ export async function discoveryChecks(shop) {
     walk(blocks);
     assert(types.has("Product"), "no Product");
     assert(types.has("FAQPage"), "no FAQPage");
-    assert(types.has("Offer"), "no Offer");
+    assert(!types.has("Offer"), "Caddock reference page claims an Offer");
+    assert(!types.has("BuyAction"), "Caddock reference page claims a BuyAction");
     return [...types].slice(0, 6).join(", ");
   });
   await check("discovery", "catalog.json points at its xYang schema and context", async () => {

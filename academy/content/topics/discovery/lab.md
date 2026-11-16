@@ -71,7 +71,7 @@ FAQPage
 BreadcrumbList 
 ```
 
-The second block has no `@type` at the top: it is the shop-vocabulary node, typed through the xYang context. After deploying, paste a part URL into Google's [Rich Results Test](https://search.google.com/test/rich-results) to confirm Product and FAQ eligibility.
+The second block has no `@type` at the top: it is the shop-vocabulary node, typed through the xYang context. Caddock pages describe reference products and FAQs without an `Offer` or `BuyAction`; availability must be confirmed with Mark. eBay listings have their own purchase links in the separate eBay section.
 
 ## 4. Validate catalog.json against the model
 
@@ -112,7 +112,7 @@ node academy/tools/lab-check.mjs --shop http://127.0.0.1:8788 --topics discovery
 ```output
 PASS  discovery     robots.txt allows AI crawlers and lists the sitemap  (4 AI crawlers allowed)
 PASS  discovery     llms.txt lists series and part pages  (85 part links)
-PASS  discovery     part page has Product and FAQPage JSON-LD  (Product, Brand, PropertyValue, Offer, Organization, PostalAddress)
+PASS  discovery     part page has Product and FAQPage JSON-LD  (Product, Brand, PropertyValue, FAQPage, Question, Answer)
 PASS  discovery     catalog.json points at its xYang schema and context  (85 parts)
 PASS  discovery     sitemap lists every page  (97 URLs)
 
