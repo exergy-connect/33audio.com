@@ -1,0 +1,47 @@
+{
+  "repo": "exergy-connect/lab.net",
+  "proposals": [
+    {
+      "slug": "01-link-delay",
+      "title": "Link propagation delay and RTT in ping results",
+      "issue_url": null,
+      "status": "draft, not yet filed"
+    },
+    {
+      "slug": "02-http-service",
+      "title": "Minimal HTTP request/response between hosts (origin and Worker nodes)",
+      "issue_url": null,
+      "status": "draft, not yet filed"
+    },
+    {
+      "slug": "03-filter-waf",
+      "title": "Ordered packet/request filter on a node (firewall and WAF role)",
+      "issue_url": null,
+      "status": "draft, not yet filed"
+    },
+    {
+      "slug": "04-load-balancer",
+      "title": "Load balancer node with a VIP, backends, and health checks",
+      "issue_url": null,
+      "status": "draft, not yet filed"
+    },
+    {
+      "slug": "05-edge-cache",
+      "title": "Caching reverse proxy node (CDN edge cache)",
+      "issue_url": null,
+      "status": "draft, not yet filed"
+    },
+    {
+      "slug": "06-rate-limit",
+      "title": "Rate limiting on a node",
+      "issue_url": null,
+      "status": "draft, not yet filed"
+    },
+    {
+      "slug": "07-traffic-source",
+      "title": "Deterministic traffic source for bots and floods",
+      "issue_url": null,
+      "status": "draft, not yet filed"
+    }
+  ]
+}

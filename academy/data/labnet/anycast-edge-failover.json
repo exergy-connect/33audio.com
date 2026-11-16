@@ -1,0 +1,424 @@
+{
+  "kind": "simulated",
+  "title": "lab.net run of anycast-edge-failover.xp",
+  "simulator": {
+    "name": "lab.net",
+    "repo": "exergy-connect/lab.net",
+    "commit": "06c71623b044e5ee2d4a9bcfe052bc1b9fe7c6d2",
+    "seed": 42,
+    "settle_ms": 1000
+  },
+  "topology_file": "network/labnet/anycast-edge-failover.xp",
+  "make_real": [
+    "This is lab.net's deterministic routing simulation of the topology file, not a measurement of the Internet.",
+    "lab.net computes BGP sessions, routes, and the forwarding path; it does not model propagation delay for ping.",
+    "Measured latency for the shop comes from the observability lab (measure.mjs against your deployment)."
+  ],
+  "topology": "33audio-anycast-edge-failover",
+  "graph": {
+    "nodes": [
+      {
+        "id": "visitor",
+        "device": "linux",
+        "role": "host",
+        "as": null,
+        "x": 213.33333333333331,
+        "y": 288
+      },
+      {
+        "id": "isp_hou",
+        "device": "frr",
+        "role": null,
+        "as": 64510,
+        "x": 213.33333333333331,
+        "y": 96
+      },
+      {
+        "id": "transit",
+        "device": "frr",
+        "role": null,
+        "as": 64520,
+        "x": 640,
+        "y": 96
+      },
+      {
+        "id": "cf_iah",
+        "device": "frr",
+        "role": null,
+        "as": 13335,
+        "x": 1066.6666666666667,
+        "y": 96
+      },
+      {
+        "id": "cf_dfw",
+        "device": "frr",
+        "role": null,
+        "as": 13335,
+        "x": 640,
+        "y": 288
+      },
+      {
+        "id": "web_iah",
+        "device": "linux",
+        "role": "host",
+        "as": null,
+        "x": 1066.6666666666667,
+        "y": 288
+      },
+      {
+        "id": "web_dfw",
+        "device": "linux",
+        "role": "host",
+        "as": null,
+        "x": 640,
+        "y": 480
+      }
+    ],
+    "edges": [
+      {
+        "a": "isp_hou",
+        "b": "visitor",
+        "aIf": "eth1",
+        "bIf": "eth1"
+      },
+      {
+        "a": "isp_hou",
+        "b": "transit",
+        "aIf": "eth2",
+        "bIf": "eth1"
+      },
+      {
+        "a": "cf_dfw",
+        "b": "transit",
+        "aIf": "eth1",
+        "bIf": "eth2"
+      },
+      {
+        "a": "cf_iah",
+        "b": "web_iah",
+        "aIf": "eth9",
+        "bIf": "eth1"
+      },
+      {
+        "a": "cf_dfw",
+        "b": "web_dfw",
+        "aIf": "eth9",
+        "bIf": "eth1"
+      }
+    ]
+  },
+  "timeMs": 1000,
+  "sessions": [
+    {
+      "left": "isp_hou",
+      "right": "transit",
+      "leftAs": 64510,
+      "rightAs": 64520,
+      "state": "established"
+    },
+    {
+      "left": "transit",
+      "right": "cf_dfw",
+      "leftAs": 64520,
+      "rightAs": 13335,
+      "state": "established"
+    },
+    {
+      "left": "cf_iah",
+      "right": "cf_dfw",
+      "leftAs": 13335,
+      "rightAs": 13335,
+      "state": "idle"
+    }
+  ],
+  "results": [
+    {
+      "label": "ISP has only the transit session",
+      "ok": true,
+      "detail": "isp_hou–transit established AS64520"
+    },
+    {
+      "label": "ISP now reaches the anycast prefix through transit",
+      "ok": true,
+      "detail": "isp_hou bgp 192.0.2.0/24 via 10.1.0.2 as-path 64520 13335"
+    },
+    {
+      "label": "Visitor reaches the same anycast address at DFW",
+      "ok": true,
+      "detail": "visitor echo 192.0.2.10 reply from web_dfw",
+      "hops": [
+        {
+          "kind": "arp-request",
+          "from": "visitor",
+          "ifname": "eth1",
+          "seq": 61
+        },
+        {
+          "kind": "ethernet",
+          "from": "visitor",
+          "to": "isp_hou",
+          "ifname": "eth1",
+          "seq": 62
+        },
+        {
+          "kind": "arp-reply",
+          "from": "isp_hou",
+          "ifname": "eth1",
+          "seq": 63
+        },
+        {
+          "kind": "ethernet",
+          "from": "isp_hou",
+          "to": "visitor",
+          "ifname": "eth1",
+          "seq": 64
+        },
+        {
+          "kind": "arp-learned",
+          "at": "visitor",
+          "ifname": "eth1",
+          "seq": 65
+        },
+        {
+          "kind": "ethernet",
+          "from": "visitor",
+          "to": "isp_hou",
+          "ifname": "eth1",
+          "seq": 66
+        },
+        {
+          "kind": "forward",
+          "at": "isp_hou",
+          "from": "172.16.0.2",
+          "to": "192.0.2.10",
+          "ttl": 63,
+          "seq": 67
+        },
+        {
+          "kind": "ethernet",
+          "from": "isp_hou",
+          "to": "transit",
+          "ifname": "eth2",
+          "seq": 68
+        },
+        {
+          "kind": "forward",
+          "at": "transit",
+          "from": "172.16.0.2",
+          "to": "192.0.2.10",
+          "ttl": 62,
+          "seq": 69
+        },
+        {
+          "kind": "ethernet",
+          "from": "transit",
+          "to": "cf_dfw",
+          "ifname": "eth2",
+          "seq": 70
+        },
+        {
+          "kind": "forward",
+          "at": "cf_dfw",
+          "from": "172.16.0.2",
+          "to": "192.0.2.10",
+          "ttl": 61,
+          "seq": 71
+        },
+        {
+          "kind": "arp-request",
+          "from": "cf_dfw",
+          "ifname": "eth9",
+          "seq": 72
+        },
+        {
+          "kind": "ethernet",
+          "from": "cf_dfw",
+          "to": "web_dfw",
+          "ifname": "eth9",
+          "seq": 73
+        },
+        {
+          "kind": "arp-reply",
+          "from": "web_dfw",
+          "ifname": "eth1",
+          "seq": 74
+        },
+        {
+          "kind": "ethernet",
+          "from": "web_dfw",
+          "to": "cf_dfw",
+          "ifname": "eth1",
+          "seq": 75
+        },
+        {
+          "kind": "arp-learned",
+          "at": "cf_dfw",
+          "ifname": "eth9",
+          "seq": 76
+        },
+        {
+          "kind": "ethernet",
+          "from": "cf_dfw",
+          "to": "web_dfw",
+          "ifname": "eth9",
+          "seq": 77
+        },
+        {
+          "kind": "icmp-request",
+          "at": "web_dfw",
+          "from": "172.16.0.2",
+          "to": "192.0.2.10",
+          "seq": 1
+        },
+        {
+          "kind": "ethernet",
+          "from": "web_dfw",
+          "to": "cf_dfw",
+          "ifname": "eth1",
+          "seq": 78
+        },
+        {
+          "kind": "forward",
+          "at": "cf_dfw",
+          "from": "192.0.2.10",
+          "to": "172.16.0.2",
+          "ttl": 63,
+          "seq": 79
+        },
+        {
+          "kind": "ethernet",
+          "from": "cf_dfw",
+          "to": "transit",
+          "ifname": "eth1",
+          "seq": 80
+        },
+        {
+          "kind": "forward",
+          "at": "transit",
+          "from": "192.0.2.10",
+          "to": "172.16.0.2",
+          "ttl": 62,
+          "seq": 81
+        },
+        {
+          "kind": "ethernet",
+          "from": "transit",
+          "to": "isp_hou",
+          "ifname": "eth1",
+          "seq": 82
+        },
+        {
+          "kind": "forward",
+          "at": "isp_hou",
+          "from": "192.0.2.10",
+          "to": "172.16.0.2",
+          "ttl": 61,
+          "seq": 83
+        },
+        {
+          "kind": "ethernet",
+          "from": "isp_hou",
+          "to": "visitor",
+          "ifname": "eth1",
+          "seq": 84
+        },
+        {
+          "kind": "icmp-reply",
+          "at": "visitor",
+          "from": "192.0.2.10",
+          "to": "172.16.0.2",
+          "seq": 1
+        }
+      ]
+    }
+  ],
+  "tables": {
+    "isp_hou": {
+      "fib": [
+        {
+          "prefix": "172.16.0.0/24",
+          "protocol": "connected",
+          "nexthop": null,
+          "aspath": null,
+          "ifname": "eth1"
+        },
+        {
+          "prefix": "10.1.0.0/30",
+          "protocol": "connected",
+          "nexthop": null,
+          "aspath": null,
+          "ifname": "eth2"
+        },
+        {
+          "prefix": "10.0.0.2/32",
+          "protocol": "connected",
+          "nexthop": null,
+          "aspath": null,
+          "ifname": "lo"
+        },
+        {
+          "prefix": "10.0.0.3/32",
+          "protocol": "bgp",
+          "nexthop": "10.1.0.2",
+          "aspath": "64520",
+          "ifname": "eth2"
+        },
+        {
+          "prefix": "192.0.2.0/24",
+          "protocol": "bgp",
+          "nexthop": "10.1.0.2",
+          "aspath": "64520 13335",
+          "ifname": "eth2"
+        },
+        {
+          "prefix": "10.0.0.5/32",
+          "protocol": "bgp",
+          "nexthop": "10.1.0.2",
+          "aspath": "64520 13335",
+          "ifname": "eth2"
+        }
+      ],
+      "locRib": [
+        {
+          "prefix": "10.0.0.2/32",
+          "protocol": "bgp",
+          "nexthop": "10.0.0.2",
+          "aspath": "",
+          "ifname": null
+        },
+        {
+          "prefix": "172.16.0.0/24",
+          "protocol": "bgp",
+          "nexthop": "10.0.0.2",
+          "aspath": "",
+          "ifname": null
+        },
+        {
+          "prefix": "10.0.0.3/32",
+          "protocol": "bgp",
+          "nexthop": "10.1.0.2",
+          "aspath": "64520",
+          "ifname": "eth2"
+        },
+        {
+          "prefix": "192.0.2.0/24",
+          "protocol": "bgp",
+          "nexthop": "10.1.0.2",
+          "aspath": "64520 13335",
+          "ifname": "eth2"
+        },
+        {
+          "prefix": "10.0.0.5/32",
+          "protocol": "bgp",
+          "nexthop": "10.1.0.2",
+          "aspath": "64520 13335",
+          "ifname": "eth2"
+        }
+      ]
+    }
+  },
+  "capture": {
+    "path": "academy/data/labnet/anycast-edge-failover.pcapng",
+    "records": 132
+  }
+}
