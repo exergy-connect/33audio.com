@@ -75,6 +75,19 @@ def first_line(lines: list[str], needle: str) -> str | None:
     return None
 
 
+def first_sentence(lines: list[str], needle: str) -> str | None:
+    for index, line in enumerate(lines):
+        if needle.lower() not in line.lower():
+            continue
+        sentence = []
+        for continuation in lines[index:]:
+            sentence.append(continuation)
+            if continuation.rstrip().endswith((".", "!", "?")):
+                break
+        return " ".join(sentence)
+    return None
+
+
 def listing_fields(lines: list[str], html: str) -> dict:
     title = ""
     title_match = re.search(r"<title>(.*?)</title>", html, re.I | re.S)
@@ -87,7 +100,7 @@ def listing_fields(lines: list[str], html: str) -> dict:
         "temperature_line": first_line(lines, "275"),
         "origin_line": first_line(lines, "made in usa"),
         "environment_line": first_line(lines, "harsh"),
-        "provenance": first_line(lines, "liquidation"),
+        "provenance": first_sentence(lines, "liquidation"),
         "payment_note": first_line(lines, "paypal"),
         "region_note": first_line(lines, "usa orders only") or first_line(lines, "no international"),
         "statements": [line for line in lines if keep_statement(line)],

@@ -41,7 +41,7 @@ class ParseTests(unittest.TestCase):
         self.assertEqual(parts["MS176-500K-G"]["tolerance"], "2%")
         self.assertEqual(parts["MS151-33.2K"]["quantity"], 14)
         self.assertEqual(parts["MM177-1.09K-D"]["quantity"], 46)
-        self.assertIn("liquidation stock", data["listing"]["provenance"])
+        self.assertEqual(data["listing"]["provenance"], "These resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s.")
 
 
 class MatchTests(unittest.TestCase):
@@ -131,6 +131,13 @@ class BuildTests(unittest.TestCase):
             self.assertIn('href="https://www.ebay.com/itm/123"', ebay)
             self.assertNotIn("Wrong seller", ebay)
             self.assertNotIn("Unsafe link", ebay)
+            index = json.loads((docs / "search.json").read_text())
+            self.assertEqual(len(index["parts"]), 85)
+            self.assertEqual(len(index["listings"]), 1)
+            self.assertEqual(index["listings"][0]["label"], "Qty(10) Dale resistors")
+            self.assertEqual(index["listings"][0]["source"], "ebay")
+            self.assertIn("data-search-all", (docs / "search/index.html").read_text())
+            self.assertIn('action="../search/"', ebay)
             reference = (docs / "parts/mm177-4.32k/index.html").read_text()
             blocks = __import__("re").findall(r'<script type="application/ld\+json">(.*?)</script>', reference)
             product = next(json.loads(block) for block in blocks if json.loads(block).get("@type") == "Product")

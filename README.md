@@ -1,6 +1,6 @@
 # 33audio.com
 
-33audio's shop has two distinct sections: `/ebay/` shows synced listings from seller `33audiomarko`, with each listing's title, lot price, and direct eBay link. `/catalog/` is the Caddock Micronox reference catalog, with one page per value and availability inquiries to Mark. Caddock source quantities and prices are not confirmed eBay offers.
+33audio's shop has two distinct sections: `/ebay/` shows synced listings from seller `33audiomarko`, with each listing's title, lot price, and direct eBay link. `/catalog/` is the Caddock Micronox reference catalog, with one page per value and availability inquiries to Mark. Caddock source quantities and prices are not confirmed eBay offers. The shared search at `/search/` searches both sections, labeling Caddock reference items and eBay listings separately.
 
 The site is hosted on Cloudflare Pages. `docs/` is the generated static output. `functions/` holds the Pages Functions (`/api/stock`, `/api/checkout`, `/api/stripe-webhook`, `/api/search`), with shared Worker code in `worker/`.
 

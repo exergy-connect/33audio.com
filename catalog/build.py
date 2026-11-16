@@ -181,10 +181,10 @@ def header(site: dict, depth: int, current: str) -> str:
     <nav class="nav" aria-label="Primary">{''.join(links)}</nav>
   </div>
   <div class="wrap">
-    <form class="search-form" action="{escape(rel(depth, 'catalog/'))}" method="get" role="search">
-      <label class="search-label" for="site-q">Search the Caddock catalog by series, value, or part number</label>
+    <form class="search-form" action="{escape(rel(depth, 'search/'))}" method="get" role="search">
+      <label class="search-label" for="site-q">Search Caddock and eBay listings</label>
       <div class="search-row">
-        <input id="site-q" data-search-input name="q" type="search" placeholder="MM177 4.32K" enterkeyhint="search">
+        <input id="site-q" data-search-input name="q" type="search" placeholder="Part number, value, brand, or keyword" enterkeyhint="search">
         <button type="submit">Search</button>
       </div>
     </form>
@@ -461,6 +461,15 @@ def render_ebay(catalog: dict, site: dict, ebay: dict, origin: str) -> str:
     return layout("33audio eBay listings | 33audio", "Browse 33audio's synced eBay listings with listing prices and direct purchase links.", abs_url(origin, "ebay/"), "ebay/index.html", body, site, catalog, "ebay/")
 
 
+def render_search(catalog: dict, site: dict, origin: str) -> str:
+    body = """<h1>Search Caddock and eBay listings</h1>
+<p>Search by brand, part number, value, or keyword. Caddock results are reference entries; eBay results link to the seller's listings with prices for the described lots.</p>
+<p class="search-status" data-search-status aria-live="polite"></p>
+<div data-search-live data-search-all></div>
+<noscript><p>Enable JavaScript to search, or browse the <a href="../catalog/">Caddock catalog</a> and <a href="../ebay/">eBay listings</a>.</p></noscript>"""
+    return layout("Search Caddock and eBay | 33audio", "Search both the Caddock reference catalog and 33audio eBay listings by brand, part number, or value.", abs_url(origin, "search/"), "search/index.html", body, site, catalog, "search/", search=True)
+
+
 def render_catalog(catalog: dict, site: dict, origin: str) -> str:
     rows = []
     for series in catalog["series"]:
@@ -478,6 +487,7 @@ def render_catalog(catalog: dict, site: dict, origin: str) -> str:
 {chips()}
 <p data-search-empty hidden>No parts match. Try a series and a value, such as MM177 4.32K.</p>
 <div class="part-list" data-search-list>{''.join(rows)}</div>
+<div data-search-live data-search-ebay-only hidden></div>
 """
     return layout(title, description, abs_url(origin, "catalog/"), "catalog/index.html", body, site, catalog, "catalog/", search=True)
 
@@ -735,7 +745,7 @@ def render_checkout_result(kind: str, catalog: dict, site: dict, origin: str) ->
     return layout(title, description, abs_url(origin, path), path + "index.html", body, site, catalog, path, noindex=True)
 
 
-def write_search_index(docs: Path, parts: list[dict], site: dict) -> None:
+def write_search_index(docs: Path, parts: list[dict], site: dict, ebay: dict) -> None:
     payload = {
         "shipping": site["shipping"]["amount"],
         "parts": [
@@ -753,6 +763,15 @@ def write_search_index(docs: Path, parts: list[dict], site: dict) -> None:
             for part in parts
         ]
     }
+    from catalog.purchase import safe_https
+    payload["listings"] = [
+        {"id": "ebay-" + str(listing.get("item_id") or listing["url"]), "source": "ebay", "label": listing["title"],
+         "price": listing.get("price", ""), "currency": listing.get("currency", "USD"),
+         "url": listing["url"], "search": "ebay " + listing["title"].lower()}
+        for listing in ebay.get("listings") or []
+        if listing.get("seller") == site["purchase"]["ebay"]["seller"]
+        and safe_https(listing.get("url", ""), "ebay.com")
+    ]
     (docs / "search.json").write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
@@ -818,7 +837,7 @@ def validate(docs: Path, catalog: dict, site: dict, origin: str) -> None:
     locs = [node.text for node in sitemap.iter() if node.tag.endswith("loc")]
     if len(locs) != len(set(locs)):
         errors.append("duplicate sitemap URLs")
-    expected = 9 + len(catalog["series"]) + len(parts)
+    expected = 10 + len(catalog["series"]) + len(parts)
     robots_text = (docs / "robots.txt").read_text(encoding="utf-8")
     for bot in (
         "GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot",
@@ -859,7 +878,7 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
         target.write_text(html, encoding="utf-8")
     matches = match_listings(catalog, ebay.get("listings") or [])
     parts = flatten(catalog)
-    paths = ["", "ebay/", "catalog/", "ask/", "fees/", "llms.txt", "llms-full.txt", "catalog.md", "catalog.json"]
+    paths = ["", "search/", "ebay/", "catalog/", "ask/", "fees/", "llms.txt", "llms-full.txt", "catalog.md", "catalog.json"]
     (docs / "llms.txt").write_text(render_llms_txt(catalog, site, origin), encoding="utf-8")
     (docs / "llms-full.txt").write_text(render_llms_full(catalog, site, origin), encoding="utf-8")
     (docs / "catalog.md").write_text(render_catalog_md(catalog, site, origin), encoding="utf-8")
@@ -867,6 +886,8 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
     fees_page = docs / "fees" / "index.html"
     fees_page.parent.mkdir(parents=True, exist_ok=True)
     fees_page.write_text(render_fees(catalog, site, origin), encoding="utf-8")
+    (docs / "search").mkdir(parents=True, exist_ok=True)
+    (docs / "search/index.html").write_text(render_search(catalog, site, origin), encoding="utf-8")
     (docs / "ebay").mkdir(parents=True, exist_ok=True)
     (docs / "ebay" / "index.html").write_text(render_ebay(catalog, site, ebay, origin), encoding="utf-8")
     (docs / "index.html").write_text(render_home(catalog, site, ebay, origin), encoding="utf-8")
@@ -886,7 +907,7 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
             part_page = docs / "parts" / part["id"].lower() / "index.html"
             part_page.parent.mkdir(parents=True, exist_ok=True)
             part_page.write_text(render_part(series, enriched, decision, catalog, site, origin), encoding="utf-8")
-    write_search_index(docs, parts, site)
+    write_search_index(docs, parts, site, ebay)
     write_sitemap(docs, origin, paths, lastmod(catalog))
     write_robots(docs, origin)
     (docs / ".nojekyll").write_bytes(b"")

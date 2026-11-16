@@ -40,13 +40,15 @@
   function renderHit(part, root) {
     var link = document.createElement("a");
     link.className = "part-row";
-    link.href = root + part.url;
+    link.href = part.source === "ebay" ? part.url : root + part.url;
     var pid = document.createElement("span");
     pid.className = "pid";
-    pid.textContent = part.id;
+    pid.textContent = part.source === "ebay" ? part.label : part.id;
     var meta = document.createElement("span");
     meta.className = "meta";
-    meta.textContent = part.label + " · " + part.tolerance + " · " + part.quantity + " listed · $" + part.price;
+    meta.textContent = part.source === "ebay"
+      ? "eBay listing · " + part.currency + " " + part.price + " for the described lot"
+      : "Caddock reference · " + part.label + " · " + part.tolerance + " · source price $" + part.price + " · ask about availability";
     link.appendChild(pid);
     link.appendChild(meta);
     return link;
@@ -70,7 +72,7 @@
         return response.json();
       })
       .then(function (index) {
-        var parts = index.parts || [];
+        var parts = (index.parts || []).concat(index.listings || []);
         var byId = {};
         parts.forEach(function (part) { byId[part.id] = part; });
 
@@ -94,20 +96,21 @@
           }
           if (live) {
             live.innerHTML = "";
-            if (!active) {
+            if (!active && !live.hasAttribute("data-search-all")) {
               live.hidden = true;
             } else {
               live.hidden = false;
-              var shown = matched.slice(0, 8);
+              var liveMatches = live.hasAttribute("data-search-ebay-only") ? matched.filter(function (part) { return part.source === "ebay"; }) : matched;
+              var shown = live.hasAttribute("data-search-all") ? liveMatches : liveMatches.slice(0, 8);
               shown.forEach(function (part) { live.appendChild(renderHit(part, root)); });
               if (!matched.length) {
                 var none = document.createElement("p");
-                none.textContent = "No parts match. Try a series and a value, such as MM177 4.32K.";
+                none.textContent = "No items match. Try a brand, part number, value, or keyword.";
                 live.appendChild(none);
-              } else if (matched.length > shown.length) {
+              } else if (liveMatches.length > shown.length) {
                 var more = document.createElement("a");
                 more.className = "more";
-                more.href = root + "catalog/?q=" + encodeURIComponent(query);
+                more.href = root + "search/?q=" + encodeURIComponent(query);
                 more.textContent = "All " + matched.length + " matches";
                 live.appendChild(more);
               }
@@ -117,7 +120,7 @@
           if (status) {
             status.textContent = active
               ? matched.length + (matched.length === 1 ? " match" : " matches")
-              : parts.length + " parts";
+              : parts.length + " Caddock items and eBay listings";
           }
         }
 

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { createRequire } from "node:module";
 
 import { formatOhms, heuristicIntent, mergeIntent, parseResistance, rankParts, sanitizeAiIntent, searchCatalog } from "../../worker/search.js";
 
@@ -80,4 +81,13 @@ test("formats ohms", () => {
 test("the tighter tolerance hint wins unless a percentage is typed", () => {
   assert.equal(heuristicIntent("precision resistor for a feedback network").maxTolerance, 0.1);
   assert.equal(heuristicIntent("1% precision feedback resistor").maxTolerance, 1);
+});
+
+
+test("shop keyword search matches both reference items and eBay titles", async () => {
+  const client = createRequire(import.meta.url)("../../catalog/templates/search.js");
+  const index = JSON.parse(await readFile(new URL("../../docs/search.json", import.meta.url), "utf8"));
+  assert.ok(index.parts.some(item => client.queryMatches(item.search, "MM177 4.32K")));
+  assert.ok(index.listings.some(item => client.queryMatches(item.search, "Dale 10K")));
+  assert.ok(index.listings.every(item => item.source === "ebay" && item.url.startsWith("https://www.ebay.com/")));
 });

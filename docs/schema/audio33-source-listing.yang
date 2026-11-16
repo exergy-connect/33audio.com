@@ -66,7 +66,7 @@ module audio33-source-listing {
     leaf temperature_line { type string; description "Temperature claim from the listing."; }
     leaf origin_line { type string; description "Country of manufacture and test claim."; }
     leaf environment_line { type string; description "Environment claim from the listing."; }
-    leaf provenance { type string; description "First line of the provenance statement."; }
+    leaf provenance { type string; description "Complete provenance statement, joining source line breaks."; }
     leaf payment_note { type string; description "How the listing says to pay."; }
     leaf region_note { type string; description "Where the listing sells."; }
     leaf-list statements {

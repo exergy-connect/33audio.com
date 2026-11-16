@@ -179,7 +179,7 @@
         },
         "provenance": {
           "type": "string",
-          "description": "First line of the provenance statement.",
+          "description": "Complete provenance statement, joining source line breaks.",
           "x-yang": {
             "type": "leaf"
           }
