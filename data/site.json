@@ -26,6 +26,32 @@
       "label": "Type MS datasheet scan (EEM 1985)"
     }
   },
+  "series_specs": {
+    "MM177": {
+      "product_line": "Caddock Type MM Precision Film Resistors",
+      "power_rating": "0.6",
+      "voltage_rating": 500,
+      "datasheet": "https://www.caddock.com/online-catalog/mrktg-lit/TypeMM.pdf"
+    },
+    "MM215": {
+      "product_line": "Caddock Type MM Precision Film Resistors",
+      "power_rating": "1.0",
+      "voltage_rating": 800,
+      "datasheet": "https://www.caddock.com/online-catalog/mrktg-lit/TypeMM.pdf"
+    },
+    "MS151": {
+      "product_line": "Caddock Type MS Power Film Resistors",
+      "power_rating": "0.5",
+      "voltage_rating": 300,
+      "datasheet": "https://www.caddock.com/online-catalog/mrktg-lit/TypeMS.pdf"
+    },
+    "MS176": {
+      "product_line": "Caddock Type MS Power Film Resistors",
+      "power_rating": "0.75",
+      "voltage_rating": 500,
+      "datasheet": "https://www.caddock.com/online-catalog/mrktg-lit/TypeMS.pdf"
+    }
+  },
   "nrnd": {
     "families": ["MM"],
     "summary": "Caddock marks Type MM Not Recommended for New Designs and points new designs to Type MS.",

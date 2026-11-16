@@ -1,0 +1,401 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://caddock-33audio.pages.dev/schema/source-listing.schema.json",
+  "description": "The 33audio Caddock listing as parsed from\n     https://www.33audio.com/enter/caddockmsmm.html into data/catalog.json.\n     This file is also edited by hand, so ohms is a plain JSON number and the\n     document is validated in xYang native JSON mode. The public catalog\n     (audio33-catalog) is generated from it.",
+  "x-yang": {
+    "module": "audio33-source-listing",
+    "yang-version": "1.1",
+    "namespace": "https://exergy-connect.github.io/33audio.com/schema/source-listing#",
+    "prefix": "src",
+    "organization": "33audio",
+    "contact": "Mark, mark@33audio.com, Houston, TX"
+  },
+  "type": "object",
+  "properties": {
+    "source_url": {
+      "type": "string",
+      "description": "Listing page that was parsed.",
+      "x-yang": {
+        "type": "leaf",
+        "mandatory": true
+      }
+    },
+    "source_last_modified": {
+      "type": "string",
+      "description": "HTTP Last-Modified of the listing page, when the server sent one.",
+      "x-yang": {
+        "type": "leaf"
+      }
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "Currency of the listing price.",
+      "x-yang": {
+        "type": "leaf",
+        "mandatory": true,
+        "string-patterns": [
+          {
+            "pattern": "[A-Z]{3}",
+            "invert-match": false
+          }
+        ]
+      }
+    },
+    "unit_price": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]{2}$",
+      "description": "Price per resistor from the listing.",
+      "x-yang": {
+        "type": "leaf",
+        "mandatory": true,
+        "string-patterns": [
+          {
+            "pattern": "[0-9]+\\.[0-9]{2}",
+            "invert-match": false
+          }
+        ]
+      }
+    },
+    "legend": {
+      "type": "string",
+      "description": "Tolerance legend line quoted from the listing.",
+      "x-yang": {
+        "type": "leaf",
+        "mandatory": true
+      }
+    },
+    "tolerance_codes": {
+      "type": "object",
+      "description": "Tolerance letters and their percentages from the legend.",
+      "x-yang": {
+        "type": "container"
+      },
+      "properties": {
+        "J": {
+          "type": "string",
+          "description": "Percent for J.",
+          "x-yang": {
+            "type": "leaf",
+            "mandatory": true
+          }
+        },
+        "G": {
+          "type": "string",
+          "description": "Percent for G.",
+          "x-yang": {
+            "type": "leaf",
+            "mandatory": true
+          }
+        },
+        "F": {
+          "type": "string",
+          "description": "Percent for F.",
+          "x-yang": {
+            "type": "leaf",
+            "mandatory": true
+          }
+        },
+        "D": {
+          "type": "string",
+          "description": "Percent for D.",
+          "x-yang": {
+            "type": "leaf",
+            "mandatory": true
+          }
+        },
+        "C": {
+          "type": "string",
+          "description": "Percent for C.",
+          "x-yang": {
+            "type": "leaf",
+            "mandatory": true
+          }
+        },
+        "B": {
+          "type": "string",
+          "description": "Percent for B.",
+          "x-yang": {
+            "type": "leaf",
+            "mandatory": true
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "J",
+        "G",
+        "F",
+        "D",
+        "C",
+        "B"
+      ]
+    },
+    "listing": {
+      "type": "object",
+      "description": "Statements about the stock, quoted from the listing.",
+      "x-yang": {
+        "type": "container"
+      },
+      "properties": {
+        "film": {
+          "type": "string",
+          "description": "Resistance film named on the listing.",
+          "x-yang": {
+            "type": "leaf"
+          }
+        },
+        "product_line": {
+          "type": "string",
+          "description": "Product line line from the listing.",
+          "x-yang": {
+            "type": "leaf"
+          }
+        },
+        "temperature_line": {
+          "type": "string",
+          "description": "Temperature claim from the listing.",
+          "x-yang": {
+            "type": "leaf"
+          }
+        },
+        "origin_line": {
+          "type": "string",
+          "description": "Country of manufacture and test claim.",
+          "x-yang": {
+            "type": "leaf"
+          }
+        },
+        "environment_line": {
+          "type": "string",
+          "description": "Environment claim from the listing.",
+          "x-yang": {
+            "type": "leaf"
+          }
+        },
+        "provenance": {
+          "type": "string",
+          "description": "First line of the provenance statement.",
+          "x-yang": {
+            "type": "leaf"
+          }
+        },
+        "payment_note": {
+          "type": "string",
+          "description": "How the listing says to pay.",
+          "x-yang": {
+            "type": "leaf"
+          }
+        },
+        "region_note": {
+          "type": "string",
+          "description": "Where the listing sells.",
+          "x-yang": {
+            "type": "leaf"
+          }
+        },
+        "statements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Every kept statement from the listing intro, in page order.",
+          "x-yang": {
+            "type": "leaf-list"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "series": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "MM177",
+              "MM215",
+              "MS151",
+              "MS176"
+            ],
+            "description": "Caddock model heading.",
+            "x-yang": {
+              "type": "leaf"
+            }
+          },
+          "family": {
+            "type": "string",
+            "enum": [
+              "MM",
+              "MS"
+            ],
+            "description": "Caddock type.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true
+            }
+          },
+          "default_tolerance_code": {
+            "type": "string",
+            "enum": [
+              "J",
+              "G",
+              "F",
+              "D",
+              "C",
+              "B"
+            ],
+            "description": "Section default tolerance letter.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true
+            }
+          },
+          "default_tolerance": {
+            "type": "string",
+            "description": "Section default tolerance percent.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true
+            }
+          },
+          "default_note": {
+            "type": "string",
+            "description": "The section's tolerance note as written.",
+            "x-yang": {
+              "type": "leaf"
+            }
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Part id built from the series, value, and an explicit tolerance letter.",
+                  "x-yang": {
+                    "type": "leaf"
+                  }
+                },
+                "resistance": {
+                  "type": "string",
+                  "pattern": "^[0-9.]+[KM]?$",
+                  "description": "Value as written, such as 4.32K.",
+                  "x-yang": {
+                    "type": "leaf",
+                    "mandatory": true,
+                    "string-patterns": [
+                      {
+                        "pattern": "[0-9.]+[KM]?",
+                        "invert-match": false
+                      }
+                    ]
+                  }
+                },
+                "ohms": {
+                  "type": "string",
+                  "pattern": "^-?[0-9]+(\\.[0-9]+)?$",
+                  "description": "Value in ohms.",
+                  "x-yang": {
+                    "type": "decimal64",
+                    "mandatory": true,
+                    "fraction-digits": 3
+                  }
+                },
+                "tolerance_code": {
+                  "type": "string",
+                  "enum": [
+                    "J",
+                    "G",
+                    "F",
+                    "D",
+                    "C",
+                    "B"
+                  ],
+                  "description": "Tolerance letter for this part.",
+                  "x-yang": {
+                    "type": "leaf",
+                    "mandatory": true
+                  }
+                },
+                "tolerance": {
+                  "type": "string",
+                  "description": "Tolerance percent for this part.",
+                  "x-yang": {
+                    "type": "leaf",
+                    "mandatory": true
+                  }
+                },
+                "tolerance_explicit": {
+                  "type": "boolean",
+                  "description": "True when the value line itself carried the letter.",
+                  "x-yang": {
+                    "type": "leaf",
+                    "mandatory": true
+                  }
+                },
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295,
+                  "description": "Quantity shown on the listing.",
+                  "x-yang": {
+                    "type": "leaf",
+                    "mandatory": true
+                  }
+                },
+                "price": {
+                  "type": "string",
+                  "pattern": "^[0-9]+\\.[0-9]{2}$",
+                  "description": "Price per piece.",
+                  "x-yang": {
+                    "type": "leaf",
+                    "mandatory": true,
+                    "string-patterns": [
+                      {
+                        "pattern": "[0-9]+\\.[0-9]{2}",
+                        "invert-match": false
+                      }
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "resistance",
+                "ohms",
+                "tolerance_code",
+                "tolerance",
+                "tolerance_explicit",
+                "quantity",
+                "price"
+              ]
+            },
+            "description": "One value line of the section.",
+            "x-yang": {
+              "type": "list",
+              "key": "id"
+            },
+            "minItems": 1
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "family",
+          "default_tolerance_code",
+          "default_tolerance"
+        ]
+      },
+      "description": "One section of the listing.",
+      "x-yang": {
+        "type": "list",
+        "key": "id"
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}

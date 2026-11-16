@@ -66,6 +66,25 @@ After the site is public:
 2. Open **Sitemaps** and submit `sitemap.xml` (the full URL is the one in `robots.txt`).
 3. In [Bing Webmaster Tools](https://www.bing.com/webmasters), add the same site. You can import it from Search Console, or verify it directly and submit the same sitemap URL.
 
+## Catalog ontology (xYang)
+
+`model/audio33-catalog.yang` is a YANG 1.1 model of the public catalog: seller, offer terms, the four Caddock series with their datasheet power and voltage ratings, and every part (part number, manufacturer, series, resistance in ohms, tolerance, NOS condition, quantity, price, currency, page URL, eBay listing). Every node has a description. Custom extensions (`c33:schema-org-class`, `c33:schema-org-property`, `c33:wikidata`, `c33:unit-code`) map nodes to schema.org and to Wikidata items that clearly match, such as resistor (Q5321), ohm (Q47083), and new old stock (Q907054). `model/audio33-source-listing.yang` describes `data/catalog.json` as the parser writes it.
+
+[xYang](https://github.com/exergy-connect/xYang) (`pip install -r requirements-schema.txt`) turns the models into the files under `docs/schema/`:
+
+- `catalog.schema.json` and `source-listing.schema.json`: JSON Schema 2020-12 with `x-yang` metadata.
+- `context.jsonld`: JSON-LD context built from the extensions, with terms scoped by position.
+- `vocab.jsonld` and `README.md`: every term with its description, schema.org mapping, Wikidata match, and unit.
+
+`docs/catalog.json` points at the schema and context with `$schema` and `@context`. Part pages add a JSON-LD node in this vocabulary with the same `@id` as their schema.org Product, and `llms.txt` links the vocabulary.
+
+```bash
+python -m catalog schema          # regenerate docs/schema and validate
+python -m catalog schema --check  # fail if docs/schema is stale or a catalog does not validate
+```
+
+The check validates `docs/catalog.json` with xYang and with the generated JSON Schema, and `data/catalog.json` with xYang in native JSON mode, because hand-edited `ohms` values are plain numbers. `.github/workflows/schema.yml` runs it on pushes that touch the model and commits the regenerated files. The daily refresh runs `--check` after rebuilding. `python -m catalog build` leaves `docs/schema/` in place.
+
 ## Selling costs
 
 `/fees/` compares published US rates for a $10 part plus $6.35 shipping, with a calculator. The rates and source URLs live in `data/site.json` under `selling_costs`. Update them there when the fee pages change.

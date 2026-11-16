@@ -13,7 +13,7 @@ from xml.etree import ElementTree as ET
 
 from catalog import ASSETS, DATA, DOCS
 from catalog.fees import estimate, from_cents, to_cents
-from catalog.llm_pages import faq_json_ld, faq_pairs, part_summary, render_catalog_json, render_catalog_md, render_llms_full, render_llms_txt, render_robots
+from catalog.llm_pages import faq_json_ld, faq_pairs, ontology_json_ld, part_summary, render_catalog_json, render_catalog_md, render_llms_full, render_llms_txt, render_robots
 from catalog.purchase import configured_flow_url, flatten, match_listings, resistance_label, resolve_purchase
 
 TEMPLATES = Path(__file__).resolve().parent / "templates"
@@ -77,9 +77,15 @@ def lastmod(catalog: dict) -> str | None:
         return None
 
 
+SCHEMA_DIR = "schema"
+
+
 def reset_output(docs: Path) -> None:
+    """Empty docs/ except docs/schema, which `python -m catalog schema` generates with xYang."""
     docs.mkdir(parents=True, exist_ok=True)
     for child in list(docs.iterdir()):
+        if child.name == SCHEMA_DIR:
+            continue
         if child.is_dir():
             shutil.rmtree(child)
         else:
@@ -368,6 +374,7 @@ def product_ld(part: dict, description: str, page_url: str, buy_url: str, site: 
     data = {
         "@context": "https://schema.org",
         "@type": "Product",
+        "@id": f"{page_url}#product",
         "name": f"Caddock {part['id']} Micronox resistor",
         "sku": part["id"],
         "mpn": part["id"],
@@ -574,6 +581,7 @@ def render_part(series: dict, part: dict, decision: dict, catalog: dict, site: d
     )
     scripts = (
         f'<script type="application/ld+json">{json_ld(product_ld(part, description, page_url, decision["primary_href"], site, made))}</script>'
+        f'<script type="application/ld+json">{json_ld(ontology_json_ld(part, catalog.get("currency", "USD"), origin, decision.get("listing")))}</script>'
         f'<script type="application/ld+json">{json_ld(faq_json_ld(pairs))}</script>'
         f'<script type="application/ld+json">{json_ld(breadcrumb_ld(origin, series, part))}</script>'
     )
@@ -866,7 +874,7 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
     (docs / "llms.txt").write_text(render_llms_txt(catalog, site, origin), encoding="utf-8")
     (docs / "llms-full.txt").write_text(render_llms_full(catalog, site, origin), encoding="utf-8")
     (docs / "catalog.md").write_text(render_catalog_md(catalog, site, origin), encoding="utf-8")
-    (docs / "catalog.json").write_text(render_catalog_json(catalog, site, origin), encoding="utf-8")
+    (docs / "catalog.json").write_text(render_catalog_json(catalog, site, origin, matches), encoding="utf-8")
     fees_page = docs / "fees" / "index.html"
     fees_page.parent.mkdir(parents=True, exist_ok=True)
     fees_page.write_text(render_fees(catalog, site, origin), encoding="utf-8")
