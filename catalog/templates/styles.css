@@ -590,6 +590,8 @@ html[data-payment-flow="paypal"] .buy > p[data-flow="paypal"] {
   justify-content: center;
 }
 .row-add {
+  grid-column: 2;
+  grid-row: 1;
   min-height: 44px;
   min-width: 44px;
   padding: 0 0.9rem;
@@ -631,6 +633,8 @@ html[data-payment-flow="paypal"] .buy > p[data-flow="paypal"] {
 .note.demo { border-left-color: var(--teal); }
 .note.error { border-left-color: #a12d1d; }
 @media (min-width: 720px) {
+  .part-row:has(> .row-add) { grid-template-columns: minmax(9rem, 1.4fr) minmax(6rem, 1fr) 5.5rem 6.5rem 5rem auto; }
+  .part-row .row-add { grid-column: auto; grid-row: auto; }
   .cart-line { grid-template-columns: minmax(9rem, 1fr) 2fr auto auto auto; }
   .cart-line .meta { grid-column: auto; }
 }
