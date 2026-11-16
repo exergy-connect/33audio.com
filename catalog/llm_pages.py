@@ -40,7 +40,7 @@ def part_summary(part: dict, site: dict, listing: dict) -> str:
     return (
         f"Caddock {part['id']} is a {label} Type {part['series']} Micronox film resistor. "
         f"{nos} "
-        f"The price is ${part['price']}, and 33audio ships it from {site['location']['label']}."
+        f"The source catalog price is ${part['price']}; ask about availability and current pricing in {site['location']['label']}."
     )
 
 
@@ -122,6 +122,8 @@ def render_llms_txt(catalog: dict, site: dict, origin: str) -> str:
         "",
         site.get("nrnd", {}).get("summary", ""),
         "",
+        "Caddock catalog quantities and prices are reference data, not confirmed offers or eBay availability. Ask Mark to confirm availability. eBay listings are a separate selection.",
+        f"- [eBay listings]({origin}/ebay/): Synced listings with their own prices and direct purchase links",
         "## Catalog files",
         "",
         f"- [All parts (Markdown)]({origin}/catalog.md): Table of every value, tolerance, quantity, and price",
@@ -195,7 +197,9 @@ def render_catalog_md(catalog: dict, site: dict, origin: str) -> str:
             f"{catalog['listing'].get('region_note') or 'USA orders only.'}"
         ),
         "",
-        "| Part | Series | Value | Tolerance | Quantity | Price | Page |",
+        "Reference quantities and prices from the Caddock source catalog; ask Mark to confirm availability. These are not eBay offers. Shop eBay listings separately at " + origin + "/ebay/.",
+        "",
+        "| Part | Series | Value | Tolerance | Source quantity | Source price | Page |",
         "| --- | --- | --- | --- | --- | --- | --- |",
     ]
     for part in flatten(catalog):

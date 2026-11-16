@@ -160,7 +160,8 @@ try {{
 def header(site: dict, depth: int, current: str) -> str:
     ebay = site["purchase"]["ebay"]["store_url"]
     items = [
-        ("catalog/", "Catalog"),
+        ("ebay/", "eBay listings"),
+        ("catalog/", "Caddock catalog"),
         ("ask/", "Ask"),
         ("series/mm177/", "MM177"),
         ("series/mm215/", "MM215"),
@@ -172,11 +173,6 @@ def header(site: dict, depth: int, current: str) -> str:
         current_attr = ' aria-current="page"' if current == href else ""
         links.append(f'<a href="{escape(rel(depth, href))}"{current_attr}>{escape(label)}</a>')
     links.append(f'<a href="{escape(ebay)}">eBay</a>')
-    cart_current = ' aria-current="page"' if current == "cart/" else ""
-    links.append(
-        f'<a class="cart-link cart-only" href="{escape(rel(depth, "cart/"))}"{cart_current}>'
-        'Cart (<span data-cart-count>0</span>)</a>'
-    )
     return f"""<a class="skip" href="#content">Skip to content</a>
 <header class="site-header">
   <div class="copper-rule"></div>
@@ -186,21 +182,12 @@ def header(site: dict, depth: int, current: str) -> str:
   </div>
   <div class="wrap">
     <form class="search-form" action="{escape(rel(depth, 'catalog/'))}" method="get" role="search">
-      <label class="search-label" for="site-q">Search by series, value, or part number</label>
+      <label class="search-label" for="site-q">Search the Caddock catalog by series, value, or part number</label>
       <div class="search-row">
         <input id="site-q" data-search-input name="q" type="search" placeholder="MM177 4.32K" enterkeyhint="search">
         <button type="submit">Search</button>
       </div>
     </form>
-    <div class="payment-switch">
-      <label class="payment-label" for="payment-flow">Checkout demo</label>
-      <select id="payment-flow" data-payment-select>
-        <option value="ebay">eBay</option>
-        <option value="stripe">Stripe (cart)</option>
-        <option value="paypal">PayPal</option>
-      </select>
-      <a href="{escape(rel(depth, 'fees/'))}">Selling costs</a>
-    </div>
   </div>
 </header>
 """
@@ -213,8 +200,8 @@ def footer(site: dict, catalog: dict, depth: int) -> str:
     return f"""<footer class="site-footer">
   <div class="wrap">
     <p>33audio · {escape(site['location']['label'])} · {escape(site['email'])}</p>
-    <p>{escape(region)} Catalog price ${escape(catalog['unit_price'])} each. {escape(site['shipping']['summary'])}. Mail order is a PayPal invoice from Mark. eBay prices and shipping are on the listing.</p>
-    <p>Inventory is taken from the <a href="{escape(source)}">33audio Caddock listing</a>. {escape(catalog.get('legend') or '')}</p>
+    <p>{escape(region)} Caddock source price ${escape(catalog['unit_price'])} each. {escape(site['shipping']['summary'])}. Ask Mark to confirm Caddock availability and pricing. eBay prices and shipping are on the listing.</p>
+    <p>Caddock reference quantities and prices come from the <a href="{escape(source)}">33audio Caddock listing</a>. {escape(catalog.get('legend') or '')}</p>
     <p><a href="{escape(rel(depth, 'fees/'))}">Selling costs</a> · <a href="{escape(rel(depth, 'catalog.md'))}">Catalog (Markdown)</a> · <a href="{escape(rel(depth, 'catalog.json'))}">Catalog (JSON)</a> · <a href="{escape(rel(depth, 'llms.txt'))}">llms.txt</a></p>
   </div>
 </footer>
@@ -266,10 +253,8 @@ def part_row(part: dict, href: str) -> str:
         f'<a class="pid" href="{escape(href)}">{pid}</a>'
         f'<span class="meta">{escape(label)}</span>'
         f'<span class="meta">{escape(part["tolerance"])}</span>'
-        f'<span class="meta"><span data-stock-qty="{pid}">{part["quantity"]}</span> in stock</span>'
+        f'<span class="meta"><span>{part["quantity"]}</span> in source catalog</span>'
         f'<span class="meta">${escape(part["price"])}</span>'
-        f'<button type="button" class="row-add cart-only" data-add-to-cart="{pid}" data-label="Add" '
-        f'aria-label="Add {pid} to cart">Add</button>'
         "</div>"
     )
 
@@ -321,25 +306,10 @@ def cart_block(part: dict, site: dict, depth: int) -> str:
 
 
 def buy_html(decision: dict, part: dict, site: dict, depth: int) -> str:
-    paypal = configured_flow_url(site, part, "paypal")
-    paypal_label = (site.get("payment_flows") or {}).get("paypal", {}).get("label") or "Pay with PayPal"
-    controls = [
-        flow_block("ebay", decision["primary_label"], decision["ebay_href"], decision["primary_note"]),
-        cart_block(part, site, depth),
-        flow_block(
-            "paypal",
-            paypal_label,
-            paypal,
-            "Opens the PayPal checkout link for this part." if paypal else "No PayPal checkout URL is configured yet. This control is a demo, not a checkout.",
-        ),
-        f'<a class="button secondary" href="{escape(decision["ask_href"])}">{escape(decision["ask_label"])}</a>',
-    ]
-    listing = decision.get("listing") or {}
-    extra = ""
-    if listing.get("title"):
-        price = f' Listing price ${escape(str(listing["price"]))}.' if listing.get("price") else ""
-        extra = f'<p class="fine">Matched eBay listing: {escape(listing["title"])}.{price}</p>'
-    return f'<div class="buy">{"".join(controls)}</div>{extra}'
+    controls = [f'<a class="button primary" href="{escape(decision["ask_href"])}">Ask about availability</a>']
+    if decision.get("ebay_href"):
+        controls.insert(0, f'<a class="button primary" data-buy="ebay" href="{escape(decision["ebay_href"])}">Buy on eBay</a>')
+    return '<div class="buy">' + "".join(controls) + '</div><p class="fine">Caddock reference catalog. Confirm availability and pricing with Mark. eBay offers are listed separately.</p>'
 
 
 def fact_items(catalog: dict) -> str:
@@ -355,14 +325,14 @@ def fact_items(catalog: dict) -> str:
 
 
 def page_title(part: dict) -> str:
-    stock = ", in stock" if part["quantity"] > 0 else ""
+    stock = ", reference catalog"
     return f"Caddock {part['id']} Micronox resistor, NOS{stock} | 33audio"
 
 
 def page_description(part: dict, site: dict) -> str:
     label = resistance_label(part["resistance"])
     if part["quantity"] > 0:
-        stock = f"{part['quantity']} in stock"
+        stock = "source catalog; ask about availability"
     else:
         stock = "ask about availability"
     return (
@@ -371,8 +341,7 @@ def page_description(part: dict, site: dict) -> str:
     )
 
 
-def product_ld(part: dict, description: str, page_url: str, buy_url: str, site: dict, made_in_usa: bool) -> dict:
-    availability = "https://schema.org/InStock" if part["quantity"] > 0 else "https://schema.org/OutOfStock"
+def product_ld(part: dict, description: str, page_url: str, made_in_usa: bool) -> dict:
     data = {
         "@context": "https://schema.org",
         "@type": "Product",
@@ -389,36 +358,6 @@ def product_ld(part: dict, description: str, page_url: str, buy_url: str, site: 
             {"@type": "PropertyValue", "name": "Tolerance", "value": part["tolerance"]},
             {"@type": "PropertyValue", "name": "Quantity listed", "value": part["quantity"]},
         ],
-        "offers": {
-            "@type": "Offer",
-            "url": page_url,
-            "priceCurrency": "USD",
-            "price": part["price"],
-            "availability": availability,
-            "itemCondition": "https://schema.org/NewCondition",
-            "areaServed": "US",
-            "seller": {
-                "@type": "Organization",
-                "name": site["name"],
-                "email": site["email"],
-                "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": site["location"]["locality"],
-                    "addressRegion": site["location"]["region"],
-                    "addressCountry": site["location"]["country"],
-                },
-            },
-            "shippingDetails": {
-                "@type": "OfferShippingDetails",
-                "shippingRate": {
-                    "@type": "MonetaryAmount",
-                    "value": site["shipping"]["amount"],
-                    "currency": site["shipping"]["currency"],
-                },
-                "shippingDestination": {"@type": "DefinedRegion", "addressCountry": "US"},
-            },
-        },
-        "potentialAction": {"@type": "BuyAction", "target": buy_url},
     }
     if made_in_usa:
         data["countryOfOrigin"] = "US"
@@ -453,12 +392,8 @@ def render_home(catalog: dict, site: dict, ebay: dict, origin: str) -> str:
             f'<span class="muted">{escape(note)}</span></a>'
         )
     lede = listing.get("provenance") or listing.get("product_line") or "NOS Caddock Micronox film resistors."
-    payment = listing.get("payment_note") or "Email Mark for a PayPal invoice."
-    title = "Caddock Micronox resistors, NOS | 33audio"
-    description = (
-        f"NOS Caddock MM177, MM215, MS151, and MS176 Micronox film resistors. "
-        f"${catalog['unit_price']} each, in stock in {site['location']['label']}. USA shipping from 33audio."
-    )
+    title = "eBay listings and Caddock reference catalog | 33audio"
+    description = "Shop 33audio eBay listings or explore the separate Caddock Micronox reference catalog and ask about availability."
     store = site["purchase"]["ebay"]["store_url"]
     org = {
         "@context": "https://schema.org",
@@ -483,29 +418,47 @@ def render_home(catalog: dict, site: dict, ebay: dict, origin: str) -> str:
 <section class="hero" aria-labelledby="home-title">
 <div>
 <p class="eyebrow">{escape(site['location']['label'])} · USA stock · NOS</p>
-<h1 id="home-title">Caddock Micronox film resistors</h1>
+<h1 id="home-title">33audio parts &amp; Caddock catalog</h1>
 <p class="badges"><span class="badge nos">NOS</span><span class="badge hifi">Hi-Fi</span></p>
 <p class="lede">{escape(lede)}</p>
-<ul class="terms">
-  <li><strong>${escape(catalog['unit_price'])}</strong>&nbsp;each</li>
-  <li><strong>${escape(site['shipping']['amount'])}</strong>&nbsp;flat shipping, any quantity</li>
-  <li>USA only</li>
-  <li>{count} values</li>
-</ul>
+<p><a class="button primary" href="./ebay/">Shop eBay listings</a> <a class="button secondary" href="./catalog/">Explore Caddock catalog</a></p>
+<p>eBay listings have their own prices and purchase links. Caddock catalog values, prices, and quantities are reference information; ask Mark about availability.</p>
 </div>
 {HERO_SVG}
 </section>
 <p class="search-status" data-search-status aria-live="polite"></p>
 {chips()}
 <div data-search-live hidden></div>
+<h2>Caddock reference catalog</h2>
 <div class="series-grid">{''.join(cards)}</div>
-<h2>Ordering</h2>
-<p>Buy on eBay from the <a href="{escape(store)}">33audio store</a> ({escape(feedback_text(site, ebay))}). Each part page opens a matched listing when the eBay sync has one, or a search of that store. The checkout demo menu switches to a Stripe cart or a PayPal button when you want to compare. {escape(payment)} The catalog price is ${escape(catalog['unit_price'])} each. {escape(site['shipping']['summary'])}. <a href="{escape(rel(0, 'fees/'))}">Selling costs</a> compares the published fees.</p>
+<p>Browse {count} Caddock values by series above. <a href="./ebay/">eBay listings</a> are a separate selection from the <a href="{escape(store)}">33audio store</a> ({escape(feedback_text(site, ebay))}).</p>
 {nrnd_html(site, 'MM')}
 {fact_items(catalog)}
 """
     extra = f'<script type="application/ld+json">{json_ld(org)}</script>'
     return layout(title, description, abs_url(origin, ""), "index.html", body, site, catalog, "", extra_head=extra, search=True)
+
+
+def render_ebay(catalog: dict, site: dict, ebay: dict, origin: str) -> str:
+    from catalog.purchase import safe_https
+
+    cards = []
+    for listing in ebay.get("listings") or []:
+        url = safe_https(listing.get("url", ""), "ebay.com")
+        if not url or listing.get("seller") != site["purchase"]["ebay"]["seller"]:
+            continue
+        title = escape(listing["title"])
+        price = escape(str(listing.get("price", "")))
+        currency = escape(listing.get("currency", "USD"))
+        condition = escape(listing.get("condition", ""))
+        cards.append(f'<article class="series-card"><h2>{title}</h2><p>{currency} {price} · {condition}</p><a class="button primary" href="{escape(url)}">Buy on eBay</a></article>')
+    contents = ''.join(cards) or '<p>No synced eBay listings are available. Visit the store for current listings.</p>'
+    synced = escape(str(ebay.get("synced_at") or "not yet synced"))
+    body = f'''<p class="eyebrow">33audio store</p><h1>eBay listings</h1>
+<p>Listings from our latest eBay sync ({synced}). Prices apply to the lot described in each title, not necessarily one component. Confirm current availability, shipping, and final price on eBay.</p>
+<p>The <a href="../catalog/">Caddock reference catalog</a> is separate; its quantities and prices are not eBay offers.</p>
+<div class="series-grid">{contents}</div>'''
+    return layout("33audio eBay listings | 33audio", "Browse 33audio's synced eBay listings with listing prices and direct purchase links.", abs_url(origin, "ebay/"), "ebay/index.html", body, site, catalog, "ebay/")
 
 
 def render_catalog(catalog: dict, site: dict, origin: str) -> str:
@@ -516,10 +469,11 @@ def render_catalog(catalog: dict, site: dict, origin: str) -> str:
             rows.append(part_row(part, href))
     count = len(rows)
     title = "Caddock resistor catalog | 33audio"
-    description = f"Search {count} NOS Caddock Micronox resistor values stocked by 33audio in {site['location']['label']}."
+    description = f"Search {count} NOS Caddock Micronox resistor values in the 33audio reference catalog in {site['location']['label']}."
     body = f"""
 <p class="eyebrow">All values</p>
-<h1>Catalog</h1>
+<h1>Caddock reference catalog</h1>
+<p>Source quantities and prices are for reference. Ask Mark about current availability. <a href="../ebay/">Shop eBay listings separately</a>.</p>
 <p class="search-status" data-search-status aria-live="polite">{count} parts</p>
 {chips()}
 <p data-search-empty hidden>No parts match. Try a series and a value, such as MM177 4.32K.</p>
@@ -588,7 +542,7 @@ def render_part(series: dict, part: dict, decision: dict, catalog: dict, site: d
         for question, answer in pairs
     )
     scripts = (
-        f'<script type="application/ld+json">{json_ld(product_ld(part, description, page_url, decision["primary_href"], site, made))}</script>'
+        f'<script type="application/ld+json">{json_ld(product_ld(part, description, page_url, made))}</script>'
         f'<script type="application/ld+json">{json_ld(ontology_json_ld(part, catalog.get("currency", "USD"), origin, decision.get("listing")))}</script>'
         f'<script type="application/ld+json">{json_ld(faq_json_ld(pairs))}</script>'
         f'<script type="application/ld+json">{json_ld(breadcrumb_ld(origin, series, part))}</script>'
@@ -616,7 +570,7 @@ def render_part(series: dict, part: dict, decision: dict, catalog: dict, site: d
 <dl class="spec">
   <div><dt>Resistance</dt><dd>{escape(label)} <span class="muted">({escape(part['resistance'])})</span></dd></div>
   <div><dt>Tolerance</dt><dd>{escape(tolerance_sentence(series, part))}</dd></div>
-  <div><dt>In stock</dt><dd><span data-stock-qty="{escape(part['id'])}">{part['quantity']}</span> · <span class="muted" data-stock-source>Stock as of the last site build</span></dd></div>
+  <div><dt>Source quantity</dt><dd><span>{part['quantity']}</span> · <span class="muted">Reference quantity; confirm availability</span></dd></div>
   <div><dt>Catalog price</dt><dd>${escape(part['price'])} each</dd></div>
   <div><dt>Shipping</dt><dd>{escape(site['shipping']['summary'])}</dd></div>
   <div><dt>Seller</dt><dd>33audio, {escape(site['location']['label'])}</dd></div>
@@ -736,7 +690,7 @@ def render_ask(catalog: dict, site: dict, origin: str) -> str:
     body = f"""
 <p class="eyebrow">Part finder</p>
 <h1>Ask for a part</h1>
-<p class="lede">Describe what you are building. The finder reads the request, then ranks the {len(flatten(catalog))} values in stock by value, voltage and power rating, and tolerance.</p>
+<p class="lede">Describe what you are building. The finder reads the request, then ranks the {len(flatten(catalog))} Caddock catalog values by value, voltage and power rating, and tolerance.</p>
 <form class="ask-form" data-ask-form role="search">
   <label class="search-label" for="ask-q">What do you need?</label>
   <div class="search-row">
@@ -751,7 +705,7 @@ def render_ask(catalog: dict, site: dict, origin: str) -> str:
 <p class="fine">With Workers AI bound, a language model turns the question into filters. Without it, a keyword parser does the same job for values like 10M, 4K32, or 470R and words like tube, precision, or power. Every answer says which one ran. Ratings come from the 1985 Caddock datasheets. Check them against your circuit.</p>
 """
     return layout(
-        "Ask for a part | 33audio", "Describe a resistor in plain words and get matching Caddock parts from 33audio stock.",
+        "Ask for a part | 33audio", "Describe a resistor in plain words and get matching Caddock parts from the 33audio reference catalog.",
         abs_url(origin, "ask/"), "ask/index.html", body, site, catalog, "ask/",
         extra_scripts='<script src="../ask.js" defer></script>',
     )
@@ -854,17 +808,8 @@ def validate(docs: Path, catalog: dict, site: dict, origin: str) -> None:
         if not product:
             errors.append(f"no Product JSON-LD for {part['id']}")
             continue
-        offer = product.get("offers") or {}
-        if offer.get("@type") != "Offer" or offer.get("price") != part["price"] or offer.get("priceCurrency") != "USD":
-            errors.append(f"bad Offer for {part['id']}")
-        if "schema.org" not in str(offer.get("availability")):
-            errors.append(f"bad availability for {part['id']}")
-        if site["purchase"]["mode"] == "ebay":
-            primary = re.search(r'data-buy="ebay" href="([^"]+)"', text)
-            if not primary or "ebay.com" not in primary.group(1):
-                errors.append(f"primary buy is not eBay for {part['id']}")
-        if f'data-add-to-cart="{part["id"]}"' not in text:
-            errors.append(f"missing add-to-cart for {part['id']}")
+        if "offers" in product or "potentialAction" in product:
+            errors.append(f"reference item has a purchase offer: {part['id']}")
         if f"mailto:{site['email']}" not in text:
             errors.append(f"missing ask link for {part['id']}")
         if part["id"] not in text:
@@ -873,7 +818,7 @@ def validate(docs: Path, catalog: dict, site: dict, origin: str) -> None:
     locs = [node.text for node in sitemap.iter() if node.tag.endswith("loc")]
     if len(locs) != len(set(locs)):
         errors.append("duplicate sitemap URLs")
-    expected = 8 + len(catalog["series"]) + len(parts)
+    expected = 9 + len(catalog["series"]) + len(parts)
     robots_text = (docs / "robots.txt").read_text(encoding="utf-8")
     for bot in (
         "GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot",
@@ -914,7 +859,7 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
         target.write_text(html, encoding="utf-8")
     matches = match_listings(catalog, ebay.get("listings") or [])
     parts = flatten(catalog)
-    paths = ["", "catalog/", "ask/", "fees/", "llms.txt", "llms-full.txt", "catalog.md", "catalog.json"]
+    paths = ["", "ebay/", "catalog/", "ask/", "fees/", "llms.txt", "llms-full.txt", "catalog.md", "catalog.json"]
     (docs / "llms.txt").write_text(render_llms_txt(catalog, site, origin), encoding="utf-8")
     (docs / "llms-full.txt").write_text(render_llms_full(catalog, site, origin), encoding="utf-8")
     (docs / "catalog.md").write_text(render_catalog_md(catalog, site, origin), encoding="utf-8")
@@ -922,6 +867,8 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
     fees_page = docs / "fees" / "index.html"
     fees_page.parent.mkdir(parents=True, exist_ok=True)
     fees_page.write_text(render_fees(catalog, site, origin), encoding="utf-8")
+    (docs / "ebay").mkdir(parents=True, exist_ok=True)
+    (docs / "ebay" / "index.html").write_text(render_ebay(catalog, site, ebay, origin), encoding="utf-8")
     (docs / "index.html").write_text(render_home(catalog, site, ebay, origin), encoding="utf-8")
     (docs / "catalog").mkdir(parents=True, exist_ok=True)
     (docs / "catalog" / "index.html").write_text(render_catalog(catalog, site, origin), encoding="utf-8")

@@ -179,7 +179,7 @@ def ebay_target(part: dict, listing: dict | None, site: dict, values: dict) -> t
         url = safe_https(listing["url"], "ebay.com")
         if url:
             return url, fill_text(ebay["matched_note"], values)
-    return fill_url(ebay["search_url"], values), fill_text(ebay["search_note"], values)
+    return "", "Ask Mark to confirm current availability and pricing."
 
 
 def resolve_purchase(part: dict, listing: dict | None, site: dict) -> dict:
@@ -196,8 +196,8 @@ def resolve_purchase(part: dict, listing: dict | None, site: dict) -> dict:
     if mode == "ebay":
         return {
             "mode": mode,
-            "primary_href": ebay_href,
-            "primary_label": purchase["ebay"]["buy_label"],
+            "primary_href": ebay_href or ask_href,
+            "primary_label": purchase["ebay"]["buy_label"] if ebay_href else "Ask about availability",
             "primary_note": ebay_note,
             "ask_href": ask_href,
             "ask_label": ask["label"],

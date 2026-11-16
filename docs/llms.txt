@@ -6,6 +6,8 @@ Seller: Mark (mark@33audio.com). eBay store: https://www.ebay.com/str/33audiomar
 
 Caddock marks Type MM Not Recommended for New Designs and points new designs to Type MS.
 
+Caddock catalog quantities and prices are reference data, not confirmed offers or eBay availability. Ask Mark to confirm availability. eBay listings are a separate selection.
+- [eBay listings](https://caddock-33audio.pages.dev/ebay/): Synced listings with their own prices and direct purchase links
 ## Catalog files
 
 - [All parts (Markdown)](https://caddock-33audio.pages.dev/catalog.md): Table of every value, tolerance, quantity, and price

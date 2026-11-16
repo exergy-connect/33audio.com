@@ -61,14 +61,14 @@ class MatchTests(unittest.TestCase):
 
 
 class PurchaseTests(unittest.TestCase):
-    def test_ebay_fallback_and_mailto(self):
+    def test_unmatched_items_use_availability_inquiries(self):
         data = catalog()
         part = next(part for series in data["series"] for part in series["parts"] if part["id"] == "MM177-4.32K")
         part = {**part, "series": "MM177", "family": "MM"}
         decision = resolve_purchase(part, None, SITE)
-        self.assertIn("https://www.ebay.com/sch/i.html", decision["primary_href"])
-        self.assertIn("_ssn=33audiomarko", decision["primary_href"])
-        self.assertIn("MM177", unquote(decision["primary_href"]))
+        self.assertEqual(decision["primary_href"], decision["ask_href"])
+        self.assertEqual(decision["primary_label"], "Ask about availability")
+        self.assertEqual(decision["ebay_href"], "")
         self.assertTrue(decision["ask_href"].startswith("mailto:mark@33audio.com"))
         self.assertIn("MM177-4.32K", unquote(decision["ask_href"]))
         direct = resolve_purchase(part, {"url": "https://www.ebay.com/itm/99", "title": "x"}, SITE)
@@ -86,7 +86,7 @@ class PurchaseTests(unittest.TestCase):
         site["purchase"]["checkout"]["url"] = "https://pay.example.test/checkout?sku={part_id}"
         decision = resolve_purchase(part, None, site)
         self.assertEqual(decision["primary_href"], "https://pay.example.test/checkout?sku=MM177-4.32K")
-        self.assertIn("ebay.com", decision["ebay_href"])
+        self.assertEqual(decision["ebay_href"], "")
 
 
 class BuildTests(unittest.TestCase):
@@ -101,11 +101,11 @@ class BuildTests(unittest.TestCase):
             self.assertFalse((docs / "CNAME").exists())
             page = (docs / "parts" / "mm177-4.32k" / "index.html").read_text(encoding="utf-8")
             self.assertIn('name="viewport" content="width=device-width, initial-scale=1"', page)
-            self.assertIn("Caddock MM177-4.32K Micronox resistor, NOS, in stock | 33audio", page)
-            self.assertIn("Buy on eBay", page)
-            self.assertIn("Ask about this part", page)
+            self.assertIn("Caddock MM177-4.32K Micronox resistor, NOS, reference catalog | 33audio", page)
+            self.assertNotIn("Buy on eBay", page)
+            self.assertIn("Ask about availability", page)
             self.assertIn("min-height: 44px", (docs / "styles.css").read_text(encoding="utf-8"))
-            self.assertIn("demo, not yet active", page)
+            self.assertNotIn("data-add-to-cart", page)
             fees = (docs / "fees" / "index.html").read_text(encoding="utf-8")
             self.assertIn("13.6%", fees)
             self.assertIn("2.9%", fees)
@@ -115,6 +115,29 @@ class BuildTests(unittest.TestCase):
             self.assertIn("https://www.ebay.com/sellercenter/selling/seller-fees", fees)
             self.assertIn('name="viewport"', fees)
             self.assertIsNone(configured_flow_url(SITE, {"id": "MM177-4.32K", "series": "MM177", "resistance": "4.32K", "tolerance": "0.1%", "tolerance_code": "B", "quantity": 63, "price": "10.00", "ohms": 4320}, "stripe"))
+
+    def test_ebay_listings_are_separate_from_reference_items(self):
+        listings = [
+            {"title": "Qty(10) Dale resistors", "url": "https://www.ebay.com/itm/123", "seller": "33audiomarko", "price": "6.50", "currency": "USD", "condition": "NOS"},
+            {"title": "Wrong seller", "url": "https://www.ebay.com/itm/456", "seller": "someone-else"},
+            {"title": "Unsafe link", "url": "javascript:alert(1)", "seller": "33audiomarko"},
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            docs = Path(tmp)
+            build(catalog(), {"listings": listings}, SITE, docs, ROOT / "assets")
+            ebay = (docs / "ebay/index.html").read_text()
+            self.assertIn("Qty(10) Dale resistors", ebay)
+            self.assertIn("USD 6.50", ebay)
+            self.assertIn('href="https://www.ebay.com/itm/123"', ebay)
+            self.assertNotIn("Wrong seller", ebay)
+            self.assertNotIn("Unsafe link", ebay)
+            reference = (docs / "parts/mm177-4.32k/index.html").read_text()
+            blocks = __import__("re").findall(r'<script type="application/ld\+json">(.*?)</script>', reference)
+            product = next(json.loads(block) for block in blocks if json.loads(block).get("@type") == "Product")
+            self.assertNotIn("offers", product)
+            self.assertNotIn("potentialAction", product)
+            self.assertNotIn("data-add-to-cart", reference)
+            self.assertNotIn("ebay.com/sch/", reference)
 
 
 class StockTests(unittest.TestCase):

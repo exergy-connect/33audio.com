@@ -1,6 +1,6 @@
 # 33audio.com
 
-Static catalog of NOS Caddock Micronox film resistors sold by Mark at 33audio, Houston, TX. Buyers can search part numbers such as `MM177 4.32K`, ask in plain words at `/ask/` ("I need a 10M resistor for a tube amp"), open one page per value, buy on eBay, email Mark, or (once switched on) pay through a Stripe cart.
+33audio's shop has two distinct sections: `/ebay/` shows synced listings from seller `33audiomarko`, with each listing's title, lot price, and direct eBay link. `/catalog/` is the Caddock Micronox reference catalog, with one page per value and availability inquiries to Mark. Caddock source quantities and prices are not confirmed eBay offers.
 
 The site is hosted on Cloudflare Pages. `docs/` is the generated static output. `functions/` holds the Pages Functions (`/api/stock`, `/api/checkout`, `/api/stripe-webhook`, `/api/search`), with shared Worker code in `worker/`.
 
@@ -38,15 +38,13 @@ The scheduled workflow fetches the live listing again and overwrites `data/catal
 
 ## Buy buttons and cart
 
-The site defaults to eBay. A checkout demo menu on every page switches among three flows and stores the choice in the browser.
+The public shop separates eBay listings from the Caddock reference catalog. Only synced eBay listings and exact Caddock matches have **Buy on eBay** links; unmatched reference items have **Ask about availability**. There is no store-search fallback, payment-flow selector, or add-to-cart button on reference pages. Product structured data describes Caddock items without claiming an active Offer.
 
-- **eBay** (default): each part page links to its matched Browse API listing, or a search of `33audiomarko`. The cart is hidden.
-- **Stripe (cart)**: part pages and listings get **Add to cart** with a quantity stepper capped at stock. `/cart/` shows line items, subtotal, $6.35 flat shipping per order, and the total, then **Check out with Stripe** calls `/api/checkout`. The cart lives in `localStorage`.
-- **PayPal**: a per-part button from `payment_flows.paypal` in `data/site.json`. Set `url` to an `https` template (`{part_id}`, `{series}`, `{resistance}`, `{query}`), or use `parts` for a per-part link. An empty URL shows a disabled “demo, not yet active” control.
+The existing Stripe cart, checkout endpoints, and PayPal configuration remain available for development, but are not linked as purchase actions from the reference catalog.
 
-**Ask about this part** always emails `mark@33audio.com` with the part id in the subject.
+**Ask about availability** emails `mark@33audio.com` with the part id in the subject.
 
-Pages show stock as of the last build, then replace it with live quantities from `/api/stock` when that endpoint answers.
+Caddock pages show quantities from the source catalog and ask buyers to confirm availability. The development cart uses `/api/stock` for live quantities.
 
 ## AI and search crawlers
 
