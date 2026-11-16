@@ -17,6 +17,12 @@
 <meta name="twitter:description" content="NOS Caddock MS151-196K, 196 kΩ, 1% (F). $10.00, 25 in stock. Houston, TX. USA shipping. 33audio.">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../styles.css">
+<script>
+try {
+  var flow = localStorage.getItem("33audio-payment-flow");
+  if (flow === "ebay" || flow === "stripe" || flow === "paypal") document.documentElement.setAttribute("data-payment-flow", flow);
+} catch (e) {}
+</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Caddock MS151-196K Micronox resistor","sku":"MS151-196K","mpn":"MS151-196K","brand":{"@type":"Brand","name":"Caddock"},"description":"NOS Caddock MS151-196K, 196 kΩ, 1% (F). $10.00, 25 in stock. Houston, TX. USA shipping. 33audio.","category":"Micronox film resistor","url":"https://exergy-connect.github.io/33audio.com/parts/ms151-196k/","additionalProperty":[{"@type":"PropertyValue","name":"Resistance","value":"196 kΩ"},{"@type":"PropertyValue","name":"Tolerance","value":"1%"},{"@type":"PropertyValue","name":"Quantity listed","value":25}],"offers":{"@type":"Offer","url":"https://exergy-connect.github.io/33audio.com/parts/ms151-196k/","priceCurrency":"USD","price":"10.00","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","areaServed":"US","seller":{"@type":"Organization","name":"33audio","email":"mark@33audio.com","address":{"@type":"PostalAddress","addressLocality":"Houston","addressRegion":"TX","addressCountry":"US"}},"shippingDetails":{"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmount","value":"6.35","currency":"USD"},"shippingDestination":{"@type":"DefinedRegion","addressCountry":"US"}}},"potentialAction":{"@type":"BuyAction","target":"https://www.ebay.com/sch/i.html?_ssn=33audiomarko&store_name=33audiomarko&_nkw=MS151%20196K%201%25&_sacat=0"},"countryOfOrigin":"US"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"33audio","item":"https://exergy-connect.github.io/33audio.com/"},{"@type":"ListItem","position":2,"name":"MS151","item":"https://exergy-connect.github.io/33audio.com/series/ms151/"},{"@type":"ListItem","position":3,"name":"MS151-196K","item":"https://exergy-connect.github.io/33audio.com/parts/ms151-196k/"}]}</script>
 </head>
 <body>
@@ -35,6 +41,15 @@
         <button type="submit">Search</button>
       </div>
     </form>
+    <div class="payment-switch">
+      <label class="payment-label" for="payment-flow">Checkout demo</label>
+      <select id="payment-flow" data-payment-select>
+        <option value="ebay">eBay</option>
+        <option value="stripe">Stripe</option>
+        <option value="paypal">PayPal</option>
+      </select>
+      <a href="../../fees/">Selling costs</a>
+    </div>
   </div>
 </header>
 <main id="content" class="wrap">
@@ -47,7 +62,7 @@
 <p class="eyebrow">Caddock MS151 · Micronox film · NOS</p>
 <h1 class="part">MS151-196K</h1>
 <p class="lede">196 kΩ · 1% (F)</p>
-<div class="buy"><a class="button primary" href="https://www.ebay.com/sch/i.html?_ssn=33audiomarko&amp;store_name=33audiomarko&amp;_nkw=MS151%20196K%201%25&amp;_sacat=0">Buy on eBay</a><a class="button secondary" href="mailto:mark@33audio.com?subject=Question%20about%20MS151-196K&amp;body=Hello%2C%0A%0AI%20have%20a%20question%20about%20MS151-196K%20%28196%20k%CE%A9%2C%201%25%29.%0AListed%20quantity%3A%2025%0ACatalog%20price%3A%20%2410.00%0A%0A">Ask about this part</a></div><p class="fine">No single listing is matched yet. This searches the 33audio eBay store for this part.</p>
+<div class="buy"><a class="button primary" data-flow="ebay" href="https://www.ebay.com/sch/i.html?_ssn=33audiomarko&amp;store_name=33audiomarko&amp;_nkw=MS151%20196K%201%25&amp;_sacat=0">Buy on eBay</a><p class="fine buy-note" data-flow="ebay">No single listing is matched yet. This searches the 33audio eBay store for this part.</p><button type="button" class="button primary is-demo" data-flow="stripe" disabled>Pay with Stripe <span class="demo-tag">demo, not yet active</span></button><p class="fine buy-note" data-flow="stripe">No Stripe Payment Link is configured yet. This control is a demo, not a checkout.</p><button type="button" class="button primary is-demo" data-flow="paypal" disabled>Pay with PayPal <span class="demo-tag">demo, not yet active</span></button><p class="fine buy-note" data-flow="paypal">No PayPal checkout URL is configured yet. This control is a demo, not a checkout.</p><a class="button secondary" href="mailto:mark@33audio.com?subject=Question%20about%20MS151-196K&amp;body=Hello%2C%0A%0AI%20have%20a%20question%20about%20MS151-196K%20%28196%20k%CE%A9%2C%201%25%29.%0AListed%20quantity%3A%2025%0ACatalog%20price%3A%20%2410.00%0A%0A">Ask about this part</a></div>
 <dl class="spec">
   <div><dt>Resistance</dt><dd>196 kΩ <span class="muted">(196K)</span></dd></div>
   <div><dt>Tolerance</dt><dd>1% (F), the MS151 default</dd></div>
@@ -68,8 +83,9 @@
     <p>33audio · Houston, TX · mark@33audio.com</p>
     <p>USA orders only, no international at this time Catalog price $10.00 each. $6.35 flat shipping for any quantity, USA only. Mail order is a PayPal invoice from Mark. eBay prices and shipping are on the listing.</p>
     <p>Inventory is taken from the <a href="https://www.33audio.com/enter/caddockmsmm.html">33audio Caddock listing</a>. Tolerances: J=5%, G=2%, F=1%, D=.5%, C=.25%, B=.1%</p>
+    <p><a href="../../fees/">Selling costs</a></p>
   </div>
 </footer>
-
+<script src="../../checkout.js" defer></script>
 </body>
 </html>

@@ -17,6 +17,12 @@
 <meta name="twitter:description" content="25 NOS Caddock MM215 Micronox resistors, F tolerance unless noted otherwise. $10.00 each from 33audio in Houston, TX.">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../styles.css">
+<script>
+try {
+  var flow = localStorage.getItem("33audio-payment-flow");
+  if (flow === "ebay" || flow === "stripe" || flow === "paypal") document.documentElement.setAttribute("data-payment-flow", flow);
+} catch (e) {}
+</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Caddock MM215 Micronox resistors","numberOfItems":25,"itemListElement":[{"@type":"ListItem","position":1,"name":"MM215-24.9","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-24.9/"},{"@type":"ListItem","position":2,"name":"MM215-32.4","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-32.4/"},{"@type":"ListItem","position":3,"name":"MM215-33.2","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-33.2/"},{"@type":"ListItem","position":4,"name":"MM215-221","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-221/"},{"@type":"ListItem","position":5,"name":"MM215-453","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-453/"},{"@type":"ListItem","position":6,"name":"MM215-475","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-475/"},{"@type":"ListItem","position":7,"name":"MM215-523","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-523/"},{"@type":"ListItem","position":8,"name":"MM215-698","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-698/"},{"@type":"ListItem","position":9,"name":"MM215-1.62K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-1.62k/"},{"@type":"ListItem","position":10,"name":"MM215-4.32K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-4.32k/"},{"@type":"ListItem","position":11,"name":"MM215-4.53K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-4.53k/"},{"@type":"ListItem","position":12,"name":"MM215-5.49K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-5.49k/"},{"@type":"ListItem","position":13,"name":"MM215-6.49K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-6.49k/"},{"@type":"ListItem","position":14,"name":"MM215-8.45K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-8.45k/"},{"@type":"ListItem","position":15,"name":"MM215-13.7K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-13.7k/"},{"@type":"ListItem","position":16,"name":"MM215-45.3K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-45.3k/"},{"@type":"ListItem","position":17,"name":"MM215-47.5K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-47.5k/"},{"@type":"ListItem","position":18,"name":"MM215-80.6K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-80.6k/"},{"@type":"ListItem","position":19,"name":"MM215-162K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-162k/"},{"@type":"ListItem","position":20,"name":"MM215-215K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-215k/"},{"@type":"ListItem","position":21,"name":"MM215-249K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-249k/"},{"@type":"ListItem","position":22,"name":"MM215-357K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-357k/"},{"@type":"ListItem","position":23,"name":"MM215-402K","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-402k/"},{"@type":"ListItem","position":24,"name":"MM215-1.5M","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-1.5m/"},{"@type":"ListItem","position":25,"name":"MM215-2.15M","url":"https://exergy-connect.github.io/33audio.com/parts/mm215-2.15m/"}]}</script>
 </head>
 <body>
@@ -35,6 +41,15 @@
         <button type="submit">Search</button>
       </div>
     </form>
+    <div class="payment-switch">
+      <label class="payment-label" for="payment-flow">Checkout demo</label>
+      <select id="payment-flow" data-payment-select>
+        <option value="ebay">eBay</option>
+        <option value="stripe">Stripe</option>
+        <option value="paypal">PayPal</option>
+      </select>
+      <a href="../../fees/">Selling costs</a>
+    </div>
   </div>
 </header>
 <main id="content" class="wrap">
@@ -52,8 +67,9 @@
     <p>33audio · Houston, TX · mark@33audio.com</p>
     <p>USA orders only, no international at this time Catalog price $10.00 each. $6.35 flat shipping for any quantity, USA only. Mail order is a PayPal invoice from Mark. eBay prices and shipping are on the listing.</p>
     <p>Inventory is taken from the <a href="https://www.33audio.com/enter/caddockmsmm.html">33audio Caddock listing</a>. Tolerances: J=5%, G=2%, F=1%, D=.5%, C=.25%, B=.1%</p>
+    <p><a href="../../fees/">Selling costs</a></p>
   </div>
 </footer>
-
+<script src="../../checkout.js" defer></script>
 </body>
 </html>

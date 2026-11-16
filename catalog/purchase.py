@@ -156,6 +156,19 @@ def safe_https(url: str, host_suffix: str | None = None) -> str | None:
     return url
 
 
+def configured_flow_url(site: dict, part: dict, flow: str) -> str | None:
+    """HTTPS checkout URL for Stripe or PayPal. Part entry wins, then the global template."""
+    flows = site.get("payment_flows") or {}
+    config = flows.get(flow) or {}
+    parts = config.get("parts") or {}
+    template = str(parts.get(part["id"]) or config.get("url") or "").strip()
+    if not template:
+        return None
+    values = template_values(part, site)
+    href = fill_url(template, values) if "{" in template else template
+    return safe_https(href)
+
+
 def mailto_link(email: str, subject: str, body: str) -> str:
     return f"mailto:{email}?subject={quote(subject)}&body={quote(body)}"
 
