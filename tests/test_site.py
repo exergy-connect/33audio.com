@@ -136,9 +136,22 @@ class StockTests(unittest.TestCase):
         self.assertEqual(next(p for p in reset["parts"] if p["id"] == "MM177-4.32K")["qty"], 63)
 
     def test_seed_skips_without_credentials(self):
-        with mock.patch.dict(os.environ, {}, clear=True):
+        with mock.patch.dict(os.environ, {}, clear=True), mock.patch("catalog.stock.wrangler") as wrangler:
             self.assertEqual(seed(stock_doc(catalog(), SITE), False, ROOT / "wrangler.toml"), 0)
-        self.assertIsNone(namespace_id(ROOT / "wrangler.toml"))
+        wrangler.assert_not_called()
+
+    def test_namespace_id_handles_placeholder_and_configured_namespace(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            config = Path(tmp) / "wrangler.toml"
+            self.assertIsNone(namespace_id(config))
+            for value, expected in (
+                ("REPLACE_WITH_STOCK_KV_NAMESPACE_ID", None),
+                ("", None),
+                ("0123456789abcdef0123456789abcdef", "0123456789abcdef0123456789abcdef"),
+            ):
+                with self.subTest(namespace=value):
+                    config.write_text(f'[[kv_namespaces]]\nbinding = "STOCK"\nid = "{value}"\n', encoding="utf-8")
+                    self.assertEqual(namespace_id(config), expected)
 
 
 class WranglerConfigTests(unittest.TestCase):
