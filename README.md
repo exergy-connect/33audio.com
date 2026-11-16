@@ -104,3 +104,11 @@ python -m unittest discover -s tests -v
 ## Refresh workflow
 
 `.github/workflows/refresh.yml` runs every day and on manual dispatch. It parses the listing, syncs eBay when the two secrets exist, rebuilds `docs/`, and commits any changes.
+
+`.github/workflows/ci.yml` runs on every pull request and on pushes to `main`. It runs the tests, rebuilds `docs/`, and fails if the committed `docs/` differs from the build.
+
+## Theme
+
+The look is a 1960s–70s hi-fi receiver: a walnut cabinet with a brushed-aluminum faceplate in the header, LP sleeves for the series cards, a record label next to each part number, and a VU meter for each fee on `/fees/`. The meter needle shows that fee as a percent of what the buyer pays, on a 0 to 20% scale. The header record spins twice on load at 33⅓ RPM (1.8 s per turn) and again on hover. Nothing moves when the visitor has `prefers-reduced-motion: reduce` set.
+
+It is CSS and inline SVG only. No web fonts or images are loaded; the font stacks fall back to system fonts. Styles live in `catalog/templates/styles.css`, and the SVG pieces live in `catalog/theme.py`.
