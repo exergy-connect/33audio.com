@@ -62,7 +62,7 @@ The canonical origin in `data/site.json` is `https://exergy-connect.github.io/33
 
 ## Local preview
 
-Python 3.11 or newer. The tools use the standard library only.
+Python 3.15. The tools use the standard library only. The refresh workflow installs it with `actions/setup-python@v7` (`python-version: '3.15'`).
 
 ```bash
 python -m catalog parse
