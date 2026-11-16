@@ -13,6 +13,7 @@ from xml.etree import ElementTree as ET
 
 from catalog import ASSETS, DATA, DOCS
 from catalog.fees import estimate, from_cents, to_cents
+from catalog.llm_pages import faq_json_ld, faq_pairs, part_summary, render_catalog_json, render_catalog_md, render_llms_full, render_llms_txt, render_robots
 from catalog.purchase import configured_flow_url, flatten, match_listings, resistance_label, resolve_purchase
 
 TEMPLATES = Path(__file__).resolve().parent / "templates"
@@ -111,8 +112,13 @@ def feedback_text(site: dict, ebay: dict) -> str:
     return site.get("ebay_feedback_label") or "eBay store"
 
 
-def head(title: str, description: str, canonical: str, depth: int, og_type: str, extra: str = "") -> str:
+def head(title: str, description: str, canonical: str, depth: int, og_type: str, extra: str = "", describedby: str = "") -> str:
     root = rel(depth)
+    described = (
+        f'<link rel="describedby" href="{escape(describedby)}" type="text/markdown">'
+        if describedby
+        else ""
+    )
     return f"""<!DOCTYPE html>
 <html lang="en" data-root="{escape(root)}">
 <head>
@@ -122,6 +128,7 @@ def head(title: str, description: str, canonical: str, depth: int, og_type: str,
 <title>{escape(title)}</title>
 <meta name="description" content="{escape(description)}">
 <link rel="canonical" href="{escape(canonical)}">
+{described}
 <meta property="og:title" content="{escape(title)}">
 <meta property="og:description" content="{escape(description)}">
 <meta property="og:url" content="{escape(canonical)}">
@@ -195,17 +202,26 @@ def footer(site: dict, catalog: dict, depth: int) -> str:
     <p>33audio · {escape(site['location']['label'])} · {escape(site['email'])}</p>
     <p>{escape(region)} Catalog price ${escape(catalog['unit_price'])} each. {escape(site['shipping']['summary'])}. Mail order is a PayPal invoice from Mark. eBay prices and shipping are on the listing.</p>
     <p>Inventory is taken from the <a href="{escape(source)}">33audio Caddock listing</a>. {escape(catalog.get('legend') or '')}</p>
-    <p><a href="{escape(rel(depth, 'fees/'))}">Selling costs</a></p>
+    <p><a href="{escape(rel(depth, 'fees/'))}">Selling costs</a> · <a href="{escape(rel(depth, 'catalog.md'))}">Catalog (Markdown)</a> · <a href="{escape(rel(depth, 'catalog.json'))}">Catalog (JSON)</a> · <a href="{escape(rel(depth, 'llms.txt'))}">llms.txt</a></p>
   </div>
 </footer>
 """
 
 
+def origin_of(canonical: str, rel_path: str) -> str:
+    suffix = rel_path.strip("/")
+    base = canonical.rstrip("/")
+    if suffix and base.endswith(suffix):
+        base = base[: -len(suffix)].rstrip("/")
+    return base
+
+
 def layout(title: str, description: str, canonical: str, rel_path: str, body: str, site: dict, catalog: dict, current: str, og_type: str = "website", extra_head: str = "", search: bool = False, extra_scripts: str = "") -> str:
     depth = depth_of(rel_path)
     script = f'<script src="{escape(rel(depth, "search.js"))}" defer></script>' if search else ""
+    describedby = origin_of(canonical, rel_path) + "/llms.txt"
     return (
-        head(title, description, canonical, depth, og_type, extra_head)
+        head(title, description, canonical, depth, og_type, extra_head, describedby)
         + "<body>\n"
         + header(site, depth, current)
         + f'<main id="content" class="wrap">\n{body}\n</main>\n'
@@ -530,8 +546,14 @@ def render_part(series: dict, part: dict, decision: dict, catalog: dict, site: d
     label = resistance_label(part["resistance"])
     page_url = abs_url(origin, path)
     made = bool(catalog["listing"].get("origin_line"))
+    pairs = faq_pairs(series, part, catalog, site)
+    faq_html = "".join(
+        f"<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>"
+        for question, answer in pairs
+    )
     scripts = (
         f'<script type="application/ld+json">{json_ld(product_ld(part, description, page_url, decision["primary_href"], site, made))}</script>'
+        f'<script type="application/ld+json">{json_ld(faq_json_ld(pairs))}</script>'
         f'<script type="application/ld+json">{json_ld(breadcrumb_ld(origin, series, part))}</script>'
     )
     others = []
@@ -552,6 +574,7 @@ def render_part(series: dict, part: dict, decision: dict, catalog: dict, site: d
 <p class="eyebrow">Caddock {escape(series['id'])} · Micronox film · NOS</p>
 <h1 class="part">{escape(part['id'])}</h1>
 <p class="lede">{escape(label)} · {escape(part['tolerance'])} ({escape(part['tolerance_code'])})</p>
+<p class="summary">{escape(part_summary(part, site, catalog['listing']))}</p>
 {buy_html(decision, part, site)}
 <dl class="spec">
   <div><dt>Resistance</dt><dd>{escape(label)} <span class="muted">({escape(part['resistance'])})</span></dd></div>
@@ -564,6 +587,8 @@ def render_part(series: dict, part: dict, decision: dict, catalog: dict, site: d
 {nrnd_html(site, series['family'])}
 <p>{escape(provenance)}</p>
 {datasheet_link(site, series['family'], depth)}
+<h2>Questions</h2>
+<div class="faq">{faq_html}</div>
 <h2>Other {escape(series['id'])} values</h2>
 <p class="related">{''.join(others)}</p>
 """
@@ -670,10 +695,7 @@ def write_sitemap(docs: Path, origin: str, paths: list[str], modified: str | Non
 
 
 def write_robots(docs: Path, origin: str) -> None:
-    (docs / "robots.txt").write_text(
-        "User-agent: *\nAllow: /\n\nSitemap: " + abs_url(origin, "sitemap.xml") + "\n",
-        encoding="utf-8",
-    )
+    (docs / "robots.txt").write_text(render_robots(origin), encoding="utf-8")
 
 
 def validate(docs: Path, catalog: dict, site: dict, origin: str) -> None:
@@ -736,7 +758,18 @@ def validate(docs: Path, catalog: dict, site: dict, origin: str) -> None:
     locs = [node.text for node in sitemap.iter() if node.tag.endswith("loc")]
     if len(locs) != len(set(locs)):
         errors.append("duplicate sitemap URLs")
-    expected = 3 + len(catalog["series"]) + len(parts)
+    expected = 7 + len(catalog["series"]) + len(parts)
+    robots_text = (docs / "robots.txt").read_text(encoding="utf-8")
+    for bot in (
+        "GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot",
+        "PerplexityBot", "Google-Extended", "Applebot-Extended", "Bingbot",
+    ):
+        if f"User-agent: {bot}\nAllow: /" not in robots_text:
+            errors.append(f"robots.txt does not allow {bot}")
+    if not (docs / "llms.txt").is_file() or not (docs / "llms-full.txt").is_file():
+        errors.append("llms.txt files missing")
+    if not (docs / "catalog.md").is_file() or not (docs / "catalog.json").is_file():
+        errors.append("machine-readable catalog missing")
     if len(locs) != expected:
         errors.append(f"sitemap has {len(locs)} URLs, expected {expected}")
     if not all(loc and loc.startswith(origin) for loc in locs):
@@ -759,7 +792,11 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
         (docs / "CNAME").write_text(str(site["custom_domain"]).strip() + "\n", encoding="utf-8")
     matches = match_listings(catalog, ebay.get("listings") or [])
     parts = flatten(catalog)
-    paths = ["", "catalog/", "fees/"]
+    paths = ["", "catalog/", "fees/", "llms.txt", "llms-full.txt", "catalog.md", "catalog.json"]
+    (docs / "llms.txt").write_text(render_llms_txt(catalog, site, origin), encoding="utf-8")
+    (docs / "llms-full.txt").write_text(render_llms_full(catalog, site, origin), encoding="utf-8")
+    (docs / "catalog.md").write_text(render_catalog_md(catalog, site, origin), encoding="utf-8")
+    (docs / "catalog.json").write_text(render_catalog_json(catalog, site, origin), encoding="utf-8")
     fees_page = docs / "fees" / "index.html"
     fees_page.parent.mkdir(parents=True, exist_ok=True)
     fees_page.write_text(render_fees(catalog, site, origin), encoding="utf-8")

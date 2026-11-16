@@ -1,0 +1,306 @@
+# 33audio
+
+> 33audio in Houston, TX sells NOS Caddock Micronox film resistors in the MM177, MM215, MS151, and MS176 series. These resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. Price is $10.00 each. $6.35 flat shipping for any quantity, USA only. USA orders only, no international at this time
+
+Seller: Mark (mark@33audio.com). eBay store: https://www.ebay.com/str/33audiomarko. Caddock High Performance Film Resistors. Temperature Range to 275 deg/C max Made in USA 100% Tested Ideal For Harsh Environments
+
+Caddock marks Type MM Not Recommended for New Designs and points new designs to Type MS.
+
+## Catalog files
+
+- [All parts (Markdown)](https://exergy-connect.github.io/33audio.com/catalog.md): Table of every value, tolerance, quantity, and price
+- [All parts (JSON)](https://exergy-connect.github.io/33audio.com/catalog.json): The same catalog as JSON
+- [Full text for agents](https://exergy-connect.github.io/33audio.com/llms-full.txt): One summary sentence per part, plus the shared FAQ
+
+## Series
+
+- [MM177](https://exergy-connect.github.io/33audio.com/series/mm177/): 31 values, B tolerance unless noted otherwise
+- [MM215](https://exergy-connect.github.io/33audio.com/series/mm215/): 25 values, F tolerance unless noted otherwise
+- [MS151](https://exergy-connect.github.io/33audio.com/series/ms151/): 20 values, F-tolerance unless noted otherwise
+- [MS176](https://exergy-connect.github.io/33audio.com/series/ms176/): 9 values, F-tolerance unless noted otherwise
+
+## Parts
+
+- [MM177-19.7-D](https://exergy-connect.github.io/33audio.com/parts/mm177-19.7-d/): 19.7 Ω, 0.5% (D), 35 listed, $10.00
+- [MM177-23.8-D](https://exergy-connect.github.io/33audio.com/parts/mm177-23.8-d/): 23.8 Ω, 0.5% (D), 57 listed, $10.00
+- [MM177-523-F](https://exergy-connect.github.io/33audio.com/parts/mm177-523-f/): 523 Ω, 1% (F), 44 listed, $10.00
+- [MM177-830-D](https://exergy-connect.github.io/33audio.com/parts/mm177-830-d/): 830 Ω, 0.5% (D), 46 listed, $10.00
+- [MM177-980-D](https://exergy-connect.github.io/33audio.com/parts/mm177-980-d/): 980 Ω, 0.5% (D), 29 listed, $10.00
+- [MM177-1.02K](https://exergy-connect.github.io/33audio.com/parts/mm177-1.02k/): 1.02 kΩ, 0.1% (B), 41 listed, $10.00
+- [MM177-1.09K-D](https://exergy-connect.github.io/33audio.com/parts/mm177-1.09k-d/): 1.09 kΩ, 0.5% (D), 46 listed, $10.00
+- [MM177-1.19K-D](https://exergy-connect.github.io/33audio.com/parts/mm177-1.19k-d/): 1.19 kΩ, 0.5% (D), 46 listed, $10.00
+- [MM177-1.43K-D](https://exergy-connect.github.io/33audio.com/parts/mm177-1.43k-d/): 1.43 kΩ, 0.5% (D), 37 listed, $10.00
+- [MM177-1.87K-F](https://exergy-connect.github.io/33audio.com/parts/mm177-1.87k-f/): 1.87 kΩ, 1% (F), 44 listed, $10.00
+- [MM177-3.53K-D](https://exergy-connect.github.io/33audio.com/parts/mm177-3.53k-d/): 3.53 kΩ, 0.5% (D), 25 listed, $10.00
+- [MM177-4.32K](https://exergy-connect.github.io/33audio.com/parts/mm177-4.32k/): 4.32 kΩ, 0.1% (B), 63 listed, $10.00
+- [MM177-4.99K-F](https://exergy-connect.github.io/33audio.com/parts/mm177-4.99k-f/): 4.99 kΩ, 1% (F), 35 listed, $10.00
+- [MM177-5.625K](https://exergy-connect.github.io/33audio.com/parts/mm177-5.625k/): 5.625 kΩ, 0.1% (B), 31 listed, $10.00
+- [MM177-5.95K](https://exergy-connect.github.io/33audio.com/parts/mm177-5.95k/): 5.95 kΩ, 0.1% (B), 45 listed, $10.00
+- [MM177-8.73K](https://exergy-connect.github.io/33audio.com/parts/mm177-8.73k/): 8.73 kΩ, 0.1% (B), 44 listed, $10.00
+- [MM177-9.72K](https://exergy-connect.github.io/33audio.com/parts/mm177-9.72k/): 9.72 kΩ, 0.1% (B), 34 listed, $10.00
+- [MM177-16.67K-D](https://exergy-connect.github.io/33audio.com/parts/mm177-16.67k-d/): 16.67 kΩ, 0.5% (D), 28 listed, $10.00
+- [MM177-19.7K](https://exergy-connect.github.io/33audio.com/parts/mm177-19.7k/): 19.7 kΩ, 0.1% (B), 30 listed, $10.00
+- [MM177-32.4K-D](https://exergy-connect.github.io/33audio.com/parts/mm177-32.4k-d/): 32.4 kΩ, 0.5% (D), 28 listed, $10.00
+- [MM177-52K](https://exergy-connect.github.io/33audio.com/parts/mm177-52k/): 52 kΩ, 0.1% (B), 32 listed, $10.00
+- [MM177-66.4K](https://exergy-connect.github.io/33audio.com/parts/mm177-66.4k/): 66.4 kΩ, 0.1% (B), 41 listed, $10.00
+- [MM177-68.1K](https://exergy-connect.github.io/33audio.com/parts/mm177-68.1k/): 68.1 kΩ, 0.1% (B), 31 listed, $10.00
+- [MM177-89K](https://exergy-connect.github.io/33audio.com/parts/mm177-89k/): 89 kΩ, 0.1% (B), 32 listed, $10.00
+- [MM177-190.5K](https://exergy-connect.github.io/33audio.com/parts/mm177-190.5k/): 190.5 kΩ, 0.1% (B), 29 listed, $10.00
+- [MM177-545.4K](https://exergy-connect.github.io/33audio.com/parts/mm177-545.4k/): 545.4 kΩ, 0.1% (B), 36 listed, $10.00
+- [MM177-665K](https://exergy-connect.github.io/33audio.com/parts/mm177-665k/): 665 kΩ, 0.1% (B), 32 listed, $10.00
+- [MM177-665K-F](https://exergy-connect.github.io/33audio.com/parts/mm177-665k-f/): 665 kΩ, 1% (F), 35 listed, $10.00
+- [MM177-992K](https://exergy-connect.github.io/33audio.com/parts/mm177-992k/): 992 kΩ, 0.1% (B), 37 listed, $10.00
+- [MM177-1.86M](https://exergy-connect.github.io/33audio.com/parts/mm177-1.86m/): 1.86 MΩ, 0.1% (B), 31 listed, $10.00
+- [MM177-1.89M](https://exergy-connect.github.io/33audio.com/parts/mm177-1.89m/): 1.89 MΩ, 0.1% (B), 36 listed, $10.00
+- [MM215-24.9](https://exergy-connect.github.io/33audio.com/parts/mm215-24.9/): 24.9 Ω, 1% (F), 29 listed, $10.00
+- [MM215-32.4](https://exergy-connect.github.io/33audio.com/parts/mm215-32.4/): 32.4 Ω, 1% (F), 35 listed, $10.00
+- [MM215-33.2](https://exergy-connect.github.io/33audio.com/parts/mm215-33.2/): 33.2 Ω, 1% (F), 30 listed, $10.00
+- [MM215-221](https://exergy-connect.github.io/33audio.com/parts/mm215-221/): 221 Ω, 1% (F), 35 listed, $10.00
+- [MM215-453](https://exergy-connect.github.io/33audio.com/parts/mm215-453/): 453 Ω, 1% (F), 35 listed, $10.00
+- [MM215-475](https://exergy-connect.github.io/33audio.com/parts/mm215-475/): 475 Ω, 1% (F), 30 listed, $10.00
+- [MM215-523](https://exergy-connect.github.io/33audio.com/parts/mm215-523/): 523 Ω, 1% (F), 29 listed, $10.00
+- [MM215-698](https://exergy-connect.github.io/33audio.com/parts/mm215-698/): 698 Ω, 1% (F), 31 listed, $10.00
+- [MM215-1.62K](https://exergy-connect.github.io/33audio.com/parts/mm215-1.62k/): 1.62 kΩ, 1% (F), 35 listed, $10.00
+- [MM215-4.32K](https://exergy-connect.github.io/33audio.com/parts/mm215-4.32k/): 4.32 kΩ, 1% (F), 42 listed, $10.00
+- [MM215-4.53K](https://exergy-connect.github.io/33audio.com/parts/mm215-4.53k/): 4.53 kΩ, 1% (F), 35 listed, $10.00
+- [MM215-5.49K](https://exergy-connect.github.io/33audio.com/parts/mm215-5.49k/): 5.49 kΩ, 1% (F), 32 listed, $10.00
+- [MM215-6.49K](https://exergy-connect.github.io/33audio.com/parts/mm215-6.49k/): 6.49 kΩ, 1% (F), 40 listed, $10.00
+- [MM215-8.45K](https://exergy-connect.github.io/33audio.com/parts/mm215-8.45k/): 8.45 kΩ, 1% (F), 35 listed, $10.00
+- [MM215-13.7K](https://exergy-connect.github.io/33audio.com/parts/mm215-13.7k/): 13.7 kΩ, 1% (F), 47 listed, $10.00
+- [MM215-45.3K](https://exergy-connect.github.io/33audio.com/parts/mm215-45.3k/): 45.3 kΩ, 1% (F), 30 listed, $10.00
+- [MM215-47.5K](https://exergy-connect.github.io/33audio.com/parts/mm215-47.5k/): 47.5 kΩ, 1% (F), 29 listed, $10.00
+- [MM215-80.6K](https://exergy-connect.github.io/33audio.com/parts/mm215-80.6k/): 80.6 kΩ, 1% (F), 34 listed, $10.00
+- [MM215-162K](https://exergy-connect.github.io/33audio.com/parts/mm215-162k/): 162 kΩ, 1% (F), 34 listed, $10.00
+- [MM215-215K](https://exergy-connect.github.io/33audio.com/parts/mm215-215k/): 215 kΩ, 1% (F), 34 listed, $10.00
+- [MM215-249K](https://exergy-connect.github.io/33audio.com/parts/mm215-249k/): 249 kΩ, 1% (F), 28 listed, $10.00
+- [MM215-357K](https://exergy-connect.github.io/33audio.com/parts/mm215-357k/): 357 kΩ, 1% (F), 29 listed, $10.00
+- [MM215-402K](https://exergy-connect.github.io/33audio.com/parts/mm215-402k/): 402 kΩ, 1% (F), 31 listed, $10.00
+- [MM215-1.5M](https://exergy-connect.github.io/33audio.com/parts/mm215-1.5m/): 1.5 MΩ, 1% (F), 34 listed, $10.00
+- [MM215-2.15M](https://exergy-connect.github.io/33audio.com/parts/mm215-2.15m/): 2.15 MΩ, 1% (F), 34 listed, $10.00
+- [MS151-104](https://exergy-connect.github.io/33audio.com/parts/ms151-104/): 104 Ω, 1% (F), 29 listed, $10.00
+- [MS151-187](https://exergy-connect.github.io/33audio.com/parts/ms151-187/): 187 Ω, 1% (F), 29 listed, $10.00
+- [MS151-267](https://exergy-connect.github.io/33audio.com/parts/ms151-267/): 267 Ω, 1% (F), 28 listed, $10.00
+- [MS151-453](https://exergy-connect.github.io/33audio.com/parts/ms151-453/): 453 Ω, 1% (F), 34 listed, $10.00
+- [MS151-475](https://exergy-connect.github.io/33audio.com/parts/ms151-475/): 475 Ω, 1% (F), 32 listed, $10.00
+- [MS151-5.9K](https://exergy-connect.github.io/33audio.com/parts/ms151-5.9k/): 5.9 kΩ, 1% (F), 29 listed, $10.00
+- [MS151-9K](https://exergy-connect.github.io/33audio.com/parts/ms151-9k/): 9 kΩ, 1% (F), 21 listed, $10.00
+- [MS151-9.09K](https://exergy-connect.github.io/33audio.com/parts/ms151-9.09k/): 9.09 kΩ, 1% (F), 28 listed, $10.00
+- [MS151-17K](https://exergy-connect.github.io/33audio.com/parts/ms151-17k/): 17 kΩ, 1% (F), 22 listed, $10.00
+- [MS151-23.2K](https://exergy-connect.github.io/33audio.com/parts/ms151-23.2k/): 23.2 kΩ, 1% (F), 29 listed, $10.00
+- [MS151-31.4K](https://exergy-connect.github.io/33audio.com/parts/ms151-31.4k/): 31.4 kΩ, 1% (F), 19 listed, $10.00
+- [MS151-33.2K](https://exergy-connect.github.io/33audio.com/parts/ms151-33.2k/): 33.2 kΩ, 1% (F), 14 listed, $10.00
+- [MS151-47.5K](https://exergy-connect.github.io/33audio.com/parts/ms151-47.5k/): 47.5 kΩ, 1% (F), 26 listed, $10.00
+- [MS151-69.9K](https://exergy-connect.github.io/33audio.com/parts/ms151-69.9k/): 69.9 kΩ, 1% (F), 21 listed, $10.00
+- [MS151-75K](https://exergy-connect.github.io/33audio.com/parts/ms151-75k/): 75 kΩ, 1% (F), 24 listed, $10.00
+- [MS151-82.5K](https://exergy-connect.github.io/33audio.com/parts/ms151-82.5k/): 82.5 kΩ, 1% (F), 27 listed, $10.00
+- [MS151-196K](https://exergy-connect.github.io/33audio.com/parts/ms151-196k/): 196 kΩ, 1% (F), 25 listed, $10.00
+- [MS151-634K](https://exergy-connect.github.io/33audio.com/parts/ms151-634k/): 634 kΩ, 1% (F), 23 listed, $10.00
+- [MS151-1.02M](https://exergy-connect.github.io/33audio.com/parts/ms151-1.02m/): 1.02 MΩ, 1% (F), 34 listed, $10.00
+- [MS151-1.1M](https://exergy-connect.github.io/33audio.com/parts/ms151-1.1m/): 1.1 MΩ, 1% (F), 27 listed, $10.00
+- [MS176-200](https://exergy-connect.github.io/33audio.com/parts/ms176-200/): 200 Ω, 1% (F), 34 listed, $10.00
+- [MS176-2.74K](https://exergy-connect.github.io/33audio.com/parts/ms176-2.74k/): 2.74 kΩ, 1% (F), 16 listed, $10.00
+- [MS176-5K-C](https://exergy-connect.github.io/33audio.com/parts/ms176-5k-c/): 5 kΩ, 0.25% (C), 28 listed, $10.00
+- [MS176-10K](https://exergy-connect.github.io/33audio.com/parts/ms176-10k/): 10 kΩ, 1% (F), 16 listed, $10.00
+- [MS176-121K](https://exergy-connect.github.io/33audio.com/parts/ms176-121k/): 121 kΩ, 1% (F), 15 listed, $10.00
+- [MS176-500K-G](https://exergy-connect.github.io/33audio.com/parts/ms176-500k-g/): 500 kΩ, 2% (G), 25 listed, $10.00
+- [MS176-1.21M](https://exergy-connect.github.io/33audio.com/parts/ms176-1.21m/): 1.21 MΩ, 1% (F), 37 listed, $10.00
+- [MS176-1.82M](https://exergy-connect.github.io/33audio.com/parts/ms176-1.82m/): 1.82 MΩ, 1% (F), 23 listed, $10.00
+- [MS176-2.5M](https://exergy-connect.github.io/33audio.com/parts/ms176-2.5m/): 2.5 MΩ, 1% (F), 24 listed, $10.00
+
+## Optional
+
+- [Selling costs](https://exergy-connect.github.io/33audio.com/fees/): Published US fee comparison for eBay, Stripe, and PayPal
+- [eBay store](https://www.ebay.com/str/33audiomarko): 33audio listings on eBay
+- [Type MM datasheet scan](https://exergy-connect.github.io/33audio.com/datasheets/mmdata85.jpg): EEM 1985 scan hosted by 33audio
+- [Type MS datasheet scan](https://exergy-connect.github.io/33audio.com/datasheets/msdata85.jpg): EEM 1985 scan hosted by 33audio
+- [Caddock Type MM datasheet](https://www.caddock.com/online-catalog/mrktg-lit/TypeMM.pdf): Current Caddock PDF, Type MM not recommended for new designs
+
+## Part summaries
+
+Caddock MM177-19.7-D is a 19.7 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-23.8-D is a 23.8 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-523-F is a 523 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-830-D is a 830 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-980-D is a 980 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-1.02K is a 1.02 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-1.09K-D is a 1.09 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-1.19K-D is a 1.19 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-1.43K-D is a 1.43 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-1.87K-F is a 1.87 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-3.53K-D is a 3.53 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-4.32K is a 4.32 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-4.99K-F is a 4.99 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-5.625K is a 5.625 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-5.95K is a 5.95 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-8.73K is a 8.73 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-9.72K is a 9.72 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-16.67K-D is a 16.67 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-19.7K is a 19.7 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-32.4K-D is a 32.4 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-52K is a 52 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-66.4K is a 66.4 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-68.1K is a 68.1 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-89K is a 89 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-190.5K is a 190.5 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-545.4K is a 545.4 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-665K is a 665 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-665K-F is a 665 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-992K is a 992 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-1.86M is a 1.86 MΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM177-1.89M is a 1.89 MΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-24.9 is a 24.9 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-32.4 is a 32.4 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-33.2 is a 33.2 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-221 is a 221 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-453 is a 453 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-475 is a 475 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-523 is a 523 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-698 is a 698 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-1.62K is a 1.62 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-4.32K is a 4.32 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-4.53K is a 4.53 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-5.49K is a 5.49 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-6.49K is a 6.49 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-8.45K is a 8.45 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-13.7K is a 13.7 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-45.3K is a 45.3 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-47.5K is a 47.5 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-80.6K is a 80.6 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-162K is a 162 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-215K is a 215 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-249K is a 249 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-357K is a 357 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-402K is a 402 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-1.5M is a 1.5 MΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MM215-2.15M is a 2.15 MΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-104 is a 104 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-187 is a 187 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-267 is a 267 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-453 is a 453 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-475 is a 475 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-5.9K is a 5.9 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-9K is a 9 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-9.09K is a 9.09 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-17K is a 17 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-23.2K is a 23.2 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-31.4K is a 31.4 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-33.2K is a 33.2 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-47.5K is a 47.5 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-69.9K is a 69.9 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-75K is a 75 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-82.5K is a 82.5 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-196K is a 196 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-634K is a 634 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-1.02M is a 1.02 MΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS151-1.1M is a 1.1 MΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS176-200 is a 200 Ω Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS176-2.74K is a 2.74 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS176-5K-C is a 5 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS176-10K is a 10 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS176-121K is a 121 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS176-500K-G is a 500 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS176-1.21M is a 1.21 MΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS176-1.82M is a 1.82 MΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+Caddock MS176-2.5M is a 2.5 MΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+## FAQ
+
+### What is MM177-19.7-D?
+
+Caddock MM177-19.7-D is a 19.7 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+
+### What is the difference between Caddock Type MM and Type MS?
+
+Type MM, including MM177 and MM215, is Caddock's precision film series in a molded body. Type MS, including MS151 and MS176, is the power film series with a silicone conformal coating. Both use Micronox film. Caddock marks Type MM Not Recommended for New Designs and points new designs to Type MS. Those distinctions are on the 1985 datasheet scans and on Caddock's current Type MM datasheet.
+
+### What does NOS mean for these resistors?
+
+On this site, NOS means the liquidation stock described by 33audio: These resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. It is not a claim that Caddock still recommends the part for a new design.
+
+### What are these Caddock resistors used for?
+
+The 1985 Caddock datasheet scans linked from this site describe these Micronox film resistors for high-temperature work in geophysical, industrial, aerospace, and military equipment, and the 33audio listing calls them ideal for harsh environments. Temperature Range to 275 deg/C max. Buyers also use exact NOS values to repair equipment that already has a Caddock MM or MS resistor in it. This catalog does not name a particular amplifier or speaker.
