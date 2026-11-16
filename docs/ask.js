@@ -33,7 +33,7 @@
       var a = el("a", "ask-part", r.part_number);
       a.href = localPath(r.url);
       li.appendChild(a);
-      li.appendChild(el("span", "ask-spec", r.resistance + " · " + r.tolerance + " · " + r.voltage_rating + " V · " + r.power_rating + " W · " + r.quantity + " in stock · $" + r.price));
+      li.appendChild(el("span", "ask-spec", r.resistance + " · " + r.tolerance + " · " + r.voltage_rating + " V · " + r.power_rating + " W · " + r.quantity + " in source catalog · source price $" + r.price));
       if (r.why && r.why.length) li.appendChild(el("span", "ask-why", r.why.join(", ")));
       list.appendChild(li);
     });

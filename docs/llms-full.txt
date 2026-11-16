@@ -6,6 +6,8 @@ Seller: Mark (mark@33audio.com). eBay store: https://www.ebay.com/str/33audiomar
 
 Caddock marks Type MM Not Recommended for New Designs and points new designs to Type MS.
 
+Caddock catalog quantities and prices are reference data, not confirmed offers or eBay availability. Ask Mark to confirm availability. eBay listings are a separate selection.
+- [eBay listings](https://caddock-33audio.pages.dev/ebay/): Synced listings with their own prices and direct purchase links
 ## Catalog files
 
 - [All parts (Markdown)](https://caddock-33audio.pages.dev/catalog.md): Table of every value, tolerance, quantity, and price
@@ -120,181 +122,181 @@ Caddock marks Type MM Not Recommended for New Designs and points new designs to 
 
 ## Part summaries
 
-Caddock MM177-19.7-D is a 19.7 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-19.7-D is a 19.7 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-23.8-D is a 23.8 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-23.8-D is a 23.8 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-523-F is a 523 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-523-F is a 523 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-830-D is a 830 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-830-D is a 830 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-980-D is a 980 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-980-D is a 980 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-1.02K is a 1.02 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-1.02K is a 1.02 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-1.09K-D is a 1.09 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-1.09K-D is a 1.09 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-1.19K-D is a 1.19 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-1.19K-D is a 1.19 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-1.43K-D is a 1.43 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-1.43K-D is a 1.43 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-1.87K-F is a 1.87 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-1.87K-F is a 1.87 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-3.53K-D is a 3.53 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-3.53K-D is a 3.53 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-4.32K is a 4.32 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-4.32K is a 4.32 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-4.99K-F is a 4.99 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-4.99K-F is a 4.99 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-5.625K is a 5.625 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-5.625K is a 5.625 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-5.95K is a 5.95 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-5.95K is a 5.95 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-8.73K is a 8.73 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-8.73K is a 8.73 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-9.72K is a 9.72 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-9.72K is a 9.72 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-16.67K-D is a 16.67 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-16.67K-D is a 16.67 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-19.7K is a 19.7 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-19.7K is a 19.7 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-32.4K-D is a 32.4 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-32.4K-D is a 32.4 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-52K is a 52 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-52K is a 52 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-66.4K is a 66.4 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-66.4K is a 66.4 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-68.1K is a 68.1 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-68.1K is a 68.1 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-89K is a 89 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-89K is a 89 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-190.5K is a 190.5 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-190.5K is a 190.5 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-545.4K is a 545.4 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-545.4K is a 545.4 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-665K is a 665 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-665K is a 665 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-665K-F is a 665 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-665K-F is a 665 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-992K is a 992 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-992K is a 992 kΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-1.86M is a 1.86 MΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-1.86M is a 1.86 MΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM177-1.89M is a 1.89 MΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-1.89M is a 1.89 MΩ Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-24.9 is a 24.9 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-24.9 is a 24.9 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-32.4 is a 32.4 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-32.4 is a 32.4 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-33.2 is a 33.2 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-33.2 is a 33.2 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-221 is a 221 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-221 is a 221 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-453 is a 453 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-453 is a 453 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-475 is a 475 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-475 is a 475 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-523 is a 523 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-523 is a 523 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-698 is a 698 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-698 is a 698 Ω Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-1.62K is a 1.62 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-1.62K is a 1.62 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-4.32K is a 4.32 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-4.32K is a 4.32 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-4.53K is a 4.53 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-4.53K is a 4.53 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-5.49K is a 5.49 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-5.49K is a 5.49 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-6.49K is a 6.49 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-6.49K is a 6.49 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-8.45K is a 8.45 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-8.45K is a 8.45 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-13.7K is a 13.7 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-13.7K is a 13.7 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-45.3K is a 45.3 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-45.3K is a 45.3 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-47.5K is a 47.5 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-47.5K is a 47.5 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-80.6K is a 80.6 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-80.6K is a 80.6 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-162K is a 162 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-162K is a 162 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-215K is a 215 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-215K is a 215 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-249K is a 249 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-249K is a 249 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-357K is a 357 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-357K is a 357 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-402K is a 402 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-402K is a 402 kΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-1.5M is a 1.5 MΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-1.5M is a 1.5 MΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MM215-2.15M is a 2.15 MΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM215-2.15M is a 2.15 MΩ Type MM215 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-104 is a 104 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-104 is a 104 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-187 is a 187 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-187 is a 187 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-267 is a 267 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-267 is a 267 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-453 is a 453 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-453 is a 453 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-475 is a 475 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-475 is a 475 Ω Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-5.9K is a 5.9 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-5.9K is a 5.9 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-9K is a 9 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-9K is a 9 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-9.09K is a 9.09 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-9.09K is a 9.09 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-17K is a 17 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-17K is a 17 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-23.2K is a 23.2 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-23.2K is a 23.2 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-31.4K is a 31.4 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-31.4K is a 31.4 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-33.2K is a 33.2 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-33.2K is a 33.2 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-47.5K is a 47.5 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-47.5K is a 47.5 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-69.9K is a 69.9 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-69.9K is a 69.9 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-75K is a 75 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-75K is a 75 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-82.5K is a 82.5 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-82.5K is a 82.5 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-196K is a 196 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-196K is a 196 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-634K is a 634 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-634K is a 634 kΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-1.02M is a 1.02 MΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-1.02M is a 1.02 MΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS151-1.1M is a 1.1 MΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS151-1.1M is a 1.1 MΩ Type MS151 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS176-200 is a 200 Ω Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS176-200 is a 200 Ω Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS176-2.74K is a 2.74 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS176-2.74K is a 2.74 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS176-5K-C is a 5 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS176-5K-C is a 5 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS176-10K is a 10 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS176-10K is a 10 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS176-121K is a 121 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS176-121K is a 121 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS176-500K-G is a 500 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS176-500K-G is a 500 kΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS176-1.21M is a 1.21 MΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS176-1.21M is a 1.21 MΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS176-1.82M is a 1.82 MΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS176-1.82M is a 1.82 MΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
-Caddock MS176-2.5M is a 2.5 MΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MS176-2.5M is a 2.5 MΩ Type MS176 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
 ## FAQ
 
 ### What is MM177-19.7-D?
 
-Caddock MM177-19.7-D is a 19.7 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The price is $10.00, and 33audio ships it from Houston, TX.
+Caddock MM177-19.7-D is a 19.7 Ω Type MM177 Micronox film resistor. It is NOS: these resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. The source catalog price is $10.00; ask about availability and current pricing in Houston, TX.
 
 ### What is the difference between Caddock Type MM and Type MS?
 

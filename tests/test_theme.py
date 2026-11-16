@@ -90,10 +90,10 @@ class ThemedBuildTests(unittest.TestCase):
 
     def test_buy_and_payment_controls(self):
         part = self.read("parts/mm177-4.32k/index.html")
-        self.assertRegex(part, r'<a class="button primary" data-(?:flow|buy)="ebay" href="https://www\.ebay\.com/')
-        self.assertIn("data-payment-select", part)
-        for flow in ("ebay", "stripe", "paypal"):
-            self.assertIn(f'<option value="{flow}">', part)
+        self.assertIn("Ask about availability", part)
+        self.assertNotIn('data-buy="ebay"', part)
+        self.assertNotIn("data-payment-select", part)
+        self.assertNotIn("data-add-to-cart", part)
 
     def test_fee_meters(self):
         fees = self.read("fees/index.html")

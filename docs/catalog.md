@@ -2,7 +2,9 @@
 
 These resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s. $10.00 each. $6.35 flat shipping for any quantity, USA only. Ships from Houston, TX. USA orders only, no international at this time
 
-| Part | Series | Value | Tolerance | Quantity | Price | Page |
+Reference quantities and prices from the Caddock source catalog; ask Mark to confirm availability. These are not eBay offers. Shop eBay listings separately at https://caddock-33audio.pages.dev/ebay/.
+
+| Part | Series | Value | Tolerance | Source quantity | Source price | Page |
 | --- | --- | --- | --- | --- | --- | --- |
 | MM177-19.7-D | MM177 | 19.7 Ω | 0.5% (D) | 35 | $10.00 | https://caddock-33audio.pages.dev/parts/mm177-19.7-d/ |
 | MM177-23.8-D | MM177 | 23.8 Ω | 0.5% (D) | 57 | $10.00 | https://caddock-33audio.pages.dev/parts/mm177-23.8-d/ |
