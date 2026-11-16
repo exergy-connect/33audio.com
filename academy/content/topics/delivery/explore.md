@@ -27,6 +27,8 @@ Remove the direct IAH peering ([anycast-edge-failover.xp](repo:network/labnet/an
 
 What lab.net shows here is the forwarding path and the routing decision behind it. The TTL column counts router hops: the failover path has one more.
 
+lab.net also lists an iBGP session between `cf_iah` and `cf_dfw`, because it pairs routers that share an AS. They have no link and no route to each other's loopback, so that session stays `idle` and plays no part in the path. Real Cloudflare locations are connected by Cloudflare's own backbone, which this two-location model leaves out.
+
 ::: pending 02-http-service The labs above use ICMP to the anycast address as a stand-in for an HTTP request, because lab.net hosts do not yet serve HTTP.
 
 ## How much latency the path adds

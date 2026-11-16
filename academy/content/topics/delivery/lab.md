@@ -12,7 +12,7 @@ npm run dev --prefix academy
 ```
 
 ```output
-Academy: 46 pages, 31 repo embeds, 0 real and 11 simulated datasets on pages.
+Academy: 39 pages, 44 repo embeds, 0 real and 8 simulated datasets on pages.
 ⛅️ wrangler 4.162.0
 Your Worker has access to the following bindings:
 env.LAB_LIMITER (20 requests/60 seconds)      Rate Limit                    local

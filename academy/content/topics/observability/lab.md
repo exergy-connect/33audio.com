@@ -43,7 +43,7 @@ python -m academy build
 ```
 
 ```output
-Academy: 46 pages, 31 repo embeds, 1 real and 10 simulated datasets on pages.
+Academy: 39 pages, 44 repo embeds, 1 real and 7 simulated datasets on pages.
 ```
 
 Open `/explore/observability/` (with `npm run dev --prefix academy` running, at `http://localhost:8787`). The latency chart now has a green REAL TELEMETRY badge naming `academy/tools/measure.mjs against http://127.0.0.1:8788`, your environment text, and the time. Delete the file and rebuild, and the chart goes back to SIMULATED.
