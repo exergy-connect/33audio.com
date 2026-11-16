@@ -1,6 +1,8 @@
 import json
+import os
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -8,6 +10,7 @@ from catalog.build import build
 from catalog.fees import estimate, to_cents
 from catalog.parse import parse_html
 from catalog.purchase import PurchaseError, configured_flow_url, match_listings, resolve_purchase
+from catalog.stock import merge, namespace_id, seed, stock_doc
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE = ROOT / "tests" / "fixtures" / "caddockmsmm.html"
@@ -112,6 +115,30 @@ class BuildTests(unittest.TestCase):
             self.assertIn("https://www.ebay.com/sellercenter/selling/seller-fees", fees)
             self.assertIn('name="viewport"', fees)
             self.assertIsNone(configured_flow_url(SITE, {"id": "MM177-4.32K", "series": "MM177", "resistance": "4.32K", "tolerance": "0.1%", "tolerance_code": "B", "quantity": 63, "price": "10.00", "ohms": 4320}, "stripe"))
+
+
+class StockTests(unittest.TestCase):
+    def test_stock_doc_and_merge(self):
+        doc = stock_doc(catalog(), SITE)
+        self.assertEqual(len(doc["parts"]), 85)
+        self.assertEqual(doc["shipping"], "6.35")
+        first = next(p for p in doc["parts"] if p["id"] == "MM177-4.32K")
+        self.assertEqual(first, {
+            "id": "MM177-4.32K", "series": "MM177", "part_number": "MM177-4.32K",
+            "value": "4.32 kΩ", "resistance": "4.32K", "tolerance": "0.1%", "qty": 63, "price": "10.00",
+        })
+        live = {"parts": [{"id": "MM177-4.32K", "qty": 60}, {"id": "GONE-1", "qty": 4}], "applied_sessions": ["cs_1"]}
+        merged = merge(doc, live, overwrite=False)
+        self.assertEqual(next(p for p in merged["parts"] if p["id"] == "MM177-4.32K")["qty"], 60)
+        self.assertNotIn("GONE-1", [p["id"] for p in merged["parts"]])
+        self.assertEqual(merged["applied_sessions"], ["cs_1"])
+        reset = merge(doc, live, overwrite=True)
+        self.assertEqual(next(p for p in reset["parts"] if p["id"] == "MM177-4.32K")["qty"], 63)
+
+    def test_seed_skips_without_credentials(self):
+        with mock.patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(seed(stock_doc(catalog(), SITE), False, ROOT / "wrangler.toml"), 0)
+        self.assertIsNone(namespace_id(ROOT / "wrangler.toml"))
 
 
 class FeeTests(unittest.TestCase):

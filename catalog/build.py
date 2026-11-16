@@ -94,7 +94,7 @@ def copy_assets(docs: Path, asset_dir: Path) -> None:
     for item in source.iterdir():
         if item.is_file():
             shutil.copy2(item, dest / item.name)
-    for name in ("styles.css", "search.js", "favicon.svg", "checkout.js", "fees.js"):
+    for name in ("styles.css", "search.js", "favicon.svg", "checkout.js", "fees.js", "cart.js"):
         shutil.copy2(TEMPLATES / name, docs / name)
 
 
@@ -157,6 +157,11 @@ def header(site: dict, depth: int, current: str) -> str:
         current_attr = ' aria-current="page"' if current == href else ""
         links.append(f'<a href="{escape(rel(depth, href))}"{current_attr}>{escape(label)}</a>')
     links.append(f'<a href="{escape(ebay)}">eBay</a>')
+    cart_current = ' aria-current="page"' if current == "cart/" else ""
+    links.append(
+        f'<a class="cart-link cart-only" href="{escape(rel(depth, "cart/"))}"{cart_current}>'
+        'Cart (<span data-cart-count>0</span>)</a>'
+    )
     return f"""<a class="skip" href="#content">Skip to content</a>
 <header class="site-header">
   <div class="copper-rule"></div>
@@ -176,7 +181,7 @@ def header(site: dict, depth: int, current: str) -> str:
       <label class="payment-label" for="payment-flow">Checkout demo</label>
       <select id="payment-flow" data-payment-select>
         <option value="ebay">eBay</option>
-        <option value="stripe">Stripe</option>
+        <option value="stripe">Stripe (cart)</option>
         <option value="paypal">PayPal</option>
       </select>
       <a href="{escape(rel(depth, 'fees/'))}">Selling costs</a>
@@ -201,9 +206,11 @@ def footer(site: dict, catalog: dict, depth: int) -> str:
 """
 
 
-def layout(title: str, description: str, canonical: str, rel_path: str, body: str, site: dict, catalog: dict, current: str, og_type: str = "website", extra_head: str = "", search: bool = False, extra_scripts: str = "") -> str:
+def layout(title: str, description: str, canonical: str, rel_path: str, body: str, site: dict, catalog: dict, current: str, og_type: str = "website", extra_head: str = "", search: bool = False, extra_scripts: str = "", noindex: bool = False) -> str:
     depth = depth_of(rel_path)
     script = f'<script src="{escape(rel(depth, "search.js"))}" defer></script>' if search else ""
+    if noindex:
+        extra_head = '<meta name="robots" content="noindex">\n' + extra_head
     return (
         head(title, description, canonical, depth, og_type, extra_head)
         + "<body>\n"
@@ -211,6 +218,7 @@ def layout(title: str, description: str, canonical: str, rel_path: str, body: st
         + f'<main id="content" class="wrap">\n{body}\n</main>\n'
         + footer(site, catalog, depth)
         + f'<script src="{escape(rel(depth, "checkout.js"))}" defer></script>'
+        + f'<script src="{escape(rel(depth, "cart.js"))}" defer></script>'
         + script
         + extra_scripts
         + "\n</body>\n</html>\n"
@@ -228,14 +236,17 @@ def chips() -> str:
 
 def part_row(part: dict, href: str) -> str:
     label = resistance_label(part["resistance"])
+    pid = escape(part["id"])
     return (
-        f'<a class="part-row" data-part-id="{escape(part["id"])}" href="{escape(href)}">'
-        f'<span class="pid">{escape(part["id"])}</span>'
+        f'<div class="part-row" data-part-id="{pid}">'
+        f'<a class="pid" href="{escape(href)}">{pid}</a>'
         f'<span class="meta">{escape(label)}</span>'
         f'<span class="meta">{escape(part["tolerance"])}</span>'
-        f'<span class="meta">{part["quantity"]} listed</span>'
+        f'<span class="meta"><span data-stock-qty="{pid}">{part["quantity"]}</span> in stock</span>'
         f'<span class="meta">${escape(part["price"])}</span>'
-        "</a>"
+        f'<button type="button" class="row-add cart-only" data-add-to-cart="{pid}" data-label="Add" '
+        f'aria-label="Add {pid} to cart">Add</button>'
+        "</div>"
     )
 
 
@@ -255,33 +266,43 @@ def datasheet_link(site: dict, family: str, depth: int) -> str:
     return f'<p><a href="{escape(rel(depth, sheet["file"]))}">{escape(sheet["label"])}</a></p>'
 
 
-def flow_button(flow: str, label: str, href: str | None, note: str) -> str:
+def flow_block(flow: str, label: str, href: str | None, note: str) -> str:
     if href:
-        control = (
-            f'<a class="button primary" data-flow="{escape(flow)}" href="{escape(href)}">{escape(label)}</a>'
-        )
+        control = f'<a class="button primary" data-buy="{escape(flow)}" href="{escape(href)}">{escape(label)}</a>'
     else:
         control = (
-            f'<button type="button" class="button primary is-demo" data-flow="{escape(flow)}" disabled>'
+            '<button type="button" class="button primary is-demo" disabled>'
             f'{escape(label)} <span class="demo-tag">demo, not yet active</span></button>'
         )
-    return control + f'<p class="fine buy-note" data-flow="{escape(flow)}">{escape(note)}</p>'
+    return f'<div class="flow" data-flow="{escape(flow)}">{control}<p class="fine">{escape(note)}</p></div>'
 
 
-def buy_html(decision: dict, part: dict, site: dict) -> str:
-    stripe = configured_flow_url(site, part, "stripe")
+def cart_block(part: dict, site: dict, depth: int) -> str:
+    pid = escape(part["id"])
+    return (
+        f'<div class="flow" data-flow="stripe">'
+        f'<div class="add-row">'
+        f'<div class="stepper" role="group" aria-label="Quantity">'
+        f'<button type="button" data-step="-1" data-step-for="{pid}" aria-label="One fewer">−</button>'
+        f'<input type="number" inputmode="numeric" min="1" max="{max(1, part["quantity"])}" value="1" '
+        f'data-qty-input="{pid}" aria-label="Quantity of {pid}">'
+        f'<button type="button" data-step="1" data-step-for="{pid}" aria-label="One more">+</button>'
+        f'</div>'
+        f'<button type="button" class="button primary" data-add-to-cart="{pid}" data-label="Add to cart">Add to cart</button>'
+        f'</div>'
+        f'<p class="fine" data-added="{pid}" hidden>Added. <a href="{escape(rel(depth, "cart/"))}">View cart and check out</a>.</p>'
+        f'<p class="fine">Quantity is capped at the stock on hand. {escape(site["shipping"]["summary"])}, charged once per order.</p>'
+        f'</div>'
+    )
+
+
+def buy_html(decision: dict, part: dict, site: dict, depth: int) -> str:
     paypal = configured_flow_url(site, part, "paypal")
-    stripe_label = (site.get("payment_flows") or {}).get("stripe", {}).get("label") or "Pay with Stripe"
     paypal_label = (site.get("payment_flows") or {}).get("paypal", {}).get("label") or "Pay with PayPal"
     controls = [
-        flow_button("ebay", decision["primary_label"], decision["ebay_href"], decision["primary_note"]),
-        flow_button(
-            "stripe",
-            stripe_label,
-            stripe,
-            "Opens the Stripe Payment Link for this part." if stripe else "No Stripe Payment Link is configured yet. This control is a demo, not a checkout.",
-        ),
-        flow_button(
+        flow_block("ebay", decision["primary_label"], decision["ebay_href"], decision["primary_note"]),
+        cart_block(part, site, depth),
+        flow_block(
             "paypal",
             paypal_label,
             paypal,
@@ -448,7 +469,7 @@ def render_home(catalog: dict, site: dict, ebay: dict, origin: str) -> str:
 <div data-search-live hidden></div>
 <div class="series-grid">{''.join(cards)}</div>
 <h2>Ordering</h2>
-<p>Buy on eBay from the <a href="{escape(store)}">33audio store</a> ({escape(feedback_text(site, ebay))}). Each part page opens a matched listing when the eBay sync has one, or a search of that store. The checkout demo menu switches that Buy button to Stripe or PayPal when you want to compare. {escape(payment)} The catalog price is ${escape(catalog['unit_price'])} each. {escape(site['shipping']['summary'])}. <a href="{escape(rel(0, 'fees/'))}">Selling costs</a> compares the published fees.</p>
+<p>Buy on eBay from the <a href="{escape(store)}">33audio store</a> ({escape(feedback_text(site, ebay))}). Each part page opens a matched listing when the eBay sync has one, or a search of that store. The checkout demo menu switches to a Stripe cart or a PayPal button when you want to compare. {escape(payment)} The catalog price is ${escape(catalog['unit_price'])} each. {escape(site['shipping']['summary'])}. <a href="{escape(rel(0, 'fees/'))}">Selling costs</a> compares the published fees.</p>
 {nrnd_html(site, 'MM')}
 {fact_items(catalog)}
 """
@@ -541,7 +562,6 @@ def render_part(series: dict, part: dict, decision: dict, catalog: dict, site: d
         others.append(
             f'<a href="{escape(rel(depth, "parts/" + sibling["id"].lower() + "/"))}">{escape(sibling["id"])}</a>'
         )
-    stock = "In stock" if part["quantity"] > 0 else "Ask about availability"
     provenance = catalog["listing"].get("provenance") or ""
     body = f"""
 <nav class="crumbs" aria-label="Breadcrumb">
@@ -552,11 +572,11 @@ def render_part(series: dict, part: dict, decision: dict, catalog: dict, site: d
 <p class="eyebrow">Caddock {escape(series['id'])} · Micronox film · NOS</p>
 <h1 class="part">{escape(part['id'])}</h1>
 <p class="lede">{escape(label)} · {escape(part['tolerance'])} ({escape(part['tolerance_code'])})</p>
-{buy_html(decision, part, site)}
+{buy_html(decision, part, site, depth)}
 <dl class="spec">
   <div><dt>Resistance</dt><dd>{escape(label)} <span class="muted">({escape(part['resistance'])})</span></dd></div>
   <div><dt>Tolerance</dt><dd>{escape(tolerance_sentence(series, part))}</dd></div>
-  <div><dt>Quantity listed</dt><dd>{part['quantity']} · {stock}</dd></div>
+  <div><dt>In stock</dt><dd><span data-stock-qty="{escape(part['id'])}">{part['quantity']}</span> · <span class="muted" data-stock-source>Stock as of the last site build</span></dd></div>
   <div><dt>Catalog price</dt><dd>${escape(part['price'])} each</dd></div>
   <div><dt>Shipping</dt><dd>{escape(site['shipping']['summary'])}</dd></div>
   <div><dt>Seller</dt><dd>33audio, {escape(site['location']['label'])}</dd></div>
@@ -637,8 +657,57 @@ def render_fees(catalog: dict, site: dict, origin: str) -> str:
     )
 
 
-def write_search_index(docs: Path, parts: list[dict]) -> None:
+def render_cart(catalog: dict, site: dict, origin: str) -> str:
+    body = f"""
+<p class="eyebrow">Stripe checkout</p>
+<h1>Cart</h1>
+<p class="note cart-mode-note">The cart is for the Stripe checkout flow. Choose “Stripe (cart)” in the Checkout demo menu to check out. In eBay mode, each part is bought on its own eBay listing.</p>
+<p class="note" data-checkout-status hidden></p>
+<p data-cart-empty>Your cart is empty. <a href="../catalog/">Browse the catalog</a>.</p>
+<ul class="cart-lines" data-cart-lines></ul>
+<div class="cart-summary" data-cart-summary hidden>
+  <dl class="spec">
+    <div><dt>Subtotal</dt><dd data-cart-subtotal>$0.00</dd></div>
+    <div><dt>Shipping</dt><dd data-cart-shipping>$0.00</dd></div>
+    <div><dt>Total</dt><dd><strong data-cart-total>$0.00</strong></dd></div>
+  </dl>
+  <button type="button" class="button primary checkout-button" data-checkout disabled>Check out with Stripe</button>
+  <p class="fine">{escape(site['shipping']['summary'])}. Stripe collects a US shipping address. Prices and stock are checked again on the server before payment.</p>
+</div>
+"""
+    return layout(
+        "Cart | 33audio", "Your 33audio cart of Caddock resistors.", abs_url(origin, "cart/"),
+        "cart/index.html", body, site, catalog, "cart/", noindex=True,
+    )
+
+
+def render_checkout_result(kind: str, catalog: dict, site: dict, origin: str) -> str:
+    if kind == "success":
+        title = "Order received | 33audio"
+        description = "Thanks for your order from 33audio."
+        body = f"""
+<p class="eyebrow">Checkout complete</p>
+<h1>Thank you</h1>
+<p class="lede" data-clear-cart>Your payment went through. Stripe emails a receipt to the address you entered.</p>
+<p>Questions about the order: <a href="mailto:{escape(site['email'])}">{escape(site['email'])}</a>.</p>
+<p><a href="../../catalog/">Back to the catalog</a></p>
+"""
+    else:
+        title = "Checkout canceled | 33audio"
+        description = "Checkout was canceled. Your 33audio cart is saved."
+        body = """
+<p class="eyebrow">Checkout canceled</p>
+<h1>No charge made</h1>
+<p class="lede">Checkout was canceled. Your cart is still saved in this browser.</p>
+<p><a href="../../cart/">Return to the cart</a></p>
+"""
+    path = f"checkout/{kind}/"
+    return layout(title, description, abs_url(origin, path), path + "index.html", body, site, catalog, path, noindex=True)
+
+
+def write_search_index(docs: Path, parts: list[dict], site: dict) -> None:
     payload = {
+        "shipping": site["shipping"]["amount"],
         "parts": [
             {
                 "id": part["id"],
@@ -678,11 +747,6 @@ def write_robots(docs: Path, origin: str) -> None:
 
 def validate(docs: Path, catalog: dict, site: dict, origin: str) -> None:
     errors = []
-    if site.get("custom_domain"):
-        if (docs / "CNAME").read_text(encoding="utf-8").strip() != str(site["custom_domain"]).strip():
-            errors.append("CNAME missing for custom_domain")
-    elif (docs / "CNAME").exists():
-        errors.append("CNAME should not be published while custom_domain is unset")
     parts = flatten(catalog)
     html_files = list(docs.rglob("*.html"))
     titles = []
@@ -723,11 +787,11 @@ def validate(docs: Path, catalog: dict, site: dict, origin: str) -> None:
         if "schema.org" not in str(offer.get("availability")):
             errors.append(f"bad availability for {part['id']}")
         if site["purchase"]["mode"] == "ebay":
-            primary = re.search(r'data-flow="ebay" href="([^"]+)"', text)
+            primary = re.search(r'data-buy="ebay" href="([^"]+)"', text)
             if not primary or "ebay.com" not in primary.group(1):
                 errors.append(f"primary buy is not eBay for {part['id']}")
-        if not configured_flow_url(site, part, "stripe") and "demo, not yet active" not in text:
-            errors.append(f"missing Stripe demo state for {part['id']}")
+        if f'data-add-to-cart="{part["id"]}"' not in text:
+            errors.append(f"missing add-to-cart for {part['id']}")
         if f"mailto:{site['email']}" not in text:
             errors.append(f"missing ask link for {part['id']}")
         if part["id"] not in text:
@@ -755,8 +819,14 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
     reset_output(docs)
     copy_assets(docs, asset_dir)
     origin = public_origin(site)
-    if site.get("custom_domain"):
-        (docs / "CNAME").write_text(str(site["custom_domain"]).strip() + "\n", encoding="utf-8")
+    for rel_path, html in (
+        ("cart/index.html", render_cart(catalog, site, origin)),
+        ("checkout/success/index.html", render_checkout_result("success", catalog, site, origin)),
+        ("checkout/cancel/index.html", render_checkout_result("cancel", catalog, site, origin)),
+    ):
+        target = docs / rel_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(html, encoding="utf-8")
     matches = match_listings(catalog, ebay.get("listings") or [])
     parts = flatten(catalog)
     paths = ["", "catalog/", "fees/"]
@@ -780,7 +850,7 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
             part_page = docs / "parts" / part["id"].lower() / "index.html"
             part_page.parent.mkdir(parents=True, exist_ok=True)
             part_page.write_text(render_part(series, enriched, decision, catalog, site, origin), encoding="utf-8")
-    write_search_index(docs, parts)
+    write_search_index(docs, parts, site)
     write_sitemap(docs, origin, paths, lastmod(catalog))
     write_robots(docs, origin)
     (docs / ".nojekyll").write_bytes(b"")

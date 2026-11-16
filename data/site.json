@@ -8,7 +8,7 @@
     "country": "US",
     "label": "Houston, TX"
   },
-  "canonical_origin": "https://exergy-connect.github.io/33audio.com",
+  "canonical_origin": "https://caddock-33audio.pages.dev",
   "custom_domain": null,
   "shipping": {
     "amount": "6.35",
@@ -33,11 +33,6 @@
     "source_label": "Caddock Type MM datasheet"
   },
   "payment_flows": {
-    "stripe": {
-      "label": "Pay with Stripe",
-      "url": "",
-      "parts": {}
-    },
     "paypal": {
       "label": "Pay with PayPal",
       "url": "",
