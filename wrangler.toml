@@ -15,7 +15,7 @@ CHECKOUT_ENABLED = "false"
 # then paste the returned id here and under [[env.production.kv_namespaces]].
 [[kv_namespaces]]
 binding = "STOCK"
-id = "REPLACE_WITH_STOCK_KV_NAMESPACE_ID"
+id = "9e033d84ee184be09a355006d8243430"
 
 [[analytics_engine_datasets]]
 binding = "SEARCH_EVENTS"
@@ -26,7 +26,7 @@ CHECKOUT_ENABLED = "false"
 
 [[env.production.kv_namespaces]]
 binding = "STOCK"
-id = "REPLACE_WITH_STOCK_KV_NAMESPACE_ID"
+id = "9e033d84ee184be09a355006d8243430"
 
 [[env.production.analytics_engine_datasets]]
 binding = "SEARCH_EVENTS"
