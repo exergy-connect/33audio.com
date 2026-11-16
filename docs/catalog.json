@@ -1,952 +1,1687 @@
 {
-  "seller": "33audio",
-  "location": "Houston, TX",
-  "email": "mark@33audio.com",
+  "$schema": "https://exergy-connect.github.io/33audio.com/schema/catalog.schema.json",
+  "@context": "https://exergy-connect.github.io/33audio.com/schema/context.jsonld",
   "currency": "USD",
   "unit_price": "10.00",
+  "region_note": "USA orders only, no international at this time",
+  "provenance": "These resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s.",
+  "source_url": "https://www.33audio.com/enter/caddockmsmm.html",
+  "seller": {
+    "name": "33audio",
+    "email": "mark@33audio.com",
+    "locality": "Houston",
+    "region": "TX",
+    "country": "US",
+    "ebay_store": "https://www.ebay.com/str/33audiomarko",
+    "ebay_seller": "33audiomarko"
+  },
   "shipping": {
     "amount": "6.35",
     "currency": "USD",
+    "per": "order",
+    "country": "US",
     "summary": "$6.35 flat shipping for any quantity, USA only"
   },
-  "region_note": "USA orders only, no international at this time",
-  "provenance": "These resistors are liquidation stock from a Caddock stocking distributor that closed in the 1980s.",
-  "ebay_store": "https://www.ebay.com/str/33audiomarko",
-  "source_url": "https://www.33audio.com/enter/caddockmsmm.html",
+  "series": [
+    {
+      "name": "MM177",
+      "family": "MM",
+      "product_line": "Caddock Type MM Precision Film Resistors",
+      "film": "Micronox",
+      "default_tolerance": "B",
+      "not_recommended_for_new_designs": true,
+      "power_rating": "0.6",
+      "voltage_rating": 500,
+      "datasheet": "https://www.caddock.com/online-catalog/mrktg-lit/TypeMM.pdf"
+    },
+    {
+      "name": "MM215",
+      "family": "MM",
+      "product_line": "Caddock Type MM Precision Film Resistors",
+      "film": "Micronox",
+      "default_tolerance": "F",
+      "not_recommended_for_new_designs": true,
+      "power_rating": "1",
+      "voltage_rating": 800,
+      "datasheet": "https://www.caddock.com/online-catalog/mrktg-lit/TypeMM.pdf"
+    },
+    {
+      "name": "MS151",
+      "family": "MS",
+      "product_line": "Caddock Type MS Power Film Resistors",
+      "film": "Micronox",
+      "default_tolerance": "F",
+      "not_recommended_for_new_designs": false,
+      "power_rating": "0.5",
+      "voltage_rating": 300,
+      "datasheet": "https://www.caddock.com/online-catalog/mrktg-lit/TypeMS.pdf"
+    },
+    {
+      "name": "MS176",
+      "family": "MS",
+      "product_line": "Caddock Type MS Power Film Resistors",
+      "film": "Micronox",
+      "default_tolerance": "F",
+      "not_recommended_for_new_designs": false,
+      "power_rating": "0.75",
+      "voltage_rating": 500,
+      "datasheet": "https://www.caddock.com/online-catalog/mrktg-lit/TypeMS.pdf"
+    }
+  ],
   "parts": [
     {
-      "id": "MM177-19.7-D",
+      "part_number": "MM177-19.7-D",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "19.7",
-      "value": "19.7 Ω",
-      "tolerance": "0.5%",
-      "tolerance_code": "D",
+      "resistance": {
+        "value": "19.7",
+        "unit": "ohm",
+        "label": "19.7 Ω"
+      },
+      "tolerance": {
+        "percent": "0.5",
+        "code": "D"
+      },
+      "condition": "new-old-stock",
       "quantity": 35,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-19.7-d/"
     },
     {
-      "id": "MM177-23.8-D",
+      "part_number": "MM177-23.8-D",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "23.8",
-      "value": "23.8 Ω",
-      "tolerance": "0.5%",
-      "tolerance_code": "D",
+      "resistance": {
+        "value": "23.8",
+        "unit": "ohm",
+        "label": "23.8 Ω"
+      },
+      "tolerance": {
+        "percent": "0.5",
+        "code": "D"
+      },
+      "condition": "new-old-stock",
       "quantity": 57,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-23.8-d/"
     },
     {
-      "id": "MM177-523-F",
+      "part_number": "MM177-523-F",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "523",
-      "value": "523 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "523",
+        "unit": "ohm",
+        "label": "523 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 44,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-523-f/"
     },
     {
-      "id": "MM177-830-D",
+      "part_number": "MM177-830-D",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "830",
-      "value": "830 Ω",
-      "tolerance": "0.5%",
-      "tolerance_code": "D",
+      "resistance": {
+        "value": "830",
+        "unit": "ohm",
+        "label": "830 Ω"
+      },
+      "tolerance": {
+        "percent": "0.5",
+        "code": "D"
+      },
+      "condition": "new-old-stock",
       "quantity": 46,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-830-d/"
     },
     {
-      "id": "MM177-980-D",
+      "part_number": "MM177-980-D",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "980",
-      "value": "980 Ω",
-      "tolerance": "0.5%",
-      "tolerance_code": "D",
+      "resistance": {
+        "value": "980",
+        "unit": "ohm",
+        "label": "980 Ω"
+      },
+      "tolerance": {
+        "percent": "0.5",
+        "code": "D"
+      },
+      "condition": "new-old-stock",
       "quantity": 29,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-980-d/"
     },
     {
-      "id": "MM177-1.02K",
+      "part_number": "MM177-1.02K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "1.02K",
-      "value": "1.02 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "1020",
+        "unit": "ohm",
+        "label": "1.02 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 41,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-1.02k/"
     },
     {
-      "id": "MM177-1.09K-D",
+      "part_number": "MM177-1.09K-D",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "1.09K",
-      "value": "1.09 kΩ",
-      "tolerance": "0.5%",
-      "tolerance_code": "D",
+      "resistance": {
+        "value": "1090",
+        "unit": "ohm",
+        "label": "1.09 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.5",
+        "code": "D"
+      },
+      "condition": "new-old-stock",
       "quantity": 46,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-1.09k-d/"
     },
     {
-      "id": "MM177-1.19K-D",
+      "part_number": "MM177-1.19K-D",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "1.19K",
-      "value": "1.19 kΩ",
-      "tolerance": "0.5%",
-      "tolerance_code": "D",
+      "resistance": {
+        "value": "1190",
+        "unit": "ohm",
+        "label": "1.19 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.5",
+        "code": "D"
+      },
+      "condition": "new-old-stock",
       "quantity": 46,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-1.19k-d/"
     },
     {
-      "id": "MM177-1.43K-D",
+      "part_number": "MM177-1.43K-D",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "1.43K",
-      "value": "1.43 kΩ",
-      "tolerance": "0.5%",
-      "tolerance_code": "D",
+      "resistance": {
+        "value": "1430",
+        "unit": "ohm",
+        "label": "1.43 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.5",
+        "code": "D"
+      },
+      "condition": "new-old-stock",
       "quantity": 37,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-1.43k-d/"
     },
     {
-      "id": "MM177-1.87K-F",
+      "part_number": "MM177-1.87K-F",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "1.87K",
-      "value": "1.87 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "1870",
+        "unit": "ohm",
+        "label": "1.87 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 44,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-1.87k-f/"
     },
     {
-      "id": "MM177-3.53K-D",
+      "part_number": "MM177-3.53K-D",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "3.53K",
-      "value": "3.53 kΩ",
-      "tolerance": "0.5%",
-      "tolerance_code": "D",
+      "resistance": {
+        "value": "3530",
+        "unit": "ohm",
+        "label": "3.53 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.5",
+        "code": "D"
+      },
+      "condition": "new-old-stock",
       "quantity": 25,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-3.53k-d/"
     },
     {
-      "id": "MM177-4.32K",
+      "part_number": "MM177-4.32K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "4.32K",
-      "value": "4.32 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "4320",
+        "unit": "ohm",
+        "label": "4.32 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 63,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-4.32k/"
     },
     {
-      "id": "MM177-4.99K-F",
+      "part_number": "MM177-4.99K-F",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "4.99K",
-      "value": "4.99 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "4990",
+        "unit": "ohm",
+        "label": "4.99 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 35,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-4.99k-f/"
     },
     {
-      "id": "MM177-5.625K",
+      "part_number": "MM177-5.625K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "5.625K",
-      "value": "5.625 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "5625",
+        "unit": "ohm",
+        "label": "5.625 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 31,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-5.625k/"
     },
     {
-      "id": "MM177-5.95K",
+      "part_number": "MM177-5.95K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "5.95K",
-      "value": "5.95 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "5950",
+        "unit": "ohm",
+        "label": "5.95 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 45,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-5.95k/"
     },
     {
-      "id": "MM177-8.73K",
+      "part_number": "MM177-8.73K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "8.73K",
-      "value": "8.73 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "8730",
+        "unit": "ohm",
+        "label": "8.73 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 44,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-8.73k/"
     },
     {
-      "id": "MM177-9.72K",
+      "part_number": "MM177-9.72K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "9.72K",
-      "value": "9.72 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "9720",
+        "unit": "ohm",
+        "label": "9.72 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 34,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-9.72k/"
     },
     {
-      "id": "MM177-16.67K-D",
+      "part_number": "MM177-16.67K-D",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "16.67K",
-      "value": "16.67 kΩ",
-      "tolerance": "0.5%",
-      "tolerance_code": "D",
+      "resistance": {
+        "value": "16670",
+        "unit": "ohm",
+        "label": "16.67 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.5",
+        "code": "D"
+      },
+      "condition": "new-old-stock",
       "quantity": 28,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-16.67k-d/"
     },
     {
-      "id": "MM177-19.7K",
+      "part_number": "MM177-19.7K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "19.7K",
-      "value": "19.7 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "19700",
+        "unit": "ohm",
+        "label": "19.7 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 30,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-19.7k/"
     },
     {
-      "id": "MM177-32.4K-D",
+      "part_number": "MM177-32.4K-D",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "32.4K",
-      "value": "32.4 kΩ",
-      "tolerance": "0.5%",
-      "tolerance_code": "D",
+      "resistance": {
+        "value": "32400",
+        "unit": "ohm",
+        "label": "32.4 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.5",
+        "code": "D"
+      },
+      "condition": "new-old-stock",
       "quantity": 28,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-32.4k-d/"
     },
     {
-      "id": "MM177-52K",
+      "part_number": "MM177-52K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "52K",
-      "value": "52 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "52000",
+        "unit": "ohm",
+        "label": "52 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 32,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-52k/"
     },
     {
-      "id": "MM177-66.4K",
+      "part_number": "MM177-66.4K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "66.4K",
-      "value": "66.4 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "66400",
+        "unit": "ohm",
+        "label": "66.4 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 41,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-66.4k/"
     },
     {
-      "id": "MM177-68.1K",
+      "part_number": "MM177-68.1K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "68.1K",
-      "value": "68.1 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "68100",
+        "unit": "ohm",
+        "label": "68.1 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 31,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-68.1k/"
     },
     {
-      "id": "MM177-89K",
+      "part_number": "MM177-89K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "89K",
-      "value": "89 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "89000",
+        "unit": "ohm",
+        "label": "89 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 32,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-89k/"
     },
     {
-      "id": "MM177-190.5K",
+      "part_number": "MM177-190.5K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "190.5K",
-      "value": "190.5 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "190500",
+        "unit": "ohm",
+        "label": "190.5 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 29,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-190.5k/"
     },
     {
-      "id": "MM177-545.4K",
+      "part_number": "MM177-545.4K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "545.4K",
-      "value": "545.4 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "545400",
+        "unit": "ohm",
+        "label": "545.4 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 36,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-545.4k/"
     },
     {
-      "id": "MM177-665K",
+      "part_number": "MM177-665K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "665K",
-      "value": "665 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "665000",
+        "unit": "ohm",
+        "label": "665 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 32,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-665k/"
     },
     {
-      "id": "MM177-665K-F",
+      "part_number": "MM177-665K-F",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "665K",
-      "value": "665 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "665000",
+        "unit": "ohm",
+        "label": "665 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 35,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-665k-f/"
     },
     {
-      "id": "MM177-992K",
+      "part_number": "MM177-992K",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "992K",
-      "value": "992 kΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "992000",
+        "unit": "ohm",
+        "label": "992 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 37,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-992k/"
     },
     {
-      "id": "MM177-1.86M",
+      "part_number": "MM177-1.86M",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "1.86M",
-      "value": "1.86 MΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "1860000",
+        "unit": "ohm",
+        "label": "1.86 MΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 31,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-1.86m/"
     },
     {
-      "id": "MM177-1.89M",
+      "part_number": "MM177-1.89M",
+      "manufacturer": "Caddock",
       "series": "MM177",
-      "resistance": "1.89M",
-      "value": "1.89 MΩ",
-      "tolerance": "0.1%",
-      "tolerance_code": "B",
+      "resistance": {
+        "value": "1890000",
+        "unit": "ohm",
+        "label": "1.89 MΩ"
+      },
+      "tolerance": {
+        "percent": "0.1",
+        "code": "B"
+      },
+      "condition": "new-old-stock",
       "quantity": 36,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm177-1.89m/"
     },
     {
-      "id": "MM215-24.9",
+      "part_number": "MM215-24.9",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "24.9",
-      "value": "24.9 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "24.9",
+        "unit": "ohm",
+        "label": "24.9 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 29,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-24.9/"
     },
     {
-      "id": "MM215-32.4",
+      "part_number": "MM215-32.4",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "32.4",
-      "value": "32.4 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "32.4",
+        "unit": "ohm",
+        "label": "32.4 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 35,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-32.4/"
     },
     {
-      "id": "MM215-33.2",
+      "part_number": "MM215-33.2",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "33.2",
-      "value": "33.2 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "33.2",
+        "unit": "ohm",
+        "label": "33.2 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 30,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-33.2/"
     },
     {
-      "id": "MM215-221",
+      "part_number": "MM215-221",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "221",
-      "value": "221 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "221",
+        "unit": "ohm",
+        "label": "221 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 35,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-221/"
     },
     {
-      "id": "MM215-453",
+      "part_number": "MM215-453",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "453",
-      "value": "453 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "453",
+        "unit": "ohm",
+        "label": "453 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 35,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-453/"
     },
     {
-      "id": "MM215-475",
+      "part_number": "MM215-475",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "475",
-      "value": "475 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "475",
+        "unit": "ohm",
+        "label": "475 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 30,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-475/"
     },
     {
-      "id": "MM215-523",
+      "part_number": "MM215-523",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "523",
-      "value": "523 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "523",
+        "unit": "ohm",
+        "label": "523 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 29,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-523/"
     },
     {
-      "id": "MM215-698",
+      "part_number": "MM215-698",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "698",
-      "value": "698 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "698",
+        "unit": "ohm",
+        "label": "698 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 31,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-698/"
     },
     {
-      "id": "MM215-1.62K",
+      "part_number": "MM215-1.62K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "1.62K",
-      "value": "1.62 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "1620",
+        "unit": "ohm",
+        "label": "1.62 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 35,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-1.62k/"
     },
     {
-      "id": "MM215-4.32K",
+      "part_number": "MM215-4.32K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "4.32K",
-      "value": "4.32 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "4320",
+        "unit": "ohm",
+        "label": "4.32 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 42,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-4.32k/"
     },
     {
-      "id": "MM215-4.53K",
+      "part_number": "MM215-4.53K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "4.53K",
-      "value": "4.53 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "4530",
+        "unit": "ohm",
+        "label": "4.53 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 35,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-4.53k/"
     },
     {
-      "id": "MM215-5.49K",
+      "part_number": "MM215-5.49K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "5.49K",
-      "value": "5.49 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "5490",
+        "unit": "ohm",
+        "label": "5.49 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 32,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-5.49k/"
     },
     {
-      "id": "MM215-6.49K",
+      "part_number": "MM215-6.49K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "6.49K",
-      "value": "6.49 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "6490",
+        "unit": "ohm",
+        "label": "6.49 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 40,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-6.49k/"
     },
     {
-      "id": "MM215-8.45K",
+      "part_number": "MM215-8.45K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "8.45K",
-      "value": "8.45 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "8450",
+        "unit": "ohm",
+        "label": "8.45 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 35,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-8.45k/"
     },
     {
-      "id": "MM215-13.7K",
+      "part_number": "MM215-13.7K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "13.7K",
-      "value": "13.7 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "13700",
+        "unit": "ohm",
+        "label": "13.7 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 47,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-13.7k/"
     },
     {
-      "id": "MM215-45.3K",
+      "part_number": "MM215-45.3K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "45.3K",
-      "value": "45.3 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "45300",
+        "unit": "ohm",
+        "label": "45.3 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 30,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-45.3k/"
     },
     {
-      "id": "MM215-47.5K",
+      "part_number": "MM215-47.5K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "47.5K",
-      "value": "47.5 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "47500",
+        "unit": "ohm",
+        "label": "47.5 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 29,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-47.5k/"
     },
     {
-      "id": "MM215-80.6K",
+      "part_number": "MM215-80.6K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "80.6K",
-      "value": "80.6 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "80600",
+        "unit": "ohm",
+        "label": "80.6 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 34,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-80.6k/"
     },
     {
-      "id": "MM215-162K",
+      "part_number": "MM215-162K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "162K",
-      "value": "162 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "162000",
+        "unit": "ohm",
+        "label": "162 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 34,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-162k/"
     },
     {
-      "id": "MM215-215K",
+      "part_number": "MM215-215K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "215K",
-      "value": "215 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "215000",
+        "unit": "ohm",
+        "label": "215 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 34,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-215k/"
     },
     {
-      "id": "MM215-249K",
+      "part_number": "MM215-249K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "249K",
-      "value": "249 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "249000",
+        "unit": "ohm",
+        "label": "249 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 28,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-249k/"
     },
     {
-      "id": "MM215-357K",
+      "part_number": "MM215-357K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "357K",
-      "value": "357 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "357000",
+        "unit": "ohm",
+        "label": "357 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 29,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-357k/"
     },
     {
-      "id": "MM215-402K",
+      "part_number": "MM215-402K",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "402K",
-      "value": "402 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "402000",
+        "unit": "ohm",
+        "label": "402 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 31,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-402k/"
     },
     {
-      "id": "MM215-1.5M",
+      "part_number": "MM215-1.5M",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "1.5M",
-      "value": "1.5 MΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "1500000",
+        "unit": "ohm",
+        "label": "1.5 MΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 34,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-1.5m/"
     },
     {
-      "id": "MM215-2.15M",
+      "part_number": "MM215-2.15M",
+      "manufacturer": "Caddock",
       "series": "MM215",
-      "resistance": "2.15M",
-      "value": "2.15 MΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "2150000",
+        "unit": "ohm",
+        "label": "2.15 MΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 34,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/mm215-2.15m/"
     },
     {
-      "id": "MS151-104",
+      "part_number": "MS151-104",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "104",
-      "value": "104 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "104",
+        "unit": "ohm",
+        "label": "104 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 29,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-104/"
     },
     {
-      "id": "MS151-187",
+      "part_number": "MS151-187",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "187",
-      "value": "187 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "187",
+        "unit": "ohm",
+        "label": "187 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 29,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-187/"
     },
     {
-      "id": "MS151-267",
+      "part_number": "MS151-267",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "267",
-      "value": "267 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "267",
+        "unit": "ohm",
+        "label": "267 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 28,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-267/"
     },
     {
-      "id": "MS151-453",
+      "part_number": "MS151-453",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "453",
-      "value": "453 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "453",
+        "unit": "ohm",
+        "label": "453 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 34,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-453/"
     },
     {
-      "id": "MS151-475",
+      "part_number": "MS151-475",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "475",
-      "value": "475 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "475",
+        "unit": "ohm",
+        "label": "475 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 32,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-475/"
     },
     {
-      "id": "MS151-5.9K",
+      "part_number": "MS151-5.9K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "5.9K",
-      "value": "5.9 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "5900",
+        "unit": "ohm",
+        "label": "5.9 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 29,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-5.9k/"
     },
     {
-      "id": "MS151-9K",
+      "part_number": "MS151-9K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "9K",
-      "value": "9 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "9000",
+        "unit": "ohm",
+        "label": "9 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 21,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-9k/"
     },
     {
-      "id": "MS151-9.09K",
+      "part_number": "MS151-9.09K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "9.09K",
-      "value": "9.09 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "9090",
+        "unit": "ohm",
+        "label": "9.09 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 28,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-9.09k/"
     },
     {
-      "id": "MS151-17K",
+      "part_number": "MS151-17K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "17K",
-      "value": "17 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "17000",
+        "unit": "ohm",
+        "label": "17 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 22,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-17k/"
     },
     {
-      "id": "MS151-23.2K",
+      "part_number": "MS151-23.2K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "23.2K",
-      "value": "23.2 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "23200",
+        "unit": "ohm",
+        "label": "23.2 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 29,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-23.2k/"
     },
     {
-      "id": "MS151-31.4K",
+      "part_number": "MS151-31.4K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "31.4K",
-      "value": "31.4 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "31400",
+        "unit": "ohm",
+        "label": "31.4 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 19,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-31.4k/"
     },
     {
-      "id": "MS151-33.2K",
+      "part_number": "MS151-33.2K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "33.2K",
-      "value": "33.2 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "33200",
+        "unit": "ohm",
+        "label": "33.2 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 14,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-33.2k/"
     },
     {
-      "id": "MS151-47.5K",
+      "part_number": "MS151-47.5K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "47.5K",
-      "value": "47.5 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "47500",
+        "unit": "ohm",
+        "label": "47.5 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 26,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-47.5k/"
     },
     {
-      "id": "MS151-69.9K",
+      "part_number": "MS151-69.9K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "69.9K",
-      "value": "69.9 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "69900",
+        "unit": "ohm",
+        "label": "69.9 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 21,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-69.9k/"
     },
     {
-      "id": "MS151-75K",
+      "part_number": "MS151-75K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "75K",
-      "value": "75 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "75000",
+        "unit": "ohm",
+        "label": "75 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 24,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-75k/"
     },
     {
-      "id": "MS151-82.5K",
+      "part_number": "MS151-82.5K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "82.5K",
-      "value": "82.5 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "82500",
+        "unit": "ohm",
+        "label": "82.5 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 27,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-82.5k/"
     },
     {
-      "id": "MS151-196K",
+      "part_number": "MS151-196K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "196K",
-      "value": "196 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "196000",
+        "unit": "ohm",
+        "label": "196 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 25,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-196k/"
     },
     {
-      "id": "MS151-634K",
+      "part_number": "MS151-634K",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "634K",
-      "value": "634 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "634000",
+        "unit": "ohm",
+        "label": "634 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 23,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-634k/"
     },
     {
-      "id": "MS151-1.02M",
+      "part_number": "MS151-1.02M",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "1.02M",
-      "value": "1.02 MΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "1020000",
+        "unit": "ohm",
+        "label": "1.02 MΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 34,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-1.02m/"
     },
     {
-      "id": "MS151-1.1M",
+      "part_number": "MS151-1.1M",
+      "manufacturer": "Caddock",
       "series": "MS151",
-      "resistance": "1.1M",
-      "value": "1.1 MΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "1100000",
+        "unit": "ohm",
+        "label": "1.1 MΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 27,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms151-1.1m/"
     },
     {
-      "id": "MS176-200",
+      "part_number": "MS176-200",
+      "manufacturer": "Caddock",
       "series": "MS176",
-      "resistance": "200",
-      "value": "200 Ω",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "200",
+        "unit": "ohm",
+        "label": "200 Ω"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 34,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms176-200/"
     },
     {
-      "id": "MS176-2.74K",
+      "part_number": "MS176-2.74K",
+      "manufacturer": "Caddock",
       "series": "MS176",
-      "resistance": "2.74K",
-      "value": "2.74 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "2740",
+        "unit": "ohm",
+        "label": "2.74 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 16,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms176-2.74k/"
     },
     {
-      "id": "MS176-5K-C",
+      "part_number": "MS176-5K-C",
+      "manufacturer": "Caddock",
       "series": "MS176",
-      "resistance": "5K",
-      "value": "5 kΩ",
-      "tolerance": "0.25%",
-      "tolerance_code": "C",
+      "resistance": {
+        "value": "5000",
+        "unit": "ohm",
+        "label": "5 kΩ"
+      },
+      "tolerance": {
+        "percent": "0.25",
+        "code": "C"
+      },
+      "condition": "new-old-stock",
       "quantity": 28,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms176-5k-c/"
     },
     {
-      "id": "MS176-10K",
+      "part_number": "MS176-10K",
+      "manufacturer": "Caddock",
       "series": "MS176",
-      "resistance": "10K",
-      "value": "10 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "10000",
+        "unit": "ohm",
+        "label": "10 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 16,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms176-10k/"
     },
     {
-      "id": "MS176-121K",
+      "part_number": "MS176-121K",
+      "manufacturer": "Caddock",
       "series": "MS176",
-      "resistance": "121K",
-      "value": "121 kΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "121000",
+        "unit": "ohm",
+        "label": "121 kΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 15,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms176-121k/"
     },
     {
-      "id": "MS176-500K-G",
+      "part_number": "MS176-500K-G",
+      "manufacturer": "Caddock",
       "series": "MS176",
-      "resistance": "500K",
-      "value": "500 kΩ",
-      "tolerance": "2%",
-      "tolerance_code": "G",
+      "resistance": {
+        "value": "500000",
+        "unit": "ohm",
+        "label": "500 kΩ"
+      },
+      "tolerance": {
+        "percent": "2",
+        "code": "G"
+      },
+      "condition": "new-old-stock",
       "quantity": 25,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms176-500k-g/"
     },
     {
-      "id": "MS176-1.21M",
+      "part_number": "MS176-1.21M",
+      "manufacturer": "Caddock",
       "series": "MS176",
-      "resistance": "1.21M",
-      "value": "1.21 MΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "1210000",
+        "unit": "ohm",
+        "label": "1.21 MΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 37,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms176-1.21m/"
     },
     {
-      "id": "MS176-1.82M",
+      "part_number": "MS176-1.82M",
+      "manufacturer": "Caddock",
       "series": "MS176",
-      "resistance": "1.82M",
-      "value": "1.82 MΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "1820000",
+        "unit": "ohm",
+        "label": "1.82 MΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 23,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms176-1.82m/"
     },
     {
-      "id": "MS176-2.5M",
+      "part_number": "MS176-2.5M",
+      "manufacturer": "Caddock",
       "series": "MS176",
-      "resistance": "2.5M",
-      "value": "2.5 MΩ",
-      "tolerance": "1%",
-      "tolerance_code": "F",
+      "resistance": {
+        "value": "2500000",
+        "unit": "ohm",
+        "label": "2.5 MΩ"
+      },
+      "tolerance": {
+        "percent": "1",
+        "code": "F"
+      },
+      "condition": "new-old-stock",
       "quantity": 24,
       "price": "10.00",
+      "currency": "USD",
       "url": "https://exergy-connect.github.io/33audio.com/parts/ms176-2.5m/"
     }
   ]

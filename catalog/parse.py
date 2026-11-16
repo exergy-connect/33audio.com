@@ -171,16 +171,19 @@ def parse_html(html: str, source_url: str, source_last_modified: str | None = No
     ids = [part["id"] for group in series for part in group["parts"]]
     if len(ids) != len(set(ids)):
         raise ParseError("Part ids are not unique")
-    return {
+    document = {
         "source_url": source_url,
         "source_last_modified": source_last_modified,
         "currency": "USD",
         "unit_price": price,
         "legend": legend,
         "tolerance_codes": TOLERANCE_CODES,
-        "listing": listing_fields(intro_lines, html),
+        "listing": {k: v for k, v in listing_fields(intro_lines, html).items() if v is not None},
         "series": series,
     }
+    if source_last_modified is None:
+        del document["source_last_modified"]
+    return document
 
 
 def fetch_html(url: str) -> tuple[str, str | None]:

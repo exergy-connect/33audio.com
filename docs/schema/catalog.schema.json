@@ -1,0 +1,807 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://exergy-connect.github.io/33audio.com/schema/catalog.schema.json",
+  "description": "Public catalog of NOS Caddock Micronox film resistors sold by 33audio.\n     One document lists the seller, the offer terms, the Caddock series, and\n     every part with its stock and price. Agents can read docs/catalog.json\n     with this model, its JSON Schema, and its JSON-LD context.\n\n     Extensions c33:schema-org-class, c33:schema-org-property, c33:wikidata,\n     and c33:unit-code tie nodes to schema.org terms, Wikidata items, and\n     UN/CEFACT unit codes. They are metadata and do not change validation.",
+  "x-yang": {
+    "module": "audio33-catalog",
+    "yang-version": "1.1",
+    "namespace": "https://exergy-connect.github.io/33audio.com/schema/vocab#",
+    "prefix": "c33",
+    "organization": "33audio",
+    "contact": "Mark, mark@33audio.com, Houston, TX",
+    "extension": {
+      "schema-org-class": {
+        "argument": "class",
+        "description": "The schema.org class (https://schema.org/<class>) that instances of\n       this node represent."
+      },
+      "schema-org-property": {
+        "argument": "property",
+        "description": "The schema.org property (https://schema.org/<property>) this node's\n       value corresponds to. Used to build the JSON-LD context."
+      },
+      "wikidata": {
+        "argument": "item",
+        "description": "A Wikidata item (http://www.wikidata.org/entity/<item>) for the concept\n       this node holds. Only items that clearly match are used."
+      },
+      "unit-code": {
+        "argument": "code",
+        "description": "UN/CEFACT Common Code for the unit of this node's value, as used by\n       schema.org unitCode (for example OHM, WTT, VLT)."
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "currency": {
+      "$ref": "#/$defs/currency-code",
+      "description": "Currency of every price in this document.",
+      "x-yang": {
+        "type": "leaf",
+        "mandatory": true,
+        "extensions": [
+          {
+            "name": "c33:schema-org-property",
+            "argument": "priceCurrency"
+          }
+        ]
+      }
+    },
+    "unit_price": {
+      "$ref": "#/$defs/money",
+      "description": "Listing price per resistor, the same for every part.",
+      "x-yang": {
+        "type": "leaf",
+        "mandatory": true,
+        "extensions": [
+          {
+            "name": "c33:schema-org-property",
+            "argument": "price"
+          }
+        ]
+      }
+    },
+    "region_note": {
+      "type": "string",
+      "description": "Where 33audio sells, quoted from the listing.",
+      "x-yang": {
+        "type": "leaf",
+        "extensions": [
+          {
+            "name": "c33:schema-org-property",
+            "argument": "eligibleRegion"
+          }
+        ]
+      }
+    },
+    "provenance": {
+      "type": "string",
+      "description": "Where the stock came from, quoted from the listing.",
+      "x-yang": {
+        "type": "leaf"
+      }
+    },
+    "source_url": {
+      "type": "string",
+      "description": "The 33audio page this catalog was parsed from.",
+      "x-yang": {
+        "type": "leaf",
+        "extensions": [
+          {
+            "name": "c33:schema-org-property",
+            "argument": "isBasedOn"
+          }
+        ]
+      }
+    },
+    "seller": {
+      "type": "object",
+      "description": "The business selling the parts.",
+      "x-yang": {
+        "type": "container",
+        "extensions": [
+          {
+            "name": "c33:schema-org-class",
+            "argument": "Organization"
+          },
+          {
+            "name": "c33:schema-org-property",
+            "argument": "seller"
+          }
+        ]
+      },
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Business name.",
+          "x-yang": {
+            "type": "leaf",
+            "mandatory": true,
+            "extensions": [
+              {
+                "name": "c33:schema-org-property",
+                "argument": "name"
+              }
+            ]
+          }
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact and order email.",
+          "x-yang": {
+            "type": "leaf",
+            "extensions": [
+              {
+                "name": "c33:schema-org-property",
+                "argument": "email"
+              }
+            ]
+          }
+        },
+        "locality": {
+          "type": "string",
+          "description": "City the parts ship from.",
+          "x-yang": {
+            "type": "leaf",
+            "extensions": [
+              {
+                "name": "c33:schema-org-property",
+                "argument": "addressLocality"
+              }
+            ]
+          }
+        },
+        "region": {
+          "type": "string",
+          "description": "State the parts ship from.",
+          "x-yang": {
+            "type": "leaf",
+            "extensions": [
+              {
+                "name": "c33:schema-org-property",
+                "argument": "addressRegion"
+              }
+            ]
+          }
+        },
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code of the seller.",
+          "x-yang": {
+            "type": "leaf",
+            "extensions": [
+              {
+                "name": "c33:schema-org-property",
+                "argument": "addressCountry"
+              }
+            ]
+          }
+        },
+        "ebay_store": {
+          "type": "string",
+          "description": "33audio's eBay store front.",
+          "x-yang": {
+            "type": "leaf",
+            "extensions": [
+              {
+                "name": "c33:schema-org-property",
+                "argument": "sameAs"
+              }
+            ]
+          }
+        },
+        "ebay_seller": {
+          "type": "string",
+          "description": "eBay seller user name.",
+          "x-yang": {
+            "type": "leaf",
+            "extensions": [
+              {
+                "name": "c33:schema-org-property",
+                "argument": "alternateName"
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ]
+    },
+    "shipping": {
+      "type": "object",
+      "description": "Shipping terms for an order.",
+      "x-yang": {
+        "type": "container",
+        "extensions": [
+          {
+            "name": "c33:schema-org-class",
+            "argument": "OfferShippingDetails"
+          },
+          {
+            "name": "c33:schema-org-property",
+            "argument": "shippingDetails"
+          }
+        ]
+      },
+      "properties": {
+        "amount": {
+          "$ref": "#/$defs/money",
+          "description": "Shipping charge per order.",
+          "x-yang": {
+            "type": "leaf",
+            "mandatory": true,
+            "extensions": [
+              {
+                "name": "c33:schema-org-property",
+                "argument": "shippingRate"
+              }
+            ]
+          }
+        },
+        "currency": {
+          "$ref": "#/$defs/currency-code",
+          "description": "Currency of the shipping charge.",
+          "x-yang": {
+            "type": "leaf",
+            "mandatory": true,
+            "extensions": [
+              {
+                "name": "c33:schema-org-property",
+                "argument": "currency"
+              }
+            ]
+          }
+        },
+        "per": {
+          "type": "string",
+          "enum": [
+            "order"
+          ],
+          "description": "What the shipping charge covers.",
+          "x-yang": {
+            "type": "leaf",
+            "mandatory": true
+          }
+        },
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 code of the only shipping destination.",
+          "x-yang": {
+            "type": "leaf",
+            "mandatory": true,
+            "extensions": [
+              {
+                "name": "c33:schema-org-property",
+                "argument": "shippingDestination"
+              }
+            ]
+          }
+        },
+        "summary": {
+          "type": "string",
+          "description": "The shipping terms as one sentence.",
+          "x-yang": {
+            "type": "leaf",
+            "extensions": [
+              {
+                "name": "c33:schema-org-property",
+                "argument": "description"
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "amount",
+        "currency",
+        "per",
+        "country"
+      ]
+    },
+    "series": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/$defs/series-name",
+            "description": "Caddock model number.",
+            "x-yang": {
+              "type": "leaf",
+              "extensions": [
+                {
+                  "name": "c33:schema-org-property",
+                  "argument": "model"
+                }
+              ]
+            }
+          },
+          "family": {
+            "type": "string",
+            "enum": [
+              "MM",
+              "MS"
+            ],
+            "description": "Caddock resistor type.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true
+            }
+          },
+          "product_line": {
+            "type": "string",
+            "description": "Caddock product line name for this type, as on the datasheet.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true,
+              "extensions": [
+                {
+                  "name": "c33:schema-org-property",
+                  "argument": "category"
+                }
+              ]
+            }
+          },
+          "film": {
+            "type": "string",
+            "enum": [
+              "Micronox"
+            ],
+            "description": "Resistance film named on the Caddock datasheets.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true
+            }
+          },
+          "power_rating": {
+            "type": "string",
+            "pattern": "^-?[0-9]+(\\.[0-9]+)?$",
+            "description": "Rated power in watts at +25 C from the Caddock datasheet. MS models are\n         rated the same at +125 C.",
+            "x-yang": {
+              "type": "decimal64",
+              "units": "W",
+              "fraction-digits": 2,
+              "extensions": [
+                {
+                  "name": "c33:wikidata",
+                  "argument": "Q25236"
+                },
+                {
+                  "name": "c33:unit-code",
+                  "argument": "WTT"
+                }
+              ]
+            }
+          },
+          "voltage_rating": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 65535,
+            "description": "Maximum continuous working voltage from the Caddock datasheet.",
+            "x-yang": {
+              "type": "leaf",
+              "units": "V",
+              "extensions": [
+                {
+                  "name": "c33:wikidata",
+                  "argument": "Q25250"
+                },
+                {
+                  "name": "c33:unit-code",
+                  "argument": "VLT"
+                }
+              ]
+            }
+          },
+          "default_tolerance": {
+            "$ref": "#/$defs/tolerance-code",
+            "description": "Tolerance of a part in this series unless its part number adds a letter.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true
+            }
+          },
+          "not_recommended_for_new_designs": {
+            "type": "boolean",
+            "description": "True when Caddock marks the type Not Recommended for New Designs.\n         Caddock says this of Type MM.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true
+            }
+          },
+          "datasheet": {
+            "type": "string",
+            "description": "Link to the datasheet these ratings come from.",
+            "x-yang": {
+              "type": "leaf",
+              "extensions": [
+                {
+                  "name": "c33:schema-org-property",
+                  "argument": "subjectOf"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "family",
+          "product_line",
+          "film",
+          "default_tolerance",
+          "not_recommended_for_new_designs"
+        ]
+      },
+      "description": "Caddock models in the catalog, with ratings from Caddock datasheets.",
+      "x-yang": {
+        "type": "list",
+        "key": "name",
+        "extensions": [
+          {
+            "name": "c33:schema-org-class",
+            "argument": "ProductModel"
+          }
+        ]
+      }
+    },
+    "parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "part_number": {
+            "type": "string",
+            "pattern": "^(MM177|MM215|MS151|MS176)-[0-9.]+[KM]?(-[JGFDCB])?$",
+            "description": "33audio part id: series, resistance, and a tolerance letter only when\n         the listing marks one, such as MM177-4.32K or MM177-665K-F.",
+            "x-yang": {
+              "type": "leaf",
+              "string-patterns": [
+                {
+                  "pattern": "(MM177|MM215|MS151|MS176)-[0-9.]+[KM]?(-[JGFDCB])?",
+                  "invert-match": false
+                }
+              ],
+              "extensions": [
+                {
+                  "name": "c33:schema-org-property",
+                  "argument": "mpn"
+                }
+              ]
+            }
+          },
+          "manufacturer": {
+            "type": "string",
+            "enum": [
+              "Caddock"
+            ],
+            "description": "Resistor manufacturer.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true,
+              "extensions": [
+                {
+                  "name": "c33:schema-org-property",
+                  "argument": "manufacturer"
+                }
+              ]
+            }
+          },
+          "series": {
+            "$ref": "#/$defs/series-name",
+            "description": "The Caddock model this part belongs to.",
+            "x-yang": {
+              "type": "leafref",
+              "mandatory": true,
+              "path": "/series/name",
+              "require-instance": true,
+              "extensions": [
+                {
+                  "name": "c33:schema-org-property",
+                  "argument": "model"
+                }
+              ]
+            }
+          },
+          "resistance": {
+            "type": "object",
+            "description": "Nominal resistance as a number and a unit.",
+            "x-yang": {
+              "type": "container",
+              "extensions": [
+                {
+                  "name": "c33:schema-org-class",
+                  "argument": "PropertyValue"
+                },
+                {
+                  "name": "c33:schema-org-property",
+                  "argument": "additionalProperty"
+                },
+                {
+                  "name": "c33:wikidata",
+                  "argument": "Q25358"
+                }
+              ]
+            },
+            "properties": {
+              "value": {
+                "type": "string",
+                "pattern": "^-?[0-9]+(\\.[0-9]+)?$",
+                "description": "Resistance in ohms.",
+                "x-yang": {
+                  "type": "decimal64",
+                  "mandatory": true,
+                  "fraction-digits": 3,
+                  "extensions": [
+                    {
+                      "name": "c33:schema-org-property",
+                      "argument": "value"
+                    }
+                  ]
+                }
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "ohm"
+                ],
+                "description": "Unit of value. Always ohm.",
+                "x-yang": {
+                  "type": "leaf",
+                  "mandatory": true,
+                  "extensions": [
+                    {
+                      "name": "c33:wikidata",
+                      "argument": "Q47083"
+                    },
+                    {
+                      "name": "c33:unit-code",
+                      "argument": "OHM"
+                    },
+                    {
+                      "name": "c33:schema-org-property",
+                      "argument": "unitText"
+                    }
+                  ]
+                }
+              },
+              "label": {
+                "type": "string",
+                "description": "Human-readable value, such as 4.32 kΩ.",
+                "x-yang": {
+                  "type": "leaf",
+                  "extensions": [
+                    {
+                      "name": "c33:schema-org-property",
+                      "argument": "name"
+                    }
+                  ]
+                }
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "value",
+              "unit"
+            ]
+          },
+          "tolerance": {
+            "type": "object",
+            "description": "Resistance tolerance.",
+            "x-yang": {
+              "type": "container",
+              "extensions": [
+                {
+                  "name": "c33:schema-org-class",
+                  "argument": "PropertyValue"
+                },
+                {
+                  "name": "c33:wikidata",
+                  "argument": "Q950292"
+                }
+              ]
+            },
+            "properties": {
+              "percent": {
+                "type": "string",
+                "pattern": "^-?[0-9]+(\\.[0-9]+)?$",
+                "description": "Tolerance in percent.",
+                "x-yang": {
+                  "type": "decimal64",
+                  "mandatory": true,
+                  "fraction-digits": 2,
+                  "extensions": [
+                    {
+                      "name": "c33:schema-org-property",
+                      "argument": "value"
+                    }
+                  ]
+                }
+              },
+              "code": {
+                "$ref": "#/$defs/tolerance-code",
+                "description": "Tolerance letter.",
+                "x-yang": {
+                  "type": "leaf",
+                  "mandatory": true
+                }
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "percent",
+              "code"
+            ]
+          },
+          "condition": {
+            "type": "string",
+            "enum": [
+              "new-old-stock"
+            ],
+            "description": "Item condition. schema.org has no NOS value, so this links to Wikidata instead.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true,
+              "extensions": [
+                {
+                  "name": "c33:wikidata",
+                  "argument": "Q907054"
+                }
+              ]
+            }
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295,
+            "description": "Quantity on the 33audio listing.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true,
+              "extensions": [
+                {
+                  "name": "c33:schema-org-property",
+                  "argument": "inventoryLevel"
+                }
+              ]
+            }
+          },
+          "price": {
+            "$ref": "#/$defs/money",
+            "description": "Price per piece.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true,
+              "extensions": [
+                {
+                  "name": "c33:schema-org-property",
+                  "argument": "price"
+                }
+              ]
+            }
+          },
+          "currency": {
+            "$ref": "#/$defs/currency-code",
+            "description": "Currency of price.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true,
+              "extensions": [
+                {
+                  "name": "c33:schema-org-property",
+                  "argument": "priceCurrency"
+                }
+              ]
+            }
+          },
+          "url": {
+            "type": "string",
+            "description": "The part's page on the 33audio catalog site.",
+            "x-yang": {
+              "type": "leaf",
+              "mandatory": true,
+              "extensions": [
+                {
+                  "name": "c33:schema-org-property",
+                  "argument": "url"
+                }
+              ]
+            }
+          },
+          "ebay_listing": {
+            "type": "string",
+            "description": "An active eBay listing for this exact part, when one is matched.",
+            "x-yang": {
+              "type": "leaf",
+              "extensions": [
+                {
+                  "name": "c33:schema-org-class",
+                  "argument": "Offer"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "manufacturer",
+          "series",
+          "condition",
+          "quantity",
+          "price",
+          "currency",
+          "url"
+        ]
+      },
+      "description": "One stocked resistor value.",
+      "x-yang": {
+        "type": "list",
+        "key": "part_number",
+        "extensions": [
+          {
+            "name": "c33:schema-org-class",
+            "argument": "Product"
+          },
+          {
+            "name": "c33:schema-org-property",
+            "argument": "itemListElement"
+          },
+          {
+            "name": "c33:wikidata",
+            "argument": "Q5321"
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "money": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]{2}$",
+      "x-yang": {
+        "string-patterns": [
+          {
+            "pattern": "[0-9]+\\.[0-9]{2}",
+            "invert-match": false
+          }
+        ]
+      },
+      "description": "An amount of money with exactly two decimal places, such as 10.00."
+    },
+    "currency-code": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "x-yang": {
+        "string-patterns": [
+          {
+            "pattern": "[A-Z]{3}",
+            "invert-match": false
+          }
+        ]
+      },
+      "description": "ISO 4217 currency code. 33audio prices are in USD."
+    },
+    "series-name": {
+      "type": "string",
+      "enum": [
+        "MM177",
+        "MM215",
+        "MS151",
+        "MS176"
+      ],
+      "description": "The Caddock models 33audio stocks."
+    },
+    "tolerance-code": {
+      "type": "string",
+      "enum": [
+        "J",
+        "G",
+        "F",
+        "D",
+        "C",
+        "B"
+      ],
+      "description": "Tolerance letter as printed on the 33audio listing."
+    }
+  }
+}

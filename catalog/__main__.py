@@ -1,4 +1,4 @@
-"""python -m catalog parse|ebay|build|refresh"""
+"""python -m catalog parse|ebay|build|schema|refresh"""
 
 import sys
 
@@ -25,9 +25,13 @@ def main(argv: list[str] | None = None) -> int:
         return ebay_main(rest) or 0
     if cmd == "build":
         return build_main(rest) or 0
+    if cmd == "schema":
+        from catalog.schema import main as schema_main
+
+        return schema_main(rest) or 0
     if cmd == "refresh":
         return refresh()
-    print("Usage: python -m catalog parse|ebay|build|refresh", file=sys.stderr)
+    print("Usage: python -m catalog parse|ebay|build|schema|refresh", file=sys.stderr)
     return 2
 
 
