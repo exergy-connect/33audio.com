@@ -20,7 +20,9 @@ def json_ld_types(html: str) -> list[str]:
     for block in blocks:
         data = json.loads(block)
         for item in data.get("@graph", [data]):
-            types.append(item["@type"])
+            # The xYang catalog block uses its own context rather than schema.org @type.
+            if "@type" in item:
+                types.append(item["@type"])
     return types
 
 

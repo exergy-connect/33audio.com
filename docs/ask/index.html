@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#4a2b18">
+<title>Ask for a part | 33audio</title>
+<meta name="description" content="Describe a resistor in plain words and get matching Caddock parts from 33audio stock.">
+<link rel="canonical" href="https://caddock-33audio.pages.dev/ask/">
+<link rel="describedby" href="https://caddock-33audio.pages.dev/ask/llms.txt" type="text/markdown">
+<meta property="og:title" content="Ask for a part | 33audio">
+<meta property="og:description" content="Describe a resistor in plain words and get matching Caddock parts from 33audio stock.">
+<meta property="og:url" content="https://caddock-33audio.pages.dev/ask/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="33audio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ask for a part | 33audio">
+<meta name="twitter:description" content="Describe a resistor in plain words and get matching Caddock parts from 33audio stock.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css">
+<script>
+try {
+  var flow = localStorage.getItem("33audio-payment-flow");
+  if (flow === "ebay" || flow === "stripe" || flow === "paypal") document.documentElement.setAttribute("data-payment-flow", flow);
+} catch (e) {}
+</script>
+
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+  <div class="copper-rule"></div>
+  <div class="wrap header-row">
+    <a class="brand" href="../"><svg class="brand-record" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><circle cx="32" cy="32" r="32" fill="#18120d"/><g fill="none" stroke="#3a2e24" stroke-width=".6"><circle cx="32" cy="32" r="28"/><circle cx="32" cy="32" r="24.5"/><circle cx="32" cy="32" r="21"/><circle cx="32" cy="32" r="17.5"/></g><path d="M32 2a30 30 0 0 1 21 8.7l-4.2 4.2A24 24 0 0 0 32 8z" fill="#fff" opacity=".12"/><circle cx="32" cy="32" r="12" fill="#d98b2b"/><path d="M22.5 28h19" stroke="#8c4510" stroke-width="1.4"/><text x="32" y="38.5" text-anchor="middle" font-family="Futura,Century Gothic,sans-serif" font-size="7" font-weight="700" fill="#2c190d">33⅓</text><circle cx="32" cy="32" r="1.6" fill="#f3ead6"/></svg><span class="brand-text"><span class="brand-name">33audio</span><span class="brand-tag">33⅓ · NOS Hi-Fi parts</span></span></a>
+    <nav class="nav" aria-label="Primary"><a href="../catalog/">Catalog</a><a href="../ask/" aria-current="page">Ask</a><a href="../series/mm177/">MM177</a><a href="../series/mm215/">MM215</a><a href="../series/ms151/">MS151</a><a href="../series/ms176/">MS176</a><a href="https://www.ebay.com/str/33audiomarko">eBay</a><a class="cart-link cart-only" href="../cart/">Cart (<span data-cart-count>0</span>)</a></nav>
+  </div>
+  <div class="wrap">
+    <form class="search-form" action="../catalog/" method="get" role="search">
+      <label class="search-label" for="site-q">Search by series, value, or part number</label>
+      <div class="search-row">
+        <input id="site-q" data-search-input name="q" type="search" placeholder="MM177 4.32K" enterkeyhint="search">
+        <button type="submit">Search</button>
+      </div>
+    </form>
+    <div class="payment-switch">
+      <label class="payment-label" for="payment-flow">Checkout demo</label>
+      <select id="payment-flow" data-payment-select>
+        <option value="ebay">eBay</option>
+        <option value="stripe">Stripe (cart)</option>
+        <option value="paypal">PayPal</option>
+      </select>
+      <a href="../fees/">Selling costs</a>
+    </div>
+  </div>
+</header>
+<main id="content" class="wrap">
+
+<p class="eyebrow">Part finder</p>
+<h1>Ask for a part</h1>
+<p class="lede">Describe what you are building. The finder reads the request, then ranks the 85 values in stock by value, voltage and power rating, and tolerance.</p>
+<form class="ask-form" data-ask-form role="search">
+  <label class="search-label" for="ask-q">What do you need?</label>
+  <div class="search-row">
+    <input id="ask-q" name="q" type="search" maxlength="200" placeholder="I need a 10M resistor for a tube amp" required>
+    <button type="submit">Ask</button>
+  </div>
+</form>
+<div class="chips" aria-label="Example questions"><button type="button" class="chip" data-ask-example>I need a 10M resistor for a tube amp</button><button type="button" class="chip" data-ask-example>precision 4.32K for a feedback network</button><button type="button" class="chip" data-ask-example>1M5 grid leak, new design</button><button type="button" class="chip" data-ask-example>MS176 around 10K</button></div>
+<p class="note ask-mode" data-ask-mode hidden></p>
+<p class="ask-summary" data-ask-summary aria-live="polite"></p>
+<ol class="ask-results" data-ask-results></ol>
+<p class="fine">With Workers AI bound, a language model turns the question into filters. Without it, a keyword parser does the same job for values like 10M, 4K32, or 470R and words like tube, precision, or power. Every answer says which one ran. Ratings come from the 1985 Caddock datasheets. Check them against your circuit.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>33audio · Houston, TX · mark@33audio.com</p>
+    <p>USA orders only, no international at this time Catalog price $10.00 each. $6.35 flat shipping for any quantity, USA only. Mail order is a PayPal invoice from Mark. eBay prices and shipping are on the listing.</p>
+    <p>Inventory is taken from the <a href="https://www.33audio.com/enter/caddockmsmm.html">33audio Caddock listing</a>. Tolerances: J=5%, G=2%, F=1%, D=.5%, C=.25%, B=.1%</p>
+    <p><a href="../fees/">Selling costs</a> · <a href="../catalog.md">Catalog (Markdown)</a> · <a href="../catalog.json">Catalog (JSON)</a> · <a href="../llms.txt">llms.txt</a></p>
+  </div>
+</footer>
+<script src="../checkout.js" defer></script><script src="../cart.js" defer></script><script src="../ask.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+---
+id: "33audio-anycast-edge-failover"
+title: "33audio: anycast failover to the next edge"
+summary: "With the direct IAH peering gone, the same anycast address is reached at DFW through transit, with no change on the visitor or the shop."
+eyebrow: "EXERGY ACADEMY · DELIVERY"
+headline: "Anycast failover"
+
+# Routing-level model of how a request for the 33audio shop reaches Cloudflare.
+#
+#   visitor -- isp_hou (AS 64510)      x      cf_iah (AS 13335) -- web_iah 192.0.2.10
+#                  \
+#                   transit (AS 64520) ------ cf_dfw (AS 13335) -- web_dfw 192.0.2.10
+#
+# Both edge routers originate 192.0.2.0/24, a documentation prefix standing in for
+# Cloudflare's anycast ranges. Both edge hosts answer on 192.0.2.10. The ISP prefers
+# the direct peering with IAH (AS path 13335) over transit (64520 13335).
+# This is anycast-edge.xp with the isp_hou-cf_iah peering removed.
+
+topology:
+  device: frr
+  module: [bgp]
+  name: 33audio-anycast-edge-failover
+
+  nodes:
+    visitor:
+      device: linux
+      role: host
+    isp_hou:
+      device: frr
+      bgp:
+        as: 64510
+    transit:
+      device: frr
+      bgp:
+        as: 64520
+    cf_iah:
+      device: frr
+      bgp:
+        as: 13335
+        advertise:
+          - ipv4: 192.0.2.0/24
+    cf_dfw:
+      device: frr
+      bgp:
+        as: 13335
+        advertise:
+          - ipv4: 192.0.2.0/24
+    web_iah:
+      device: linux
+      role: host
+    web_dfw:
+      device: linux
+      role: host
+
+  links:
+    - visitor-isp_hou
+    - isp_hou-transit
+    - transit-cf_dfw
+    - interfaces:
+        - node: cf_iah
+          ifname: eth9
+          ipv4: 192.0.2.1/24
+        - node: web_iah
+          ifname: eth1
+          ipv4: 192.0.2.10/24
+    - interfaces:
+        - node: cf_dfw
+          ifname: eth9
+          ipv4: 192.0.2.1/24
+        - node: web_dfw
+          ifname: eth1
+          ipv4: 192.0.2.10/24
+
+  validate:
+    - label: ISP has only the transit session
+      state:
+        - node: isp_hou
+          bgp:
+            - peer: transit
+              asn: transit.asn
+              state: established
+    - label: ISP now reaches the anycast prefix through transit
+      state:
+        - node: isp_hou
+          routes:
+            - prefix: 192.0.2.0/24
+              protocol: bgp
+              nexthop: transit.ipv4.isp_hou
+              aspath: "64520 13335"
+    - label: Visitor reaches the same anycast address at DFW
+      packet:
+        from: visitor
+        type: icmp-echo
+        target: 192.0.2.10
+        expect:
+          type: icmp-echo-reply
+          from: web_dfw

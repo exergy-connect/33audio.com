@@ -1,0 +1,85 @@
+{
+  "$comment": "Zone rulesets for the 33audio shop once it is on a custom domain in a Cloudflare zone. Apply with: node security/waf/apply.mjs (dry run) or --apply. Each phase entrypoint is replaced as a whole.",
+  "phases": {
+    "http_request_firewall_custom": {
+      "description": "33audio WAF custom rules",
+      "rules": [
+        {
+          "ref": "allow_ai_crawlers_discovery",
+          "description": "Let verified AI crawlers read the discovery files without later custom rules interfering",
+          "expression": "(cf.verified_bot_category eq \"AI Crawler\" and http.request.uri.path in {\"/llms.txt\" \"/llms-full.txt\" \"/catalog.json\" \"/catalog.md\" \"/robots.txt\" \"/sitemap.xml\"})",
+          "action": "skip",
+          "action_parameters": { "ruleset": "current" },
+          "logging": { "enabled": true },
+          "enabled": true
+        },
+        {
+          "ref": "block_exploit_probes",
+          "description": "Block scanner paths for software this static site does not run",
+          "expression": "(ends_with(http.request.uri.path, \".php\") or starts_with(http.request.uri.path, \"/wp-\") or starts_with(http.request.uri.path, \"/.env\") or starts_with(http.request.uri.path, \"/.git\") or http.request.uri.path contains \"/cgi-bin/\")",
+          "action": "block",
+          "enabled": true
+        },
+        {
+          "ref": "webhook_post_only",
+          "description": "The Stripe webhook only accepts POST with a Stripe-Signature header",
+          "expression": "(http.request.uri.path eq \"/api/stripe-webhook\" and (http.request.method ne \"POST\" or not any(len(http.request.headers[\"stripe-signature\"][*]) gt 0)))",
+          "action": "block",
+          "enabled": true
+        },
+        {
+          "ref": "api_methods",
+          "description": "Read-only API routes take GET and HEAD only",
+          "expression": "(http.request.uri.path in {\"/api/stock\" \"/api/search\"} and not http.request.method in {\"GET\" \"HEAD\"})",
+          "action": "block",
+          "enabled": true
+        },
+        {
+          "ref": "checkout_outside_us",
+          "description": "Orders ship to the USA only, so challenge checkout attempts from elsewhere",
+          "expression": "(http.request.uri.path eq \"/api/checkout\" and http.request.method eq \"POST\" and ip.src.country ne \"US\")",
+          "action": "managed_challenge",
+          "enabled": true
+        },
+        {
+          "ref": "checkout_likely_bots",
+          "description": "Challenge likely automated checkout traffic. Needs Bot Management (Enterprise); leave disabled on other plans and use Bot Fight Mode instead.",
+          "expression": "(http.request.uri.path eq \"/api/checkout\" and cf.bot_management.score lt 30 and not cf.bot_management.verified_bot)",
+          "action": "managed_challenge",
+          "enabled": false
+        }
+      ]
+    },
+    "http_ratelimit": {
+      "description": "33audio rate limiting rules",
+      "rules": [
+        {
+          "ref": "search_rate_limit",
+          "description": "Workers AI costs money per call: limit /api/search per client and data center. Fits the Free plan (10 s period and timeout).",
+          "expression": "(http.request.uri.path eq \"/api/search\")",
+          "action": "block",
+          "ratelimit": {
+            "characteristics": ["cf.colo.id", "ip.src"],
+            "period": 10,
+            "requests_per_period": 10,
+            "mitigation_timeout": 10
+          },
+          "enabled": true
+        },
+        {
+          "ref": "checkout_rate_limit",
+          "description": "Limit checkout session creation. A second rate limiting rule needs the Pro plan or higher.",
+          "expression": "(http.request.uri.path eq \"/api/checkout\" and http.request.method eq \"POST\")",
+          "action": "managed_challenge",
+          "ratelimit": {
+            "characteristics": ["cf.colo.id", "ip.src"],
+            "period": 60,
+            "requests_per_period": 5,
+            "mitigation_timeout": 600
+          },
+          "enabled": false
+        }
+      ]
+    }
+  }
+}

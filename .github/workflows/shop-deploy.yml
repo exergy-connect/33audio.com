@@ -1,0 +1,48 @@
+name: Deploy shop (Pages direct upload)
+
+# Use this OR the Cloudflare Pages Git integration, not both: a Pages project is either
+# Git-connected or direct-upload. Run it by hand from the Actions tab.
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Pages branch to deploy (main is production)"
+        default: main
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Check Cloudflare credentials
+        id: creds
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Shop deploy skipped: add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID as repository secrets."
+          fi
+
+      - uses: actions/checkout@v7
+        if: steps.creds.outputs.ready == 'true'
+
+      - uses: actions/setup-node@v7
+        if: steps.creds.outputs.ready == 'true'
+        with:
+          node-version: '26'
+
+      - name: Create the Pages project if it does not exist
+        if: steps.creds.outputs.ready == 'true'
+        run: |
+          npx --yes wrangler@4.162.0 pages project list | grep -q caddock-33audio \
+            || npx --yes wrangler@4.162.0 pages project create caddock-33audio --production-branch main
+
+      - name: Deploy docs/ and functions/
+        if: steps.creds.outputs.ready == 'true'
+        run: npx --yes wrangler@4.162.0 pages deploy docs --project-name caddock-33audio --branch "${{ inputs.branch }}" --commit-hash "${{ github.sha }}"

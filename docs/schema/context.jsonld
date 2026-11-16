@@ -1,0 +1,163 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "c33": "https://exergy-connect.github.io/33audio.com/schema/vocab#",
+    "wd": "http://www.wikidata.org/entity/",
+    "currency": {
+      "@id": "schema:priceCurrency"
+    },
+    "unit_price": {
+      "@id": "schema:price"
+    },
+    "region_note": {
+      "@id": "schema:eligibleRegion"
+    },
+    "provenance": {
+      "@id": "c33:provenance"
+    },
+    "source_url": {
+      "@id": "schema:isBasedOn",
+      "@type": "@id"
+    },
+    "seller": {
+      "@id": "schema:seller",
+      "@context": {
+        "name": {
+          "@id": "schema:name"
+        },
+        "email": {
+          "@id": "schema:email"
+        },
+        "locality": {
+          "@id": "schema:addressLocality"
+        },
+        "region": {
+          "@id": "schema:addressRegion"
+        },
+        "country": {
+          "@id": "schema:addressCountry"
+        },
+        "ebay_store": {
+          "@id": "schema:sameAs",
+          "@type": "@id"
+        },
+        "ebay_seller": {
+          "@id": "schema:alternateName"
+        }
+      }
+    },
+    "shipping": {
+      "@id": "schema:shippingDetails",
+      "@context": {
+        "amount": {
+          "@id": "schema:shippingRate"
+        },
+        "currency": {
+          "@id": "schema:currency"
+        },
+        "per": {
+          "@id": "c33:per"
+        },
+        "country": {
+          "@id": "schema:shippingDestination"
+        },
+        "summary": {
+          "@id": "schema:description"
+        }
+      }
+    },
+    "series": {
+      "@id": "c33:series",
+      "@context": {
+        "name": {
+          "@id": "schema:model"
+        },
+        "family": {
+          "@id": "c33:family"
+        },
+        "product_line": {
+          "@id": "schema:category"
+        },
+        "film": {
+          "@id": "c33:film"
+        },
+        "power_rating": {
+          "@id": "c33:power_rating"
+        },
+        "voltage_rating": {
+          "@id": "c33:voltage_rating"
+        },
+        "default_tolerance": {
+          "@id": "c33:default_tolerance"
+        },
+        "not_recommended_for_new_designs": {
+          "@id": "c33:not_recommended_for_new_designs"
+        },
+        "datasheet": {
+          "@id": "schema:subjectOf",
+          "@type": "@id"
+        }
+      }
+    },
+    "parts": {
+      "@id": "schema:itemListElement",
+      "@context": {
+        "part_number": {
+          "@id": "schema:mpn"
+        },
+        "manufacturer": {
+          "@id": "schema:manufacturer"
+        },
+        "series": {
+          "@id": "schema:model"
+        },
+        "resistance": {
+          "@id": "schema:additionalProperty",
+          "@context": {
+            "value": {
+              "@id": "schema:value"
+            },
+            "unit": {
+              "@id": "schema:unitText"
+            },
+            "label": {
+              "@id": "schema:name"
+            }
+          }
+        },
+        "tolerance": {
+          "@id": "c33:tolerance",
+          "@context": {
+            "percent": {
+              "@id": "schema:value"
+            },
+            "code": {
+              "@id": "c33:code"
+            }
+          }
+        },
+        "condition": {
+          "@id": "c33:condition"
+        },
+        "quantity": {
+          "@id": "schema:inventoryLevel"
+        },
+        "price": {
+          "@id": "schema:price"
+        },
+        "currency": {
+          "@id": "schema:priceCurrency"
+        },
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "ebay_listing": {
+          "@id": "c33:ebay_listing",
+          "@type": "@id"
+        }
+      }
+    }
+  }
+}

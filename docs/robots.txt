@@ -28,4 +28,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://exergy-connect.github.io/33audio.com/sitemap.xml
+Sitemap: https://caddock-33audio.pages.dev/sitemap.xml

@@ -1,0 +1,382 @@
+module audio33-catalog {
+  yang-version 1.1;
+  namespace "https://exergy-connect.github.io/33audio.com/schema/vocab#";
+  prefix c33;
+
+  organization "33audio";
+  contact "Mark, mark@33audio.com, Houston, TX";
+  description
+    "Public catalog of NOS Caddock Micronox film resistors sold by 33audio.
+     One document lists the seller, the offer terms, the Caddock series, and
+     every part with its stock and price. Agents can read docs/catalog.json
+     with this model, its JSON Schema, and its JSON-LD context.
+
+     Extensions c33:schema-org-class, c33:schema-org-property, c33:wikidata,
+     and c33:unit-code tie nodes to schema.org terms, Wikidata items, and
+     UN/CEFACT unit codes. They are metadata and do not change validation.";
+
+  revision 2026-11-16 {
+    description "First version: seller, offer terms, series, parts.";
+  }
+
+  extension schema-org-class {
+    argument class;
+    description
+      "The schema.org class (https://schema.org/<class>) that instances of
+       this node represent.";
+  }
+
+  extension schema-org-property {
+    argument property;
+    description
+      "The schema.org property (https://schema.org/<property>) this node's
+       value corresponds to. Used to build the JSON-LD context.";
+  }
+
+  extension wikidata {
+    argument item;
+    description
+      "A Wikidata item (http://www.wikidata.org/entity/<item>) for the concept
+       this node holds. Only items that clearly match are used.";
+  }
+
+  extension unit-code {
+    argument code;
+    description
+      "UN/CEFACT Common Code for the unit of this node's value, as used by
+       schema.org unitCode (for example OHM, WTT, VLT).";
+  }
+
+  typedef money {
+    type string {
+      pattern '[0-9]+\.[0-9]{2}';
+    }
+    description "An amount of money with exactly two decimal places, such as 10.00.";
+  }
+
+  typedef currency-code {
+    type string {
+      pattern '[A-Z]{3}';
+    }
+    description "ISO 4217 currency code. 33audio prices are in USD.";
+  }
+
+  typedef series-name {
+    type enumeration {
+      enum MM177 { description "Caddock Type MM precision film resistor, model MM177."; }
+      enum MM215 { description "Caddock Type MM precision film resistor, model MM215."; }
+      enum MS151 { description "Caddock Type MS power film resistor, model MS151."; }
+      enum MS176 { description "Caddock Type MS power film resistor, model MS176."; }
+    }
+    description "The Caddock models 33audio stocks.";
+  }
+
+  typedef tolerance-code {
+    type enumeration {
+      enum J { description "5 percent."; }
+      enum G { description "2 percent."; }
+      enum F { description "1 percent."; }
+      enum D { description "0.5 percent."; }
+      enum C { description "0.25 percent."; }
+      enum B { description "0.1 percent."; }
+    }
+    description "Tolerance letter as printed on the 33audio listing.";
+  }
+
+  leaf currency {
+    type currency-code;
+    mandatory true;
+    description "Currency of every price in this document.";
+    c33:schema-org-property "priceCurrency";
+  }
+
+  leaf unit_price {
+    type money;
+    mandatory true;
+    description "Listing price per resistor, the same for every part.";
+    c33:schema-org-property "price";
+  }
+
+  leaf region_note {
+    type string;
+    description "Where 33audio sells, quoted from the listing.";
+    c33:schema-org-property "eligibleRegion";
+  }
+
+  leaf provenance {
+    type string;
+    description "Where the stock came from, quoted from the listing.";
+  }
+
+  leaf source_url {
+    type string;
+    description "The 33audio page this catalog was parsed from.";
+    c33:schema-org-property "isBasedOn";
+  }
+
+  container seller {
+    description "The business selling the parts.";
+    c33:schema-org-class "Organization";
+    c33:schema-org-property "seller";
+    leaf name {
+      type string;
+      mandatory true;
+      description "Business name.";
+      c33:schema-org-property "name";
+    }
+    leaf email {
+      type string;
+      description "Contact and order email.";
+      c33:schema-org-property "email";
+    }
+    leaf locality {
+      type string;
+      description "City the parts ship from.";
+      c33:schema-org-property "addressLocality";
+    }
+    leaf region {
+      type string;
+      description "State the parts ship from.";
+      c33:schema-org-property "addressRegion";
+    }
+    leaf country {
+      type string;
+      description "ISO 3166-1 alpha-2 country code of the seller.";
+      c33:schema-org-property "addressCountry";
+    }
+    leaf ebay_store {
+      type string;
+      description "33audio's eBay store front.";
+      c33:schema-org-property "sameAs";
+    }
+    leaf ebay_seller {
+      type string;
+      description "eBay seller user name.";
+      c33:schema-org-property "alternateName";
+    }
+  }
+
+  container shipping {
+    description "Shipping terms for an order.";
+    c33:schema-org-class "OfferShippingDetails";
+    c33:schema-org-property "shippingDetails";
+    leaf amount {
+      type money;
+      mandatory true;
+      description "Shipping charge per order.";
+      c33:schema-org-property "shippingRate";
+    }
+    leaf currency {
+      type currency-code;
+      mandatory true;
+      description "Currency of the shipping charge.";
+      c33:schema-org-property "currency";
+    }
+    leaf per {
+      type enumeration {
+        enum order { description "One charge for the whole order, any quantity."; }
+      }
+      mandatory true;
+      description "What the shipping charge covers.";
+    }
+    leaf country {
+      type string;
+      mandatory true;
+      description "ISO 3166-1 alpha-2 code of the only shipping destination.";
+      c33:schema-org-property "shippingDestination";
+    }
+    leaf summary {
+      type string;
+      description "The shipping terms as one sentence.";
+      c33:schema-org-property "description";
+    }
+  }
+
+  list series {
+    key "name";
+    description "Caddock models in the catalog, with ratings from Caddock datasheets.";
+    c33:schema-org-class "ProductModel";
+    leaf name {
+      type series-name;
+      description "Caddock model number.";
+      c33:schema-org-property "model";
+    }
+    leaf family {
+      type enumeration {
+        enum MM { description "Caddock Type MM precision film resistors."; }
+        enum MS { description "Caddock Type MS power film resistors."; }
+      }
+      mandatory true;
+      description "Caddock resistor type.";
+    }
+    leaf product_line {
+      type string;
+      mandatory true;
+      description "Caddock product line name for this type, as on the datasheet.";
+      c33:schema-org-property "category";
+    }
+    leaf film {
+      type enumeration {
+        enum Micronox { description "Caddock Micronox resistance film."; }
+      }
+      mandatory true;
+      description "Resistance film named on the Caddock datasheets.";
+    }
+    leaf power_rating {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units "W";
+      description
+        "Rated power in watts at +25 C from the Caddock datasheet. MS models are
+         rated the same at +125 C.";
+      c33:wikidata "Q25236";
+      c33:unit-code "WTT";
+    }
+    leaf voltage_rating {
+      type uint16;
+      units "V";
+      description "Maximum continuous working voltage from the Caddock datasheet.";
+      c33:wikidata "Q25250";
+      c33:unit-code "VLT";
+    }
+    leaf default_tolerance {
+      type tolerance-code;
+      mandatory true;
+      description "Tolerance of a part in this series unless its part number adds a letter.";
+    }
+    leaf not_recommended_for_new_designs {
+      type boolean;
+      mandatory true;
+      description
+        "True when Caddock marks the type Not Recommended for New Designs.
+         Caddock says this of Type MM.";
+    }
+    leaf datasheet {
+      type string;
+      description "Link to the datasheet these ratings come from.";
+      c33:schema-org-property "subjectOf";
+    }
+  }
+
+  list parts {
+    key "part_number";
+    description "One stocked resistor value.";
+    c33:schema-org-class "Product";
+    c33:schema-org-property "itemListElement";
+    c33:wikidata "Q5321";
+    leaf part_number {
+      type string {
+        pattern '(MM177|MM215|MS151|MS176)-[0-9.]+[KM]?(-[JGFDCB])?';
+      }
+      description
+        "33audio part id: series, resistance, and a tolerance letter only when
+         the listing marks one, such as MM177-4.32K or MM177-665K-F.";
+      c33:schema-org-property "mpn";
+    }
+    leaf manufacturer {
+      type enumeration {
+        enum Caddock { description "Caddock Electronics, Inc."; }
+      }
+      mandatory true;
+      description "Resistor manufacturer.";
+      c33:schema-org-property "manufacturer";
+    }
+    leaf series {
+      type leafref {
+        path "/series/name";
+      }
+      mandatory true;
+      description "The Caddock model this part belongs to.";
+      c33:schema-org-property "model";
+    }
+    container resistance {
+      description "Nominal resistance as a number and a unit.";
+      c33:schema-org-class "PropertyValue";
+      c33:schema-org-property "additionalProperty";
+      c33:wikidata "Q25358";
+      leaf value {
+        type decimal64 {
+          fraction-digits 3;
+        }
+        mandatory true;
+        description "Resistance in ohms.";
+        c33:schema-org-property "value";
+      }
+      leaf unit {
+        type enumeration {
+          enum ohm { description "Ohm, the SI unit of resistance."; }
+        }
+        mandatory true;
+        description "Unit of value. Always ohm.";
+        c33:wikidata "Q47083";
+        c33:unit-code "OHM";
+        c33:schema-org-property "unitText";
+      }
+      leaf label {
+        type string;
+        description "Human-readable value, such as 4.32 kΩ.";
+        c33:schema-org-property "name";
+      }
+    }
+    container tolerance {
+      description "Resistance tolerance.";
+      c33:schema-org-class "PropertyValue";
+      c33:wikidata "Q950292";
+      leaf percent {
+        type decimal64 {
+          fraction-digits 2;
+        }
+        mandatory true;
+        description "Tolerance in percent.";
+        c33:schema-org-property "value";
+      }
+      leaf code {
+        type tolerance-code;
+        mandatory true;
+        description "Tolerance letter.";
+      }
+    }
+    leaf condition {
+      type enumeration {
+        enum new-old-stock {
+          description
+            "Never sold at retail. Here: liquidation stock from a Caddock stocking
+             distributor that closed in the 1980s.";
+        }
+      }
+      mandatory true;
+      description "Item condition. schema.org has no NOS value, so this links to Wikidata instead.";
+      c33:wikidata "Q907054";
+    }
+    leaf quantity {
+      type uint32;
+      mandatory true;
+      description "Quantity on the 33audio listing.";
+      c33:schema-org-property "inventoryLevel";
+    }
+    leaf price {
+      type money;
+      mandatory true;
+      description "Price per piece.";
+      c33:schema-org-property "price";
+    }
+    leaf currency {
+      type currency-code;
+      mandatory true;
+      description "Currency of price.";
+      c33:schema-org-property "priceCurrency";
+    }
+    leaf url {
+      type string;
+      mandatory true;
+      description "The part's page on the 33audio catalog site.";
+      c33:schema-org-property "url";
+    }
+    leaf ebay_listing {
+      type string;
+      description "An active eBay listing for this exact part, when one is matched.";
+      c33:schema-org-class "Offer";
+    }
+  }
+}

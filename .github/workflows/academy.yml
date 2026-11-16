@@ -1,0 +1,212 @@
+name: Academy
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: academy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.15'
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '26'
+
+      - name: Install xYang
+        run: python -m pip install -r requirements-schema.txt
+
+      - name: Unit tests
+        run: |
+          python -m unittest discover -s tests -v
+          node --test tests/js/*.test.mjs
+
+      - name: Committed shop output matches the generator
+        run: |
+          python -m catalog build
+          python -m catalog schema --check
+          git diff --stat --exit-code -- docs
+
+      - name: Academy builds with every embed, link, and badge intact
+        run: python -m academy build --check
+
+      - name: WAF and cache rules validate
+        run: |
+          node security/waf/apply.mjs > /dev/null
+          node security/waf/apply.mjs --file delivery/cache-rules.json > /dev/null
+
+  labs:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.15'
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '26'
+
+      - name: Install
+        run: |
+          python -m pip install -r requirements-schema.txt
+          npm ci --prefix academy
+
+      - name: Start the shop with wrangler pages dev
+        run: |
+          printf 'STRIPE_WEBHOOK_SECRET="whsec_lab_local"\n' > .dev.vars
+          nohup node academy/tools/dev-shop.mjs > shop.log 2>&1 &
+          for i in $(seq 1 90); do curl -sf http://127.0.0.1:8788/api/checkout > /dev/null && exit 0; sleep 1; done
+          cat shop.log; exit 1
+
+      - name: Start the Academy Worker with wrangler dev
+        run: |
+          python -m academy build
+          cd academy
+          nohup npx wrangler dev --port 8787 --ip 127.0.0.1 > ../academy.log 2>&1 &
+          for i in $(seq 1 90); do curl -sf http://127.0.0.1:8787/api/health > /dev/null && exit 0; sleep 1; done
+          cat ../academy.log; exit 1
+
+      - name: Run the deploy, discovery, AI, observability, and Academy lab checks
+        run: node academy/tools/lab-check.mjs --shop http://127.0.0.1:8788 --academy http://127.0.0.1:8787 --webhook-secret whsec_lab_local
+
+      - name: Measure (REAL TELEMETRY from this runner)
+        run: |
+          ENVIRONMENT="wrangler pages dev on a GitHub Actions ubuntu-latest runner, run ${{ github.run_id }}"
+          node academy/tools/measure.mjs --base http://127.0.0.1:8788 --n 10 --environment "$ENVIRONMENT" --out academy/data/real/local-latency.json
+          node academy/tools/loadtest.mjs --url http://127.0.0.1:8787/api/lab/echo --rps 5 --seconds 8 --out academy/data/real/ratelimit-burst.json
+          python -c "import json; rows = json.load(open('academy/data/real/ratelimit-burst.json'))['rows']; limited = sum(r['limited'] for r in rows); assert limited > 0, 'rate limiter never answered 429'; print(limited, 'requests limited')"
+
+      - name: Pull Analytics Engine telemetry (skips without credentials)
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ANALYTICS_API_TOKEN: ${{ secrets.ANALYTICS_API_TOKEN }}
+        run: node academy/tools/telemetry.mjs --out-dir academy/data/real
+
+      - name: Build the Academy with the real datasets
+        run: python -m academy build
+
+      - name: Server logs
+        if: always()
+        run: |
+          tail -n 60 shop.log || true
+          tail -n 60 academy.log || true
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: academy-dist
+          path: academy/dist
+          retention-days: 14
+
+  labnet:
+    needs: test
+    runs-on: ubuntu-latest
+    env:
+      LABNET_TOKEN: ${{ secrets.LABNET_TOKEN }}
+      LABNET_COMMIT: 06c71623b044e5ee2d4a9bcfe052bc1b9fe7c6d2
+    steps:
+      - name: Check lab.net access
+        id: access
+        run: |
+          if [ -n "$LABNET_TOKEN" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::lab.net runs not regenerated: add a LABNET_TOKEN secret with read access to exergy-connect/lab.net. The committed runs in academy/data/labnet are used as recorded."
+          fi
+
+      - uses: actions/checkout@v7
+        if: steps.access.outputs.ready == 'true'
+
+      - name: Check out lab.net at the pinned commit
+        if: steps.access.outputs.ready == 'true'
+        uses: actions/checkout@v7
+        with:
+          repository: exergy-connect/lab.net
+          ref: ${{ env.LABNET_COMMIT }}
+          token: ${{ secrets.LABNET_TOKEN }}
+          path: .labnet
+          persist-credentials: false
+
+      - name: Validate the anycast lab with lab.net's GitHub Action
+        if: steps.access.outputs.ready == 'true'
+        uses: ./.labnet
+        with:
+          topology: network/labnet/anycast-edge.xp
+          output: validation/anycast-edge.pcapng
+          report: validation/anycast-edge.json
+          artifact-name: labnet-anycast-edge
+
+      - name: Validate the failover lab with lab.net's GitHub Action
+        if: steps.access.outputs.ready == 'true'
+        uses: ./.labnet
+        with:
+          topology: network/labnet/anycast-edge-failover.xp
+          output: validation/anycast-edge-failover.pcapng
+          report: validation/anycast-edge-failover.json
+          artifact-name: labnet-anycast-edge-failover
+
+      - name: Regenerate the Academy's lab.net runs and compare
+        if: steps.access.outputs.ready == 'true'
+        run: |
+          docker build -q -f .labnet/go/Dockerfile --target validation-runner --build-arg LABNET_GIT_COMMIT="$LABNET_COMMIT" -t labnet-validator .labnet
+          for t in anycast-edge anycast-edge-failover; do
+            docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/workspace" -w /workspace -e LABNET_COMMIT \
+              --entrypoint node labnet-validator academy/tools/labnet-path.mjs "network/labnet/$t.xp" \
+              --labnet /app --nodes isp_hou --out "academy/data/labnet/$t.json" --pcap "academy/data/labnet/$t.pcapng"
+          done
+          git diff --stat --exit-code -- academy/data/labnet
+
+  deploy:
+    needs: labs
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Check Cloudflare credentials
+        id: creds
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Academy deploy skipped: add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID as repository secrets to deploy exergy-academy."
+          fi
+
+      - uses: actions/checkout@v7
+        if: steps.creds.outputs.ready == 'true'
+
+      - uses: actions/setup-node@v7
+        if: steps.creds.outputs.ready == 'true'
+        with:
+          node-version: '26'
+
+      - uses: actions/download-artifact@v8
+        if: steps.creds.outputs.ready == 'true'
+        with:
+          name: academy-dist
+          path: academy/dist
+
+      - name: Deploy exergy-academy
+        if: steps.creds.outputs.ready == 'true'
+        working-directory: academy
+        run: |
+          npm ci
+          npx wrangler deploy --var DEPLOYMENT:production --var COMMIT_SHA:${{ github.sha }}

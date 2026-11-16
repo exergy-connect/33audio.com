@@ -1,0 +1,145 @@
+{
+  "kind": "simulated",
+  "title": "Worker requests and errors per hour",
+  "chart": "line",
+  "unit": "requests",
+  "x": "hour",
+  "x_label": "Hour (UTC)",
+  "series": [
+    {
+      "key": "requests",
+      "label": "Requests"
+    },
+    {
+      "key": "errors",
+      "label": "Errors"
+    }
+  ],
+  "rows": [
+    {
+      "hour": "00:00",
+      "requests": 102,
+      "errors": 1
+    },
+    {
+      "hour": "01:00",
+      "requests": 93,
+      "errors": 0
+    },
+    {
+      "hour": "02:00",
+      "requests": 90,
+      "errors": 0
+    },
+    {
+      "hour": "03:00",
+      "requests": 93,
+      "errors": 0
+    },
+    {
+      "hour": "04:00",
+      "requests": 102,
+      "errors": 0
+    },
+    {
+      "hour": "05:00",
+      "requests": 116,
+      "errors": 1
+    },
+    {
+      "hour": "06:00",
+      "requests": 135,
+      "errors": 0
+    },
+    {
+      "hour": "07:00",
+      "requests": 156,
+      "errors": 0
+    },
+    {
+      "hour": "08:00",
+      "requests": 180,
+      "errors": 0
+    },
+    {
+      "hour": "09:00",
+      "requests": 203,
+      "errors": 0
+    },
+    {
+      "hour": "10:00",
+      "requests": 225,
+      "errors": 1
+    },
+    {
+      "hour": "11:00",
+      "requests": 243,
+      "errors": 0
+    },
+    {
+      "hour": "12:00",
+      "requests": 257,
+      "errors": 0
+    },
+    {
+      "hour": "13:00",
+      "requests": 266,
+      "errors": 0
+    },
+    {
+      "hour": "14:00",
+      "requests": 270,
+      "errors": 3
+    },
+    {
+      "hour": "15:00",
+      "requests": 266,
+      "errors": 1
+    },
+    {
+      "hour": "16:00",
+      "requests": 257,
+      "errors": 0
+    },
+    {
+      "hour": "17:00",
+      "requests": 243,
+      "errors": 0
+    },
+    {
+      "hour": "18:00",
+      "requests": 225,
+      "errors": 0
+    },
+    {
+      "hour": "19:00",
+      "requests": 203,
+      "errors": 0
+    },
+    {
+      "hour": "20:00",
+      "requests": 180,
+      "errors": 1
+    },
+    {
+      "hour": "21:00",
+      "requests": 156,
+      "errors": 0
+    },
+    {
+      "hour": "22:00",
+      "requests": 135,
+      "errors": 0
+    },
+    {
+      "hour": "23:00",
+      "requests": 116,
+      "errors": 0
+    }
+  ],
+  "description": "Example of the workersInvocationsAdaptive dataset for the exergy-academy script.",
+  "make_real": [
+    "Deploy the Academy Worker.",
+    "Run observability/queries/workers-invocations.graphql with scriptName exergy-academy and an Account Analytics Read token."
+  ]
+}

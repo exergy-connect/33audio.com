@@ -1,0 +1,158 @@
+module audio33-source-listing {
+  yang-version 1.1;
+  namespace "https://exergy-connect.github.io/33audio.com/schema/source-listing#";
+  prefix src;
+
+  import audio33-catalog {
+    prefix c33;
+  }
+
+  organization "33audio";
+  contact "Mark, mark@33audio.com, Houston, TX";
+  description
+    "The 33audio Caddock listing as parsed from
+     https://www.33audio.com/enter/caddockmsmm.html into data/catalog.json.
+     This file is also edited by hand, so ohms is a plain JSON number and the
+     document is validated in xYang native JSON mode. The public catalog
+     (audio33-catalog) is generated from it.";
+
+  revision 2026-11-16 {
+    description "First version, matching catalog/parse.py.";
+  }
+
+  leaf source_url {
+    type string;
+    mandatory true;
+    description "Listing page that was parsed.";
+  }
+
+  leaf source_last_modified {
+    type string;
+    description "HTTP Last-Modified of the listing page, when the server sent one.";
+  }
+
+  leaf currency {
+    type c33:currency-code;
+    mandatory true;
+    description "Currency of the listing price.";
+  }
+
+  leaf unit_price {
+    type c33:money;
+    mandatory true;
+    description "Price per resistor from the listing.";
+  }
+
+  leaf legend {
+    type string;
+    mandatory true;
+    description "Tolerance legend line quoted from the listing.";
+  }
+
+  container tolerance_codes {
+    description "Tolerance letters and their percentages from the legend.";
+    leaf J { type string; mandatory true; description "Percent for J."; }
+    leaf G { type string; mandatory true; description "Percent for G."; }
+    leaf F { type string; mandatory true; description "Percent for F."; }
+    leaf D { type string; mandatory true; description "Percent for D."; }
+    leaf C { type string; mandatory true; description "Percent for C."; }
+    leaf B { type string; mandatory true; description "Percent for B."; }
+  }
+
+  container listing {
+    description "Statements about the stock, quoted from the listing.";
+    leaf film { type string; description "Resistance film named on the listing."; }
+    leaf product_line { type string; description "Product line line from the listing."; }
+    leaf temperature_line { type string; description "Temperature claim from the listing."; }
+    leaf origin_line { type string; description "Country of manufacture and test claim."; }
+    leaf environment_line { type string; description "Environment claim from the listing."; }
+    leaf provenance { type string; description "First line of the provenance statement."; }
+    leaf payment_note { type string; description "How the listing says to pay."; }
+    leaf region_note { type string; description "Where the listing sells."; }
+    leaf-list statements {
+      type string;
+      ordered-by user;
+      description "Every kept statement from the listing intro, in page order.";
+    }
+  }
+
+  list series {
+    key "id";
+    min-elements 1;
+    description "One section of the listing.";
+    leaf id {
+      type c33:series-name;
+      description "Caddock model heading.";
+    }
+    leaf family {
+      type enumeration {
+        enum MM { description "Caddock Type MM."; }
+        enum MS { description "Caddock Type MS."; }
+      }
+      mandatory true;
+      description "Caddock type.";
+    }
+    leaf default_tolerance_code {
+      type c33:tolerance-code;
+      mandatory true;
+      description "Section default tolerance letter.";
+    }
+    leaf default_tolerance {
+      type string;
+      mandatory true;
+      description "Section default tolerance percent.";
+    }
+    leaf default_note {
+      type string;
+      description "The section's tolerance note as written.";
+    }
+    list parts {
+      key "id";
+      min-elements 1;
+      description "One value line of the section.";
+      leaf id {
+        type string;
+        description "Part id built from the series, value, and an explicit tolerance letter.";
+      }
+      leaf resistance {
+        type string {
+          pattern '[0-9.]+[KM]?';
+        }
+        mandatory true;
+        description "Value as written, such as 4.32K.";
+      }
+      leaf ohms {
+        type decimal64 {
+          fraction-digits 3;
+        }
+        mandatory true;
+        description "Value in ohms.";
+      }
+      leaf tolerance_code {
+        type c33:tolerance-code;
+        mandatory true;
+        description "Tolerance letter for this part.";
+      }
+      leaf tolerance {
+        type string;
+        mandatory true;
+        description "Tolerance percent for this part.";
+      }
+      leaf tolerance_explicit {
+        type boolean;
+        mandatory true;
+        description "True when the value line itself carried the letter.";
+      }
+      leaf quantity {
+        type uint32;
+        mandatory true;
+        description "Quantity shown on the listing.";
+      }
+      leaf price {
+        type c33:money;
+        mandatory true;
+        description "Price per piece.";
+      }
+    }
+  }
+}

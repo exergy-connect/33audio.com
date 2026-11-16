@@ -525,21 +525,24 @@ div.part-row .pid { min-height: 44px; display: inline-flex; align-items: center;
 }
 .payment-switch a:hover { color: var(--ink); }
 
-.buy > [data-flow] { display: none; }
-html:not([data-payment-flow]) .buy > [data-flow="ebay"],
-html[data-payment-flow="ebay"] .buy > [data-flow="ebay"],
-html[data-payment-flow="stripe"] .buy > a[data-flow="stripe"],
-html[data-payment-flow="paypal"] .buy > a[data-flow="paypal"],
-html[data-payment-flow="stripe"] .buy > button[data-flow="stripe"],
-html[data-payment-flow="paypal"] .buy > button[data-flow="paypal"] {
-  display: inline-flex;
-}
-html:not([data-payment-flow]) .buy > p[data-flow="ebay"],
-html[data-payment-flow="ebay"] .buy > p[data-flow="ebay"],
-html[data-payment-flow="stripe"] .buy > p[data-flow="stripe"],
-html[data-payment-flow="paypal"] .buy > p[data-flow="paypal"] {
+.buy { flex-direction: column; align-items: stretch; }
+.buy > .button { flex: 0 0 auto; }
+.buy .flow { display: none; }
+.buy .flow .button { width: 100%; }
+html:not([data-payment-flow]) .buy .flow[data-flow="ebay"],
+html[data-payment-flow="ebay"] .buy .flow[data-flow="ebay"],
+html[data-payment-flow="stripe"] .buy .flow[data-flow="stripe"],
+html[data-payment-flow="paypal"] .buy .flow[data-flow="paypal"] {
   display: block;
 }
+@media (min-width: 560px) {
+  .buy { max-width: 28rem; }
+}
+
+.cart-only { display: none !important; }
+html[data-payment-flow="stripe"] .cart-only { display: inline-flex !important; }
+html[data-payment-flow="stripe"] .cart-mode-note { display: none; }
+
 .button.is-demo {
   opacity: 1;
   background: repeating-linear-gradient(135deg, var(--card) 0 8px, #f1e7d0 8px 16px);
@@ -555,6 +558,7 @@ html[data-payment-flow="paypal"] .buy > p[data-flow="paypal"] {
 /* Cart and quantity controls */
 .cart-link { white-space: nowrap; }
 .add-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.add-row .button { flex: 1 1 9rem; width: auto; }
 .stepper {
   display: inline-flex;
   align-items: stretch;
@@ -589,6 +593,9 @@ html[data-payment-flow="paypal"] .buy > p[data-flow="paypal"] {
   align-items: center;
   justify-content: center;
 }
+.stepper input { -moz-appearance: textfield; }
+.stepper input::-webkit-outer-spin-button,
+.stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .row-add {
   grid-column: 2;
   grid-row: 1;
@@ -720,6 +727,19 @@ html[data-payment-flow="paypal"] .buy > p[data-flow="paypal"] {
 .site-footer a { color: var(--amber-glow); }
 .site-footer a:hover { color: #fff; }
 .search-status { min-height: 1.4rem; font-weight: 700; }
+
+.ask-form { margin: 1rem 0 0.5rem; }
+.ask-summary { font-weight: 700; min-height: 1.5em; }
+.ask-results { list-style: none; padding: 0; margin: 0.5rem 0 1.5rem; }
+.ask-result {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--line);
+}
+.ask-part { font-family: var(--mono); font-weight: 700; }
+.ask-spec { font-size: 0.95rem; }
+.ask-why { color: var(--muted); font-size: 0.88rem; }
 
 @media (prefers-reduced-motion: no-preference) {
   .brand-record { animation: spin33 1.8s cubic-bezier(0.3, 0, 0.3, 1) 2; }

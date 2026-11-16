@@ -1,0 +1,28 @@
+# Zone traffic by path, cache status, and edge status (GraphQL Analytics API).
+# Needs the shop on a custom domain in a zone, and a token with Zone → Analytics → Read.
+# Field availability varies by plan; check it in the GraphQL API explorer before relying on a field.
+query ZoneHttp($zoneTag: string!, $since: Time!, $until: Time!) {
+  viewer {
+    zones(filter: { zoneTag: $zoneTag }) {
+      httpRequestsAdaptiveGroups(
+        limit: 50
+        filter: { datetime_geq: $since, datetime_lt: $until, requestSource: "eyeball" }
+        orderBy: [count_DESC]
+      ) {
+        count
+        sum {
+          edgeResponseBytes
+        }
+        avg {
+          edgeTimeToFirstByteMs
+          originResponseDurationMs
+        }
+        dimensions {
+          clientRequestPath
+          cacheStatus
+          edgeResponseStatus
+        }
+      }
+    }
+  }
+}
