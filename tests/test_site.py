@@ -141,6 +141,30 @@ class StockTests(unittest.TestCase):
         self.assertIsNone(namespace_id(ROOT / "wrangler.toml"))
 
 
+class WranglerConfigTests(unittest.TestCase):
+    def test_production_repeats_bindings_and_adds_ai(self):
+        import tomllib
+
+        config = tomllib.loads((ROOT / "wrangler.toml").read_text(encoding="utf-8"))
+        production = config["env"]["production"]
+        self.assertNotIn("ai", config, "a top-level [ai] block stops `wrangler pages dev` without a token")
+        self.assertEqual(production["ai"]["binding"], "AI")
+        top_ids = {kv["binding"]: kv["id"] for kv in config["kv_namespaces"]}
+        prod_ids = {kv["binding"]: kv["id"] for kv in production["kv_namespaces"]}
+        self.assertEqual(top_ids, prod_ids)
+        self.assertEqual(config["analytics_engine_datasets"], production["analytics_engine_datasets"])
+        self.assertEqual(config["vars"], production["vars"])
+
+    def test_ask_page_is_built(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            docs = Path(tmp) / "docs"
+            build(catalog(), {"listings": []}, SITE, docs, ROOT / "assets")
+            page = (docs / "ask" / "index.html").read_text(encoding="utf-8")
+            self.assertIn("data-ask-form", page)
+            self.assertIn("ask.js", page)
+            self.assertTrue((docs / "ask.js").is_file())
+
+
 class FeeTests(unittest.TestCase):
     def test_example_order(self):
         costs = SITE["selling_costs"]

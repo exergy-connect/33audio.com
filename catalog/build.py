@@ -101,7 +101,7 @@ def copy_assets(docs: Path, asset_dir: Path) -> None:
     for item in source.iterdir():
         if item.is_file():
             shutil.copy2(item, dest / item.name)
-    for name in ("styles.css", "search.js", "favicon.svg", "checkout.js", "fees.js", "cart.js"):
+    for name in ("styles.css", "search.js", "favicon.svg", "checkout.js", "fees.js", "cart.js", "ask.js"):
         shutil.copy2(TEMPLATES / name, docs / name)
 
 
@@ -160,6 +160,7 @@ def header(site: dict, depth: int, current: str) -> str:
     ebay = site["purchase"]["ebay"]["store_url"]
     items = [
         ("catalog/", "Catalog"),
+        ("ask/", "Ask"),
         ("series/mm177/", "MM177"),
         ("series/mm215/", "MM215"),
         ("series/ms151/", "MS151"),
@@ -714,6 +715,38 @@ def render_cart(catalog: dict, site: dict, origin: str) -> str:
     )
 
 
+def render_ask(catalog: dict, site: dict, origin: str) -> str:
+    examples = [
+        "I need a 10M resistor for a tube amp",
+        "precision 4.32K for a feedback network",
+        "1M5 grid leak, new design",
+        "MS176 around 10K",
+    ]
+    chips_html = "".join(f'<button type="button" class="chip" data-ask-example>{escape(text)}</button>' for text in examples)
+    body = f"""
+<p class="eyebrow">Part finder</p>
+<h1>Ask for a part</h1>
+<p class="lede">Describe what you are building. The finder reads the request, then ranks the {len(flatten(catalog))} values in stock by value, voltage and power rating, and tolerance.</p>
+<form class="ask-form" data-ask-form role="search">
+  <label class="search-label" for="ask-q">What do you need?</label>
+  <div class="search-row">
+    <input id="ask-q" name="q" type="search" maxlength="200" placeholder="I need a 10M resistor for a tube amp" required>
+    <button type="submit">Ask</button>
+  </div>
+</form>
+<div class="chips" aria-label="Example questions">{chips_html}</div>
+<p class="note ask-mode" data-ask-mode hidden></p>
+<p class="ask-summary" data-ask-summary aria-live="polite"></p>
+<ol class="ask-results" data-ask-results></ol>
+<p class="fine">With Workers AI bound, a language model turns the question into filters. Without it, a keyword parser does the same job for values like 10M, 4K32, or 470R and words like tube, precision, or power. Every answer says which one ran. Ratings come from the 1985 Caddock datasheets. Check them against your circuit.</p>
+"""
+    return layout(
+        "Ask for a part | 33audio", "Describe a resistor in plain words and get matching Caddock parts from 33audio stock.",
+        abs_url(origin, "ask/"), "ask/index.html", body, site, catalog, "ask/",
+        extra_scripts='<script src="../ask.js" defer></script>',
+    )
+
+
 def render_checkout_result(kind: str, catalog: dict, site: dict, origin: str) -> str:
     if kind == "success":
         title = "Order received | 33audio"
@@ -830,7 +863,7 @@ def validate(docs: Path, catalog: dict, site: dict, origin: str) -> None:
     locs = [node.text for node in sitemap.iter() if node.tag.endswith("loc")]
     if len(locs) != len(set(locs)):
         errors.append("duplicate sitemap URLs")
-    expected = 7 + len(catalog["series"]) + len(parts)
+    expected = 8 + len(catalog["series"]) + len(parts)
     robots_text = (docs / "robots.txt").read_text(encoding="utf-8")
     for bot in (
         "GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot",
@@ -862,6 +895,7 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
     origin = public_origin(site)
     for rel_path, html in (
         ("cart/index.html", render_cart(catalog, site, origin)),
+        ("ask/index.html", render_ask(catalog, site, origin)),
         ("checkout/success/index.html", render_checkout_result("success", catalog, site, origin)),
         ("checkout/cancel/index.html", render_checkout_result("cancel", catalog, site, origin)),
     ):
@@ -870,7 +904,7 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
         target.write_text(html, encoding="utf-8")
     matches = match_listings(catalog, ebay.get("listings") or [])
     parts = flatten(catalog)
-    paths = ["", "catalog/", "fees/", "llms.txt", "llms-full.txt", "catalog.md", "catalog.json"]
+    paths = ["", "catalog/", "ask/", "fees/", "llms.txt", "llms-full.txt", "catalog.md", "catalog.json"]
     (docs / "llms.txt").write_text(render_llms_txt(catalog, site, origin), encoding="utf-8")
     (docs / "llms-full.txt").write_text(render_llms_full(catalog, site, origin), encoding="utf-8")
     (docs / "catalog.md").write_text(render_catalog_md(catalog, site, origin), encoding="utf-8")

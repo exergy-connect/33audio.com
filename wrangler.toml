@@ -2,11 +2,35 @@ name = "caddock-33audio"
 pages_build_output_dir = "docs"
 compatibility_date = "2026-11-16"
 
+# Top-level bindings serve `wrangler pages dev` and preview deployments.
+# [env.production] repeats them (Pages does not inherit bindings) and adds Workers AI.
+# Workers AI only runs remotely, so a top-level [ai] block would stop `pages dev`
+# from starting without a Cloudflare API token. /api/search falls back to its
+# keyword parser wherever env.AI is missing.
+
 [vars]
 CHECKOUT_ENABLED = "false"
 
 # Create with: npx wrangler@4.162.0 kv namespace create STOCK
-# then paste the returned id here.
+# then paste the returned id here and under [[env.production.kv_namespaces]].
 [[kv_namespaces]]
 binding = "STOCK"
 id = "REPLACE_WITH_STOCK_KV_NAMESPACE_ID"
+
+[[analytics_engine_datasets]]
+binding = "SEARCH_EVENTS"
+dataset = "caddock_search"
+
+[env.production.vars]
+CHECKOUT_ENABLED = "false"
+
+[[env.production.kv_namespaces]]
+binding = "STOCK"
+id = "REPLACE_WITH_STOCK_KV_NAMESPACE_ID"
+
+[[env.production.analytics_engine_datasets]]
+binding = "SEARCH_EVENTS"
+dataset = "caddock_search"
+
+[env.production.ai]
+binding = "AI"
