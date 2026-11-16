@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "include": [
+    "/api/*",
+    "/parts/*",
+    "/llms.txt",
+    "/llms-full.txt",
+    "/catalog.json",
+    "/catalog.md"
+  ],
+  "exclude": []
+}

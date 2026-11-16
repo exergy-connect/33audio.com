@@ -885,6 +885,9 @@ def build(catalog: dict, ebay: dict, site: dict, docs: Path, asset_dir: Path) ->
     matches = match_listings(catalog, ebay.get("listings") or [])
     parts = flatten(catalog)
     paths = ["", "search/", "ebay/", "catalog/", "ask/", "fees/", "llms.txt", "llms-full.txt", "catalog.md", "catalog.json"]
+    # Keep static assets outside Functions while instrumenting discovery requests.
+    routes = {"version": 1, "include": ["/api/*", "/parts/*", "/llms.txt", "/llms-full.txt", "/catalog.json", "/catalog.md"], "exclude": []}
+    (docs / "_routes.json").write_text(json.dumps(routes, indent=2) + "\n", encoding="utf-8")
     (docs / "llms.txt").write_text(render_llms_txt(catalog, site, origin), encoding="utf-8")
     (docs / "llms-full.txt").write_text(render_llms_full(catalog, site, origin), encoding="utf-8")
     (docs / "catalog.md").write_text(render_catalog_md(catalog, site, origin), encoding="utf-8")

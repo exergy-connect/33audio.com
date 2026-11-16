@@ -124,6 +124,57 @@
     });
   }
 
+  function initCrawlers(figure) {
+    var button = el("button", { type: "button", text: "Refresh live analytics" });
+    var status = el("p", { role: "status", "aria-live": "polite" });
+    var live = el("div");
+    figure.insertAdjacentElement("afterend", live);
+    live.appendChild(button);
+    live.appendChild(status);
+    function refresh() {
+      button.disabled = true;
+      status.textContent = "Loading live crawler analytics…";
+      timedFetch("/api/crawler-analytics").then(function (r) {
+        if (!r.response.ok || !r.data || r.data.kind !== "real") {
+          throw new Error(r.data && r.data.message || "Live analytics unavailable. Showing the last available chart.");
+        }
+        var data = r.data;
+        var content = el("div", { "data-crawler-result": "" });
+        content.appendChild(badge("real", data.source + " · Updated " + data.collected_at));
+        content.appendChild(el("p", { text: "Crawler requests · " + data.since + " to " + data.until }));
+        content.appendChild(el("p", { text: data.description }));
+        var table = el("table");
+        var head = el("tr");
+        ["Crawler", "llms.txt / catalog.*", "Part pages"].forEach(function (label) {
+          head.appendChild(el("th", { scope: "col", text: label }));
+        });
+        table.appendChild(el("thead", {}, [head]));
+        var body = el("tbody");
+        var peak = Math.max.apply(null, data.rows.map(function (row) { return Math.max(row.llms, row.pages); }).concat([1]));
+        data.rows.forEach(function (row) {
+          var tr = el("tr", {}, [el("th", { scope: "row", text: row.label })]);
+          ["llms", "pages"].forEach(function (key) {
+            var cell = el("td", { text: row[key].toLocaleString() + " " });
+            cell.appendChild(el("meter", { min: "0", max: String(peak), value: String(row[key]), "aria-label": row.label + " " + key, text: String(row[key]) }));
+            tr.appendChild(cell);
+          });
+          body.appendChild(tr);
+        });
+        table.appendChild(body);
+        content.appendChild(el("div", { cls: "table-wrap" }, [table]));
+        var previous = live.querySelector("[data-crawler-result]");
+        if (previous) previous.remove();
+        live.appendChild(content);
+        figure.hidden = true;
+        status.textContent = "Live analytics loaded. Refreshes may use results cached for 60 seconds.";
+      }).catch(function (error) {
+        status.textContent = error.message + (figure.hidden ? " Last successful live results remain visible." : "");
+      }).then(function () { button.disabled = false; });
+    }
+    button.addEventListener("click", refresh);
+    refresh();
+  }
+
   function init() {
     var toggle = document.querySelector("[data-nav-toggle]");
     var nav = document.getElementById("site-nav");
@@ -144,6 +195,7 @@
       });
     });
     document.querySelectorAll("[data-live]").forEach(initLive);
+    document.querySelectorAll('[data-dataset="crawler-hits"]').forEach(initCrawlers);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

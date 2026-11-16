@@ -62,4 +62,12 @@ The FAQ answers come only from the listing and the 1985 Caddock datasheets. Stru
 
 ::: chart crawler-hits
 
-Crawler counts need the shop on a zone with analytics. Until then this chart is example data, and its badge says so.
+This chart requests live crawler analytics when the page opens. Use **Refresh live analytics** to query again; results are cached for 60 seconds. It shows the last 24 hours of user-agent matches, which are not verified crawler identities. Cloudflare analytics may be delayed and sampled. If live analytics is unavailable, the saved chart stays visible with its provenance badge.
+
+The shop records successful crawler GET/HEAD requests through Pages Functions middleware into the `caddock_crawlers` Analytics Engine dataset. This works on `33audio-com.pages.dev` without a custom domain or zone ID. Recording starts after deployment; historical traffic is unavailable. Preview hostnames are excluded. Only crawler labels, surface categories, and the configured shop hostname are stored; raw user agents and visitor IPs are not stored.
+
+To enable it, deploy the shop with the `CRAWLER_EVENTS` Analytics Engine binding in the root `wrangler.toml`. In the Academy, set `CF_ACCOUNT_ID` in `academy/wrangler.toml` and run `npx wrangler secret put ANALYTICS_API_TOKEN` from `academy/`, using an Account Analytics Read token for the same Cloudflare account. Redeploy the Academy Worker. Find the account ID in the Cloudflare dashboard under Workers & Pages. Both deployments default to `CRAWLER_HOST = "33audio-com.pages.dev"`; if the shop hostname changes, configure the same value in both projects. The token stays in the Worker; browsers receive only aggregate counts.
+
+Only discovery files, part pages, and existing API routes invoke Pages Functions; other static assets bypass them via the generated `_routes.json`. These tracked requests use Pages Functions invocations. If no crawler events have yet created the dataset, the live query may be unavailable until the first event is recorded.
+
+The endpoint is `GET /api/crawler-analytics`. Its JSON includes counts, the query window, source, and collection timestamp; no rebuild is needed for a refresh.

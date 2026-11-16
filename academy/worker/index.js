@@ -1,6 +1,8 @@
 // exergy-academy Worker: serves academy/dist and the live lab endpoints under /api/.
 // Static files never reach this code; [assets] answers them first (see run_worker_first).
 
+import { crawlerAnalytics } from "./crawlers.js";
+
 import { aeSql, summarizeTelemetry, telemetryQueries } from "./telemetry.js";
 
 const JSON_HEADERS = { "Content-Type": "application/json; charset=utf-8" };
@@ -119,6 +121,9 @@ export default {
           break;
         case "/api/lab/cache":
           response = await cacheDemo(request, ctx);
+          break;
+        case "/api/crawler-analytics":
+          response = await crawlerAnalytics(request, env, ctx);
           break;
         case "/api/telemetry":
           response = await telemetry(env, ctx, request);

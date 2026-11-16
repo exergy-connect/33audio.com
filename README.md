@@ -134,6 +134,7 @@ The generator still writes an empty `docs/.nojekyll`. It does nothing on Cloudfl
 | Name | Where | Purpose |
 | --- | --- | --- |
 | `STOCK` | KV binding in `wrangler.toml` | Holds one key, `stock`, with the stock JSON document |
+| `CRAWLER_EVENTS` | Analytics Engine binding (`caddock_crawlers`) | Successful crawler GET/HEAD requests to discovery files and part pages on `33audio-com.pages.dev` |
 | `SEARCH_EVENTS` | Analytics Engine binding (`caddock_search`) | One data point per part search |
 | `AI` | Workers AI, `[env.production.ai]` only | Turns `/api/search` questions into filters. Local dev and previews use the keyword fallback |
 | `CHECKOUT_ENABLED` | `[vars]` in `wrangler.toml` | `"false"` by default. `"true"` turns on Stripe checkout |
@@ -269,3 +270,22 @@ Nothing is deployed yet. These steps need the owner's Cloudflare account:
 The look is a 1960s–70s hi-fi receiver: a walnut cabinet with a brushed-aluminum faceplate in the header, LP sleeves for the series cards, a record label next to each part number, and a VU meter for each fee on `/fees/`. The meter needle shows that fee as a percent of what the buyer pays, on a 0 to 20% scale. The header record spins twice on load at 33⅓ RPM (1.8 s per turn) and again on hover. Nothing moves when the visitor has `prefers-reduced-motion: reduce` set.
 
 It is CSS and inline SVG only. No web fonts or images are loaded; the font stacks fall back to system fonts. Styles live in `catalog/templates/styles.css`, and the SVG pieces live in `catalog/theme.py`.
+
+### Live crawler analytics on pages.dev
+
+The discovery chart loads `/api/crawler-analytics` from the Academy Worker. The shop's
+Pages middleware records crawler user-agent matches into `caddock_crawlers`; no
+custom domain or zone ID is needed. Deploy the shop with the `CRAWLER_EVENTS`
+binding in `wrangler.toml`, then configure `CF_ACCOUNT_ID` and the
+`ANALYTICS_API_TOKEN` secret (Account Analytics Read) in the Academy and redeploy it.
+Both must use the same Cloudflare account. The account ID is available in the
+Cloudflare dashboard under Workers & Pages.
+
+Only the configured `CRAWLER_HOST` (default `33audio-com.pages.dev`) is recorded;
+preview hosts are excluded. If changing it, set the same value in both projects.
+Counts begin after deployment, include successful GET/HEAD requests, and are
+weighted for Analytics Engine sampling. They identify claimed crawler user agents,
+not verified bots. The endpoint caches responses for 60 seconds; the chart keeps
+its saved fallback if collection is unconfigured or unavailable. The dataset may
+not exist until the first crawler event. Tracked discovery and part requests invoke
+Pages Functions; `_routes.json` keeps other static assets outside Functions.
