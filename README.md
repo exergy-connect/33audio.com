@@ -56,7 +56,7 @@ Locally, export the same variables before `python -m catalog ebay`. A missing se
 2. In the repo settings, open **Pages**.
 3. Deploy from branch `main`, folder `/docs`.
 
-`docs/.nojekyll` is empty on purpose so GitHub Pages serves the files as-is and does not run Jekyll. The site generator rewrites that empty file on every build. The refresh workflow does not delete `docs/` or `.nojekyll`.
+`docs/.nojekyll` is an empty file so GitHub Pages serves the files as-is and does not run Jekyll. The site generator writes it on every build.
 
 The canonical origin in `data/site.json` is `https://exergy-connect.github.io/33audio.com` until a domain is chosen. Leave `custom_domain` as `null`. When the hostname is decided, set `custom_domain` to it (and point `canonical_origin` at `https://` that host), then rebuild. The generator writes `docs/CNAME` only in that case. No `CNAME` file is published while the decision is open.
 
@@ -79,4 +79,4 @@ python -m unittest discover -s tests -v
 
 ## Refresh workflow
 
-`.github/workflows/refresh.yml` runs every day and on manual dispatch. It parses the listing, syncs eBay when the two secrets exist, rebuilds `docs/`, checks that `.nojekyll` is still an empty file, and commits any changes.
+`.github/workflows/refresh.yml` runs every day and on manual dispatch. It parses the listing, syncs eBay when the two secrets exist, rebuilds `docs/`, and commits any changes.

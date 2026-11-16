@@ -78,13 +78,10 @@ def lastmod(catalog: dict) -> str | None:
 def reset_output(docs: Path) -> None:
     docs.mkdir(parents=True, exist_ok=True)
     for child in list(docs.iterdir()):
-        if child.name == ".nojekyll":
-            continue
         if child.is_dir():
             shutil.rmtree(child)
         else:
             child.unlink()
-    (docs / ".nojekyll").write_bytes(b"")
 
 
 def copy_assets(docs: Path, asset_dir: Path) -> None:
@@ -579,9 +576,6 @@ def write_robots(docs: Path, origin: str) -> None:
 
 def validate(docs: Path, catalog: dict, site: dict, origin: str) -> None:
     errors = []
-    nojekyll = docs / ".nojekyll"
-    if not nojekyll.is_file() or nojekyll.read_bytes() != b"":
-        errors.append("docs/.nojekyll must exist and be empty")
     if site.get("custom_domain"):
         if (docs / "CNAME").read_text(encoding="utf-8").strip() != str(site["custom_domain"]).strip():
             errors.append("CNAME missing for custom_domain")

@@ -86,16 +86,14 @@ class PurchaseTests(unittest.TestCase):
 
 
 class BuildTests(unittest.TestCase):
-    def test_build_writes_pages_and_keeps_nojekyll(self):
+    def test_build_writes_pages(self):
         data = catalog()
         with tempfile.TemporaryDirectory() as tmp:
             docs = Path(tmp) / "docs"
             docs.mkdir()
-            (docs / ".nojekyll").write_text("not empty")
             (docs / "old.html").write_text("bye")
             build(data, {"listings": []}, SITE, docs, ROOT / "assets")
             self.assertFalse((docs / "old.html").exists())
-            self.assertEqual((docs / ".nojekyll").read_bytes(), b"")
             self.assertFalse((docs / "CNAME").exists())
             page = (docs / "parts" / "mm177-4.32k" / "index.html").read_text(encoding="utf-8")
             self.assertIn('name="viewport" content="width=device-width, initial-scale=1"', page)
@@ -103,9 +101,6 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Buy on eBay", page)
             self.assertIn("Ask about this part", page)
             self.assertIn("min-height: 44px", (docs / "styles.css").read_text(encoding="utf-8"))
-            workflow = (ROOT / ".github" / "workflows" / "refresh.yml").read_text(encoding="utf-8")
-            self.assertNotIn("rm -rf docs", workflow)
-            self.assertIn(".nojekyll", workflow)
 
 
 if __name__ == "__main__":

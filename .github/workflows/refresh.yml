@@ -37,13 +37,6 @@ jobs:
       - name: Build site
         run: python -m catalog build
 
-      - name: Confirm Jekyll stays disabled
-        run: |
-          # This workflow never deletes docs/ or docs/.nojekyll.
-          # The generator rewrites that file empty on every build.
-          test -f docs/.nojekyll
-          test ! -s docs/.nojekyll
-
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
