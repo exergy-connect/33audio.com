@@ -41,6 +41,10 @@
     var link = document.createElement("a");
     link.className = "part-row";
     link.href = part.source === "ebay" ? part.url : root + part.url;
+    if (part.source === "ebay") {
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    }
     var pid = document.createElement("span");
     pid.className = "pid";
     pid.textContent = part.source === "ebay" ? part.label : part.id;

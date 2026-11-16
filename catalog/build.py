@@ -222,7 +222,7 @@ def layout(title: str, description: str, canonical: str, rel_path: str, body: st
     if noindex:
         extra_head = '<meta name="robots" content="noindex">\n' + extra_head
     describedby = origin_of(canonical, rel_path) + "/llms.txt"
-    return (
+    html = (
         head(title, description, canonical, depth, og_type, extra_head, describedby)
         + "<body>\n"
         + header(site, depth, current)
@@ -233,6 +233,12 @@ def layout(title: str, description: str, canonical: str, rel_path: str, body: st
         + script
         + extra_scripts
         + "\n</body>\n</html>\n"
+    )
+
+    return re.sub(
+        r'(<a\b[^>]*\bhref="https://(?:[a-zA-Z0-9-]+\.)*ebay\.com(?:/[^"]*)?"[^>]*)(>)',
+        r'\1 target="_blank" rel="noopener noreferrer"\2',
+        html,
     )
 
 
