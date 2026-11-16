@@ -1,0 +1,48 @@
+{
+  "kind": "simulated",
+  "title": "Academy lab API requests",
+  "chart": "bar",
+  "unit": "requests",
+  "x": "label",
+  "x_label": "Path and status",
+  "series": [
+    {
+      "key": "requests",
+      "label": "Requests"
+    }
+  ],
+  "extra_columns": [
+    {
+      "key": "p50_ms",
+      "label": "p50 ms"
+    }
+  ],
+  "rows": [
+    {
+      "label": "/api/lab/echo 200",
+      "requests": 930,
+      "p50_ms": 1
+    },
+    {
+      "label": "/api/lab/echo 429",
+      "requests": 140,
+      "p50_ms": 0
+    },
+    {
+      "label": "/api/lab/cache 200",
+      "requests": 310,
+      "p50_ms": 1
+    },
+    {
+      "label": "/api/telemetry 200",
+      "requests": 75,
+      "p50_ms": 180
+    }
+  ],
+  "description": "Example breakdown of what the LAB_EVENTS dataset records.",
+  "make_real": [
+    "Deploy the Academy Worker.",
+    "Set CF_ACCOUNT_ID and ANALYTICS_API_TOKEN.",
+    "node academy/tools/telemetry.mjs --out-dir academy/data/real && python -m academy build"
+  ]
+}

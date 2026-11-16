@@ -4,3 +4,6 @@ __pycache__/
 .wrangler/
 node_modules/
 .dev.vars
+academy/dist/
+academy/data/real/
+academy/node_modules/

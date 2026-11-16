@@ -1,0 +1,145 @@
+{
+  "kind": "simulated",
+  "title": "Cache hit ratio over 24 hours",
+  "chart": "line",
+  "unit": "%",
+  "x": "hour",
+  "x_label": "Hour (UTC)",
+  "series": [
+    {
+      "key": "static",
+      "label": "Static pages"
+    },
+    {
+      "key": "stock",
+      "label": "/api/stock (Cache API, 30 s)"
+    }
+  ],
+  "rows": [
+    {
+      "hour": "00:00",
+      "static": 93.0,
+      "stock": 44.0
+    },
+    {
+      "hour": "01:00",
+      "static": 94.0,
+      "stock": 44.6
+    },
+    {
+      "hour": "02:00",
+      "static": 95.0,
+      "stock": 46.4
+    },
+    {
+      "hour": "03:00",
+      "static": 95.8,
+      "stock": 49.3
+    },
+    {
+      "hour": "04:00",
+      "static": 96.5,
+      "stock": 53.0
+    },
+    {
+      "hour": "05:00",
+      "static": 96.9,
+      "stock": 57.3
+    },
+    {
+      "hour": "06:00",
+      "static": 97.0,
+      "stock": 62.0
+    },
+    {
+      "hour": "07:00",
+      "static": 96.9,
+      "stock": 66.7
+    },
+    {
+      "hour": "08:00",
+      "static": 96.5,
+      "stock": 71.0
+    },
+    {
+      "hour": "09:00",
+      "static": 95.8,
+      "stock": 74.7
+    },
+    {
+      "hour": "10:00",
+      "static": 95.0,
+      "stock": 77.6
+    },
+    {
+      "hour": "11:00",
+      "static": 94.0,
+      "stock": 79.4
+    },
+    {
+      "hour": "12:00",
+      "static": 93.0,
+      "stock": 80.0
+    },
+    {
+      "hour": "13:00",
+      "static": 92.0,
+      "stock": 79.4
+    },
+    {
+      "hour": "14:00",
+      "static": 91.0,
+      "stock": 77.6
+    },
+    {
+      "hour": "15:00",
+      "static": 90.2,
+      "stock": 74.7
+    },
+    {
+      "hour": "16:00",
+      "static": 89.5,
+      "stock": 71.0
+    },
+    {
+      "hour": "17:00",
+      "static": 89.1,
+      "stock": 66.7
+    },
+    {
+      "hour": "18:00",
+      "static": 89.0,
+      "stock": 62.0
+    },
+    {
+      "hour": "19:00",
+      "static": 89.1,
+      "stock": 57.3
+    },
+    {
+      "hour": "20:00",
+      "static": 89.5,
+      "stock": 53.0
+    },
+    {
+      "hour": "21:00",
+      "static": 90.2,
+      "stock": 49.3
+    },
+    {
+      "hour": "22:00",
+      "static": 91.0,
+      "stock": 46.4
+    },
+    {
+      "hour": "23:00",
+      "static": 92.0,
+      "stock": 44.6
+    }
+  ],
+  "description": "Example curve: /api/stock hit ratio rises with traffic because a 30 s TTL is shared by more visitors per data center.",
+  "make_real": [
+    "Put the shop on a zone and query httpRequestsAdaptiveGroups by cacheStatus (observability/queries/zone-http.graphql).",
+    "Cache API hits from Functions do not show in cacheStatus; count them from the Server-Timing cache entry with Analytics Engine instead."
+  ]
+}

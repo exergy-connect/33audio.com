@@ -1,0 +1,90 @@
+{
+  "kind": "simulated",
+  "title": "Rate-limit burst: answers per second",
+  "chart": "line",
+  "unit": "requests",
+  "x": "second",
+  "x_label": "Second",
+  "series": [
+    {
+      "key": "ok",
+      "label": "2xx"
+    },
+    {
+      "key": "limited",
+      "label": "429 rate limited"
+    },
+    {
+      "key": "other",
+      "label": "Other"
+    }
+  ],
+  "rows": [
+    {
+      "second": 1,
+      "ok": 5,
+      "limited": 0,
+      "other": 0
+    },
+    {
+      "second": 2,
+      "ok": 5,
+      "limited": 0,
+      "other": 0
+    },
+    {
+      "second": 3,
+      "ok": 5,
+      "limited": 0,
+      "other": 0
+    },
+    {
+      "second": 4,
+      "ok": 5,
+      "limited": 0,
+      "other": 0
+    },
+    {
+      "second": 5,
+      "ok": 0,
+      "limited": 5,
+      "other": 0
+    },
+    {
+      "second": 6,
+      "ok": 0,
+      "limited": 5,
+      "other": 0
+    },
+    {
+      "second": 7,
+      "ok": 0,
+      "limited": 5,
+      "other": 0
+    },
+    {
+      "second": 8,
+      "ok": 0,
+      "limited": 5,
+      "other": 0
+    },
+    {
+      "second": 9,
+      "ok": 0,
+      "limited": 5,
+      "other": 0
+    },
+    {
+      "second": 10,
+      "ok": 0,
+      "limited": 5,
+      "other": 0
+    }
+  ],
+  "description": "Example: 5 req/s against a 20-per-60-s limit, so requests from the fifth second on are limited.",
+  "make_real": [
+    "npm run dev --prefix academy",
+    "node academy/tools/loadtest.mjs --url http://localhost:8787/api/lab/echo --rps 5 --seconds 10 --out academy/data/real/ratelimit-burst.json",
+    "python -m academy build"
+  ]
+}

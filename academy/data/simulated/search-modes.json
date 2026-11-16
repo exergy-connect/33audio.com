@@ -1,0 +1,44 @@
+{
+  "kind": "simulated",
+  "title": "Part search: latency by mode",
+  "chart": "bar",
+  "unit": "ms",
+  "x": "label",
+  "x_label": "Mode",
+  "series": [
+    {
+      "key": "p50_ms",
+      "label": "p50 latency"
+    },
+    {
+      "key": "p95_ms",
+      "label": "p95 latency"
+    }
+  ],
+  "extra_columns": [
+    {
+      "key": "searches",
+      "label": "Searches"
+    }
+  ],
+  "rows": [
+    {
+      "label": "ai",
+      "searches": 412,
+      "p50_ms": 640,
+      "p95_ms": 1450
+    },
+    {
+      "label": "keyword",
+      "searches": 96,
+      "p50_ms": 2,
+      "p95_ms": 6
+    }
+  ],
+  "description": "Example: the language model adds hundreds of milliseconds; the keyword parser is nearly free. Caching AI answers for 300 s hides repeats.",
+  "make_real": [
+    "Deploy the shop with the production AI binding and the SEARCH_EVENTS Analytics Engine dataset.",
+    "Set CF_ACCOUNT_ID and ANALYTICS_API_TOKEN, then run node academy/tools/telemetry.mjs --out-dir academy/data/real.",
+    "Or configure the Academy Worker's /api/telemetry and use the live widget."
+  ]
+}

@@ -1,0 +1,290 @@
+{
+  "name": "Exergy ∞ Engineering Academy",
+  "tagline": "Learn Cloudflare by building, securing, and observing one real shop.",
+  "repo": "exergy-connect/33audio.com",
+  "author": {
+    "name": "Jeroen",
+    "github": "jbemmel"
+  },
+  "shop": {
+    "name": "33audio Caddock resistor shop",
+    "planned_origin": "https://caddock-33audio.pages.dev",
+    "deployed": false
+  },
+  "academy": {
+    "worker": "exergy-academy",
+    "deployed": false
+  },
+  "topics": [
+    {
+      "slug": "deploy",
+      "number": 1,
+      "title": "Build and deploy the shop",
+      "short": "Pages Functions and Workers KV: the stock document, Stripe checkout, and signed webhooks.",
+      "level": "Foundation",
+      "services": [
+        "Pages",
+        "Pages Functions",
+        "Workers KV",
+        "Cache API",
+        "Wrangler"
+      ],
+      "files": [
+        "wrangler.toml",
+        "functions/api/stock.js",
+        "functions/api/checkout.js",
+        "functions/api/stripe-webhook.js",
+        "worker/cart.js",
+        "worker/stripe.js",
+        "catalog/stock.py"
+      ],
+      "local": true
+    },
+    {
+      "slug": "discovery",
+      "number": 2,
+      "title": "Product discovery",
+      "short": "SEO, schema.org JSON-LD, llms.txt, AI crawler access, and the xYang ontology.",
+      "level": "Foundation",
+      "services": [
+        "Pages",
+        "AI Crawl Control",
+        "robots.txt",
+        "JSON-LD"
+      ],
+      "files": [
+        "catalog/llm_pages.py",
+        "docs/llms.txt",
+        "docs/robots.txt",
+        "model/audio33-catalog.yang",
+        "catalog/schema.py"
+      ],
+      "local": true
+    },
+    {
+      "slug": "ai",
+      "number": 3,
+      "title": "AI-assisted search",
+      "short": "Natural-language part search with Workers AI over catalog.json, with a keyword fallback.",
+      "level": "Intermediate",
+      "services": [
+        "Workers AI",
+        "Pages Functions",
+        "Cache API",
+        "Analytics Engine"
+      ],
+      "files": [
+        "worker/search.js",
+        "functions/api/search.js",
+        "catalog/templates/ask.js"
+      ],
+      "local": true
+    },
+    {
+      "slug": "delivery",
+      "number": 4,
+      "title": "DNS, delivery, caching, and latency",
+      "short": "Anycast request paths simulated in lab.net, cache headers and rules, the Cache API, and Tiered Cache.",
+      "level": "Intermediate",
+      "services": [
+        "DNS",
+        "Anycast",
+        "CDN cache",
+        "Cache API",
+        "Tiered Cache",
+        "Cache Rules",
+        "lab.net"
+      ],
+      "files": [
+        "network/labnet/anycast-edge.xp",
+        "network/labnet/anycast-edge-failover.xp",
+        "academy/tools/labnet-path.mjs",
+        "functions/api/stock.js",
+        "delivery/cache-rules.json"
+      ],
+      "local": true
+    },
+    {
+      "slug": "security",
+      "number": 5,
+      "title": "Security at the edge",
+      "short": "DDoS mitigation, WAF custom rules, bot management, and rate limiting, tested only against your own deployment.",
+      "level": "Advanced",
+      "services": [
+        "DDoS protection",
+        "WAF",
+        "Rate limiting rules",
+        "Workers Rate Limiting binding",
+        "Bot management"
+      ],
+      "files": [
+        "security/waf/rules.json",
+        "security/waf/apply.mjs",
+        "academy/worker/index.js",
+        "academy/tools/loadtest.mjs"
+      ],
+      "local": true
+    },
+    {
+      "slug": "observability",
+      "number": 6,
+      "title": "Observability",
+      "short": "Workers Logs, wrangler tail, Analytics Engine, the GraphQL Analytics API, Server-Timing, and measured results.",
+      "level": "Intermediate",
+      "services": [
+        "Workers Logs",
+        "wrangler tail",
+        "Analytics Engine",
+        "GraphQL Analytics API",
+        "Server-Timing"
+      ],
+      "files": [
+        "academy/worker/index.js",
+        "academy/tools/measure.mjs",
+        "academy/tools/telemetry.mjs",
+        "observability/queries/search-modes.sql"
+      ],
+      "local": true
+    }
+  ],
+  "paths": [
+    {
+      "slug": "ship-a-store",
+      "title": "Ship a store on the edge",
+      "summary": "Deploy the shop, make it discoverable, and prove it works with measurements.",
+      "audience": "Developers new to Cloudflare who want a working, observable app.",
+      "steps": [
+        [
+          "explore",
+          "deploy"
+        ],
+        [
+          "lab",
+          "deploy"
+        ],
+        [
+          "explore",
+          "discovery"
+        ],
+        [
+          "lab",
+          "discovery"
+        ],
+        [
+          "lab",
+          "observability"
+        ]
+      ]
+    },
+    {
+      "slug": "edge-performance",
+      "title": "Edge performance engineer",
+      "summary": "Follow a request from DNS to KV, cache what is safe to cache, and measure the difference.",
+      "audience": "Engineers who own latency and cache-hit ratio.",
+      "steps": [
+        [
+          "explore",
+          "delivery"
+        ],
+        [
+          "lab",
+          "delivery"
+        ],
+        [
+          "explore",
+          "observability"
+        ],
+        [
+          "lab",
+          "observability"
+        ]
+      ]
+    },
+    {
+      "slug": "secure-the-shop",
+      "title": "Secure the shop",
+      "summary": "Layer DDoS protection, WAF rules, and rate limits, then verify them with controlled traffic you own.",
+      "audience": "Security-minded engineers and SREs.",
+      "steps": [
+        [
+          "explore",
+          "security"
+        ],
+        [
+          "lab",
+          "security"
+        ],
+        [
+          "lab",
+          "observability"
+        ]
+      ]
+    },
+    {
+      "slug": "ai-on-the-edge",
+      "title": "AI on the edge",
+      "summary": "Add a Workers AI feature that degrades gracefully, and make the catalog readable by AI crawlers.",
+      "audience": "Developers adding AI features to production apps.",
+      "steps": [
+        [
+          "explore",
+          "ai"
+        ],
+        [
+          "lab",
+          "ai"
+        ],
+        [
+          "explore",
+          "discovery"
+        ],
+        [
+          "lab",
+          "discovery"
+        ]
+      ]
+    }
+  ],
+  "reference": [
+    {
+      "slug": "adr",
+      "title": "Architecture decision records",
+      "summary": "Why each Cloudflare service was chosen, and what was traded away."
+    },
+    {
+      "slug": "repo-map",
+      "title": "Repository map",
+      "summary": "Every file the Academy teaches from, linked at the commit this site was built from."
+    },
+    {
+      "slug": "bindings",
+      "title": "Bindings, variables, and secrets",
+      "summary": "Every binding for the shop and the Academy, where it is set, and what it does."
+    },
+    {
+      "slug": "pipelines",
+      "title": "Deployment pipelines",
+      "summary": "The GitHub Actions workflows that test, build, and deploy both projects."
+    },
+    {
+      "slug": "api-integrations",
+      "title": "Cloudflare API integrations",
+      "summary": "Each call this repository makes to the Cloudflare API, with the token permission it needs."
+    },
+    {
+      "slug": "labnet",
+      "title": "lab.net integration",
+      "summary": "How the request-path labs run on lab.net, the pinned commit, and the lab.net extensions the Academy is waiting for."
+    },
+    {
+      "slug": "real-vs-simulated",
+      "title": "Real vs. simulated data",
+      "summary": "The badge policy, and every dataset in this build with its provenance."
+    },
+    {
+      "slug": "go-live",
+      "title": "Go-live checklist",
+      "summary": "The remaining steps to deploy both projects: KV ids, secrets, Workers AI, and DNS."
+    }
+  ]
+}

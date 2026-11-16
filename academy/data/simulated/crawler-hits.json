@@ -1,0 +1,51 @@
+{
+  "kind": "simulated",
+  "title": "Crawler requests to discovery files (7 days)",
+  "chart": "bar",
+  "unit": "requests",
+  "x": "label",
+  "x_label": "Crawler",
+  "series": [
+    {
+      "key": "llms",
+      "label": "llms.txt / catalog.*"
+    },
+    {
+      "key": "pages",
+      "label": "Part pages"
+    }
+  ],
+  "rows": [
+    {
+      "label": "Googlebot",
+      "llms": 4,
+      "pages": 610
+    },
+    {
+      "label": "Bingbot",
+      "llms": 3,
+      "pages": 280
+    },
+    {
+      "label": "GPTBot",
+      "llms": 38,
+      "pages": 190
+    },
+    {
+      "label": "ClaudeBot",
+      "llms": 31,
+      "pages": 140
+    },
+    {
+      "label": "PerplexityBot",
+      "llms": 22,
+      "pages": 75
+    }
+  ],
+  "description": "Example only: AI crawlers tend to fetch llms.txt and catalog files more than classic search crawlers.",
+  "make_real": [
+    "Put the shop on a zone.",
+    "Open AI Crawl Control, or query httpRequestsAdaptiveGroups filtered by userAgent and clientRequestPath.",
+    "Save the counts as academy/data/real/crawler-hits.json with kind real."
+  ]
+}

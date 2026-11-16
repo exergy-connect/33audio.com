@@ -1,0 +1,56 @@
+{
+  "kind": "simulated",
+  "title": "Time to first byte by route",
+  "chart": "bar",
+  "unit": "ms",
+  "x": "label",
+  "x_label": "Route",
+  "series": [
+    {
+      "key": "p50",
+      "label": "TTFB p50"
+    },
+    {
+      "key": "p95",
+      "label": "TTFB p95"
+    }
+  ],
+  "rows": [
+    {
+      "label": "/",
+      "p50": 4.0,
+      "p95": 7.5
+    },
+    {
+      "label": "/parts/mm177-4.32k/",
+      "p50": 3.8,
+      "p95": 6.9
+    },
+    {
+      "label": "/llms.txt",
+      "p50": 3.5,
+      "p95": 6.1
+    },
+    {
+      "label": "/catalog.json",
+      "p50": 4.4,
+      "p95": 8.0
+    },
+    {
+      "label": "/api/stock",
+      "p50": 6.2,
+      "p95": 14.0
+    },
+    {
+      "label": "/api/search?q=10M+tube+amp",
+      "p50": 9.5,
+      "p95": 21.0
+    }
+  ],
+  "description": "Example shape of the measure.mjs output. CI replaces this with a real measurement of wrangler pages dev.",
+  "make_real": [
+    "npm ci --prefix academy && npm run dev:shop --prefix academy",
+    "In a second terminal: node academy/tools/measure.mjs --base http://localhost:8788 --out academy/data/real/local-latency.json",
+    "python -m academy build — the chart now shows REAL TELEMETRY with your host and timestamp."
+  ]
+}
