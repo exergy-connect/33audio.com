@@ -15,6 +15,7 @@ from catalog import ASSETS, DATA, DOCS
 from catalog.fees import estimate, from_cents, to_cents
 from catalog.llm_pages import faq_json_ld, faq_pairs, ontology_json_ld, part_summary, render_catalog_json, render_catalog_md, render_llms_full, render_llms_txt, render_robots
 from catalog.purchase import configured_flow_url, flatten, match_listings, resistance_label, resolve_purchase
+from catalog.theme import HERO_SVG, RECORD_SVG, vu_meter
 
 TEMPLATES = Path(__file__).resolve().parent / "templates"
 
@@ -130,7 +131,7 @@ def head(title: str, description: str, canonical: str, depth: int, og_type: str,
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#1b4332">
+<meta name="theme-color" content="#4a2b18">
 <title>{escape(title)}</title>
 <meta name="description" content="{escape(description)}">
 <link rel="canonical" href="{escape(canonical)}">
@@ -180,7 +181,7 @@ def header(site: dict, depth: int, current: str) -> str:
 <header class="site-header">
   <div class="copper-rule"></div>
   <div class="wrap header-row">
-    <a class="brand" href="{escape(rel(depth))}">33audio</a>
+    <a class="brand" href="{escape(rel(depth))}">{RECORD_SVG}<span class="brand-text"><span class="brand-name">33audio</span><span class="brand-tag">33⅓ · NOS Hi-Fi parts</span></span></a>
     <nav class="nav" aria-label="Primary">{''.join(links)}</nav>
   </div>
   <div class="wrap">
@@ -479,8 +480,11 @@ def render_home(catalog: dict, site: dict, ebay: dict, origin: str) -> str:
         ],
     }
     body = f"""
+<section class="hero" aria-labelledby="home-title">
+<div>
 <p class="eyebrow">{escape(site['location']['label'])} · USA stock · NOS</p>
-<h1>Caddock Micronox film resistors</h1>
+<h1 id="home-title">Caddock Micronox film resistors</h1>
+<p class="badges"><span class="badge nos">NOS</span><span class="badge hifi">Hi-Fi</span></p>
 <p class="lede">{escape(lede)}</p>
 <ul class="terms">
   <li><strong>${escape(catalog['unit_price'])}</strong>&nbsp;each</li>
@@ -488,6 +492,9 @@ def render_home(catalog: dict, site: dict, ebay: dict, origin: str) -> str:
   <li>USA only</li>
   <li>{count} values</li>
 </ul>
+</div>
+{HERO_SVG}
+</section>
 <p class="search-status" data-search-status aria-live="polite"></p>
 {chips()}
 <div data-search-live hidden></div>
@@ -602,6 +609,7 @@ def render_part(series: dict, part: dict, decision: dict, catalog: dict, site: d
 </nav>
 <p class="eyebrow">Caddock {escape(series['id'])} · Micronox film · NOS</p>
 <h1 class="part">{escape(part['id'])}</h1>
+<p class="badges"><span class="badge nos">NOS</span><span class="badge hifi">Hi-Fi</span></p>
 <p class="lede">{escape(label)} · {escape(part['tolerance'])} ({escape(part['tolerance_code'])})</p>
 <p class="summary">{escape(part_summary(part, site, catalog['listing']))}</p>
 {buy_html(decision, part, site, depth)}
@@ -642,9 +650,11 @@ def render_fees(catalog: dict, site: dict, origin: str) -> str:
     card_html = []
     for name, fee, note, url, label in cards:
         kept = from_cents(totals["total_cents"] - fee)
+        share = 100 * fee / totals["total_cents"] if totals["total_cents"] else 0.0
         card_html.append(
             f'<article class="fee-card"><h2>{escape(name)}</h2>'
-            f'<p class="fee-amount">${escape(from_cents(fee))}</p>'
+            f'{vu_meter(share, name.split()[0].lower())}'
+            f'<p class="fee-amount">${escape(from_cents(fee))} <span class="fine">({share:.1f}% of the order)</span></p>'
             f'<p>Fee on ${escape(buyer)}. About ${escape(kept)} remains after this fee, before postage the seller pays the carrier.</p>'
             f'<p class="fine">{escape(note)} <a href="{escape(url)}">{escape(label)}</a>. Checked {escape(costs["checked_on"])}.</p></article>'
         )

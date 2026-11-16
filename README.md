@@ -263,3 +263,11 @@ Nothing is deployed yet. These steps need the owner's Cloudflare account:
 6. **DNS.** Add the domain as a Cloudflare zone. Attach a custom domain to the Pages project (for example `shop.33audio.com`) and to the Worker (for example `academy.<domain>`). Set `custom_domain` and `canonical_origin` in `data/site.json` and rebuild. Then apply the edge rules with `CLOUDFLARE_ZONE_ID=… node security/waf/apply.mjs --apply` and `… --file delivery/cache-rules.json --apply`, and check that AI Crawl Control allows the crawlers listed in `robots.txt`.
 7. **Stripe** (when ready): Pages secrets `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET`, a webhook for `checkout.session.completed`, then `CHECKOUT_ENABLED = "true"` in both `[vars]` blocks.
 8. Set `"deployed": true` in `academy/content/site.json` once each project is live.
+
+`.github/workflows/ci.yml` runs on every pull request and on pushes to `main`. It runs the tests, rebuilds `docs/`, and fails if the committed `docs/` differs from the build.
+
+## Theme
+
+The look is a 1960s–70s hi-fi receiver: a walnut cabinet with a brushed-aluminum faceplate in the header, LP sleeves for the series cards, a record label next to each part number, and a VU meter for each fee on `/fees/`. The meter needle shows that fee as a percent of what the buyer pays, on a 0 to 20% scale. The header record spins twice on load at 33⅓ RPM (1.8 s per turn) and again on hover. Nothing moves when the visitor has `prefers-reduced-motion: reduce` set.
+
+It is CSS and inline SVG only. No web fonts or images are loaded; the font stacks fall back to system fonts. Styles live in `catalog/templates/styles.css`, and the SVG pieces live in `catalog/theme.py`.
