@@ -39,8 +39,9 @@ class StylesheetTests(unittest.TestCase):
         self.assertIn("animation: none !important", CSS[reduce:])
 
     def test_payment_flow_rules_kept(self):
-        self.assertIn('html[data-payment-flow="stripe"] .buy > button[data-flow="stripe"]', CSS)
-        self.assertIn("html:not([data-payment-flow]) .buy > [data-flow=\"ebay\"]", CSS)
+        for flow in ("ebay", "stripe", "paypal"):
+            self.assertRegex(CSS, rf'html\[data-payment-flow="{flow}"\] \.buy [^{{]*\[data-flow="{flow}"\]')
+        self.assertRegex(CSS, r'html:not\(\[data-payment-flow\]\) \.buy [^{]*\[data-flow="ebay"\]')
 
 
 class VuMeterTests(unittest.TestCase):
@@ -87,7 +88,7 @@ class ThemedBuildTests(unittest.TestCase):
 
     def test_buy_and_payment_controls(self):
         part = self.read("parts/mm177-4.32k/index.html")
-        self.assertRegex(part, r'<a class="button primary" data-flow="ebay" href="https://www\.ebay\.com/')
+        self.assertRegex(part, r'<a class="button primary" data-(?:flow|buy)="ebay" href="https://www\.ebay\.com/')
         self.assertIn("data-payment-select", part)
         for flow in ("ebay", "stripe", "paypal"):
             self.assertIn(f'<option value="{flow}">', part)

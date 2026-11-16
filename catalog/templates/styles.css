@@ -601,6 +601,8 @@ html[data-payment-flow="paypal"] .buy > p[data-flow="paypal"] {
   color: var(--cream);
   font: inherit;
   font-weight: 700;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 .row-add:hover { background: var(--walnut-dark); }
