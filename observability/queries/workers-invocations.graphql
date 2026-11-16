@@ -1,0 +1,27 @@
+# Worker invocations, errors, and CPU time per hour (GraphQL Analytics API).
+# Token permission: Account → Account Analytics → Read. Use scriptName "exergy-academy".
+query WorkerInvocations($accountTag: string!, $scriptName: string!, $since: Time!, $until: Time!) {
+  viewer {
+    accounts(filter: { accountTag: $accountTag }) {
+      workersInvocationsAdaptive(
+        limit: 100
+        filter: { scriptName: $scriptName, datetime_geq: $since, datetime_leq: $until }
+        orderBy: [datetimeHour_ASC]
+      ) {
+        sum {
+          requests
+          errors
+          subrequests
+        }
+        quantiles {
+          cpuTimeP50
+          cpuTimeP99
+        }
+        dimensions {
+          datetimeHour
+          status
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "$comment": "Cache rules and Tiered Cache for the 33audio shop on a custom domain. Apply with: node security/waf/apply.mjs --file delivery/cache-rules.json [--apply].",
+  "settings": [
+    { "method": "PATCH", "path": "/argo/tiered_caching", "body": { "value": "on" } },
+    { "method": "PATCH", "path": "/cache/tiered_cache_smart_topology_enable", "body": { "value": "on" } }
+  ],
+  "phases": {
+    "http_request_cache_settings": {
+      "description": "33audio cache rules",
+      "rules": [
+        {
+          "ref": "bypass_transactional_api",
+          "description": "Never cache checkout or the Stripe webhook",
+          "expression": "(http.request.uri.path in {\"/api/checkout\" \"/api/stripe-webhook\"})",
+          "action": "set_cache_settings",
+          "action_parameters": { "cache": false },
+          "enabled": true
+        },
+        {
+          "ref": "discovery_files",
+          "description": "llms.txt and catalog files change once a day: 5 minutes at the edge, 1 minute in browsers",
+          "expression": "(http.request.uri.path in {\"/llms.txt\" \"/llms-full.txt\" \"/catalog.json\" \"/catalog.md\" \"/sitemap.xml\"})",
+          "action": "set_cache_settings",
+          "action_parameters": {
+            "cache": true,
+            "edge_ttl": { "mode": "override_origin", "default": 300 },
+            "browser_ttl": { "mode": "override_origin", "default": 60 }
+          },
+          "enabled": true
+        },
+        {
+          "ref": "datasheets",
+          "description": "Datasheet scans never change: 30 days at the edge",
+          "expression": "(starts_with(http.request.uri.path, \"/datasheets/\"))",
+          "action": "set_cache_settings",
+          "action_parameters": {
+            "cache": true,
+            "edge_ttl": { "mode": "override_origin", "default": 2592000 },
+            "browser_ttl": { "mode": "override_origin", "default": 86400 }
+          },
+          "enabled": true
+        }
+      ]
+    }
+  }
+}
