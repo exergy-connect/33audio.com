@@ -1,0 +1,58 @@
+name: Refresh catalog
+
+on:
+  schedule:
+    - cron: "17 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-catalog
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test
+        run: python -m unittest discover -s tests -v
+
+      - name: Parse catalog
+        run: python -m catalog parse
+
+      - name: Sync eBay listings
+        env:
+          EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}
+          EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
+        run: python -m catalog ebay
+
+      - name: Build site
+        run: python -m catalog build
+
+      - name: Confirm Jekyll stays disabled
+        run: |
+          # This workflow never deletes docs/ or docs/.nojekyll.
+          # The generator rewrites that file empty on every build.
+          test -f docs/.nojekyll
+          test ! -s docs/.nojekyll
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog.json docs
+          if [ -f data/ebay.json ]; then git add data/ebay.json; fi
+          if git diff --staged --quiet; then
+            echo "No catalog changes to commit."
+          else
+            git commit -m "Refresh resistor catalog and rebuild site"
+            git push
+          fi

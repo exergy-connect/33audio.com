@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://exergy-connect.github.io/33audio.com/sitemap.xml

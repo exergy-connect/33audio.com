@@ -1,0 +1,926 @@
+{
+  "source_url": "https://www.33audio.com/enter/caddockmsmm.html",
+  "source_last_modified": "Thu, 12 Nov 2026 11:41:51 GMT",
+  "currency": "USD",
+  "unit_price": "10.00",
+  "legend": "Tolerances: J=5%, G=2%, F=1%, D=.5%, C=.25%, B=.1%",
+  "tolerance_codes": {
+    "J": "5%",
+    "G": "2%",
+    "F": "1%",
+    "D": "0.5%",
+    "C": "0.25%",
+    "B": "0.1%"
+  },
+  "listing": {
+    "film": "Micronox",
+    "product_line": "Caddock High Performance Film Resistors",
+    "temperature_line": "Temperature Range to 275 deg/C max",
+    "origin_line": "Made in USA 100% Tested",
+    "environment_line": "Ideal For Harsh Environments",
+    "provenance": "These resistors are liquidation stock from a",
+    "payment_note": "Payment by Paypal only, invoice will be sent.",
+    "region_note": "USA orders only, no international at this time",
+    "statements": [
+      "Caddock Resistors MM177_MM215_MS151_MS176 Micronox Film",
+      "Caddock High Performance Film Resistors",
+      "Temperature Range to 275 deg/C max",
+      "Made in USA 100% Tested",
+      "Ideal For Harsh Environments",
+      "These resistors are liquidation stock from a",
+      "Caddock stocking distributor that closed in the 1980s.",
+      "Caddock Type MM & MS $10.00 each",
+      "Payment by Paypal only, invoice will be sent.",
+      "USA orders only, no international at this time",
+      "Tolerances: J=5%, G=2%, F=1%, D=.5%, C=.25%, B=.1%"
+    ]
+  },
+  "series": [
+    {
+      "id": "MM177",
+      "family": "MM",
+      "default_tolerance_code": "B",
+      "default_tolerance": "0.1%",
+      "default_note": "B tolerance unless noted otherwise",
+      "parts": [
+        {
+          "id": "MM177-19.7-D",
+          "resistance": "19.7",
+          "ohms": 19.7,
+          "tolerance_code": "D",
+          "tolerance": "0.5%",
+          "tolerance_explicit": true,
+          "quantity": 35,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-23.8-D",
+          "resistance": "23.8",
+          "ohms": 23.8,
+          "tolerance_code": "D",
+          "tolerance": "0.5%",
+          "tolerance_explicit": true,
+          "quantity": 57,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-523-F",
+          "resistance": "523",
+          "ohms": 523,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": true,
+          "quantity": 44,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-830-D",
+          "resistance": "830",
+          "ohms": 830,
+          "tolerance_code": "D",
+          "tolerance": "0.5%",
+          "tolerance_explicit": true,
+          "quantity": 46,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-980-D",
+          "resistance": "980",
+          "ohms": 980,
+          "tolerance_code": "D",
+          "tolerance": "0.5%",
+          "tolerance_explicit": true,
+          "quantity": 29,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-1.02K",
+          "resistance": "1.02K",
+          "ohms": 1020,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 41,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-1.09K-D",
+          "resistance": "1.09K",
+          "ohms": 1090,
+          "tolerance_code": "D",
+          "tolerance": "0.5%",
+          "tolerance_explicit": true,
+          "quantity": 46,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-1.19K-D",
+          "resistance": "1.19K",
+          "ohms": 1190,
+          "tolerance_code": "D",
+          "tolerance": "0.5%",
+          "tolerance_explicit": true,
+          "quantity": 46,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-1.43K-D",
+          "resistance": "1.43K",
+          "ohms": 1430,
+          "tolerance_code": "D",
+          "tolerance": "0.5%",
+          "tolerance_explicit": true,
+          "quantity": 37,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-1.87K-F",
+          "resistance": "1.87K",
+          "ohms": 1870,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": true,
+          "quantity": 44,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-3.53K-D",
+          "resistance": "3.53K",
+          "ohms": 3530,
+          "tolerance_code": "D",
+          "tolerance": "0.5%",
+          "tolerance_explicit": true,
+          "quantity": 25,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-4.32K",
+          "resistance": "4.32K",
+          "ohms": 4320,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 63,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-4.99K-F",
+          "resistance": "4.99K",
+          "ohms": 4990,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": true,
+          "quantity": 35,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-5.625K",
+          "resistance": "5.625K",
+          "ohms": 5625,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 31,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-5.95K",
+          "resistance": "5.95K",
+          "ohms": 5950,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 45,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-8.73K",
+          "resistance": "8.73K",
+          "ohms": 8730,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 44,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-9.72K",
+          "resistance": "9.72K",
+          "ohms": 9720,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 34,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-16.67K-D",
+          "resistance": "16.67K",
+          "ohms": 16670,
+          "tolerance_code": "D",
+          "tolerance": "0.5%",
+          "tolerance_explicit": true,
+          "quantity": 28,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-19.7K",
+          "resistance": "19.7K",
+          "ohms": 19700,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 30,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-32.4K-D",
+          "resistance": "32.4K",
+          "ohms": 32400,
+          "tolerance_code": "D",
+          "tolerance": "0.5%",
+          "tolerance_explicit": true,
+          "quantity": 28,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-52K",
+          "resistance": "52K",
+          "ohms": 52000,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 32,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-66.4K",
+          "resistance": "66.4K",
+          "ohms": 66400,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 41,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-68.1K",
+          "resistance": "68.1K",
+          "ohms": 68100,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 31,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-89K",
+          "resistance": "89K",
+          "ohms": 89000,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 32,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-190.5K",
+          "resistance": "190.5K",
+          "ohms": 190500,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 29,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-545.4K",
+          "resistance": "545.4K",
+          "ohms": 545400,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 36,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-665K",
+          "resistance": "665K",
+          "ohms": 665000,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 32,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-665K-F",
+          "resistance": "665K",
+          "ohms": 665000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": true,
+          "quantity": 35,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-992K",
+          "resistance": "992K",
+          "ohms": 992000,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 37,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-1.86M",
+          "resistance": "1.86M",
+          "ohms": 1860000,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 31,
+          "price": "10.00"
+        },
+        {
+          "id": "MM177-1.89M",
+          "resistance": "1.89M",
+          "ohms": 1890000,
+          "tolerance_code": "B",
+          "tolerance": "0.1%",
+          "tolerance_explicit": false,
+          "quantity": 36,
+          "price": "10.00"
+        }
+      ]
+    },
+    {
+      "id": "MM215",
+      "family": "MM",
+      "default_tolerance_code": "F",
+      "default_tolerance": "1%",
+      "default_note": "F tolerance unless noted otherwise",
+      "parts": [
+        {
+          "id": "MM215-24.9",
+          "resistance": "24.9",
+          "ohms": 24.9,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 29,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-32.4",
+          "resistance": "32.4",
+          "ohms": 32.4,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 35,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-33.2",
+          "resistance": "33.2",
+          "ohms": 33.2,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 30,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-221",
+          "resistance": "221",
+          "ohms": 221,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 35,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-453",
+          "resistance": "453",
+          "ohms": 453,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 35,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-475",
+          "resistance": "475",
+          "ohms": 475,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 30,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-523",
+          "resistance": "523",
+          "ohms": 523,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 29,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-698",
+          "resistance": "698",
+          "ohms": 698,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 31,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-1.62K",
+          "resistance": "1.62K",
+          "ohms": 1620,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 35,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-4.32K",
+          "resistance": "4.32K",
+          "ohms": 4320,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 42,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-4.53K",
+          "resistance": "4.53K",
+          "ohms": 4530,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 35,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-5.49K",
+          "resistance": "5.49K",
+          "ohms": 5490,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 32,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-6.49K",
+          "resistance": "6.49K",
+          "ohms": 6490,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 40,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-8.45K",
+          "resistance": "8.45K",
+          "ohms": 8450,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 35,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-13.7K",
+          "resistance": "13.7K",
+          "ohms": 13700,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 47,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-45.3K",
+          "resistance": "45.3K",
+          "ohms": 45300,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 30,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-47.5K",
+          "resistance": "47.5K",
+          "ohms": 47500,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 29,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-80.6K",
+          "resistance": "80.6K",
+          "ohms": 80600,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 34,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-162K",
+          "resistance": "162K",
+          "ohms": 162000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 34,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-215K",
+          "resistance": "215K",
+          "ohms": 215000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 34,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-249K",
+          "resistance": "249K",
+          "ohms": 249000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 28,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-357K",
+          "resistance": "357K",
+          "ohms": 357000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 29,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-402K",
+          "resistance": "402K",
+          "ohms": 402000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 31,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-1.5M",
+          "resistance": "1.5M",
+          "ohms": 1500000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 34,
+          "price": "10.00"
+        },
+        {
+          "id": "MM215-2.15M",
+          "resistance": "2.15M",
+          "ohms": 2150000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 34,
+          "price": "10.00"
+        }
+      ]
+    },
+    {
+      "id": "MS151",
+      "family": "MS",
+      "default_tolerance_code": "F",
+      "default_tolerance": "1%",
+      "default_note": "F-tolerance unless noted otherwise",
+      "parts": [
+        {
+          "id": "MS151-104",
+          "resistance": "104",
+          "ohms": 104,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 29,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-187",
+          "resistance": "187",
+          "ohms": 187,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 29,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-267",
+          "resistance": "267",
+          "ohms": 267,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 28,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-453",
+          "resistance": "453",
+          "ohms": 453,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 34,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-475",
+          "resistance": "475",
+          "ohms": 475,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 32,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-5.9K",
+          "resistance": "5.9K",
+          "ohms": 5900,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 29,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-9K",
+          "resistance": "9K",
+          "ohms": 9000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 21,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-9.09K",
+          "resistance": "9.09K",
+          "ohms": 9090,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 28,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-17K",
+          "resistance": "17K",
+          "ohms": 17000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 22,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-23.2K",
+          "resistance": "23.2K",
+          "ohms": 23200,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 29,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-31.4K",
+          "resistance": "31.4K",
+          "ohms": 31400,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 19,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-33.2K",
+          "resistance": "33.2K",
+          "ohms": 33200,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 14,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-47.5K",
+          "resistance": "47.5K",
+          "ohms": 47500,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 26,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-69.9K",
+          "resistance": "69.9K",
+          "ohms": 69900,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 21,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-75K",
+          "resistance": "75K",
+          "ohms": 75000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 24,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-82.5K",
+          "resistance": "82.5K",
+          "ohms": 82500,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 27,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-196K",
+          "resistance": "196K",
+          "ohms": 196000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 25,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-634K",
+          "resistance": "634K",
+          "ohms": 634000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 23,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-1.02M",
+          "resistance": "1.02M",
+          "ohms": 1020000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 34,
+          "price": "10.00"
+        },
+        {
+          "id": "MS151-1.1M",
+          "resistance": "1.1M",
+          "ohms": 1100000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 27,
+          "price": "10.00"
+        }
+      ]
+    },
+    {
+      "id": "MS176",
+      "family": "MS",
+      "default_tolerance_code": "F",
+      "default_tolerance": "1%",
+      "default_note": "F-tolerance unless noted otherwise",
+      "parts": [
+        {
+          "id": "MS176-200",
+          "resistance": "200",
+          "ohms": 200,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 34,
+          "price": "10.00"
+        },
+        {
+          "id": "MS176-2.74K",
+          "resistance": "2.74K",
+          "ohms": 2740,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 16,
+          "price": "10.00"
+        },
+        {
+          "id": "MS176-5K-C",
+          "resistance": "5K",
+          "ohms": 5000,
+          "tolerance_code": "C",
+          "tolerance": "0.25%",
+          "tolerance_explicit": true,
+          "quantity": 28,
+          "price": "10.00"
+        },
+        {
+          "id": "MS176-10K",
+          "resistance": "10K",
+          "ohms": 10000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 16,
+          "price": "10.00"
+        },
+        {
+          "id": "MS176-121K",
+          "resistance": "121K",
+          "ohms": 121000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 15,
+          "price": "10.00"
+        },
+        {
+          "id": "MS176-500K-G",
+          "resistance": "500K",
+          "ohms": 500000,
+          "tolerance_code": "G",
+          "tolerance": "2%",
+          "tolerance_explicit": true,
+          "quantity": 25,
+          "price": "10.00"
+        },
+        {
+          "id": "MS176-1.21M",
+          "resistance": "1.21M",
+          "ohms": 1210000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 37,
+          "price": "10.00"
+        },
+        {
+          "id": "MS176-1.82M",
+          "resistance": "1.82M",
+          "ohms": 1820000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 23,
+          "price": "10.00"
+        },
+        {
+          "id": "MS176-2.5M",
+          "resistance": "2.5M",
+          "ohms": 2500000,
+          "tolerance_code": "F",
+          "tolerance": "1%",
+          "tolerance_explicit": false,
+          "quantity": 24,
+          "price": "10.00"
+        }
+      ]
+    }
+  ]
+}

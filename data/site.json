@@ -1,0 +1,58 @@
+{
+  "name": "33audio",
+  "seller_name": "Mark",
+  "email": "mark@33audio.com",
+  "location": {
+    "locality": "Houston",
+    "region": "TX",
+    "country": "US",
+    "label": "Houston, TX"
+  },
+  "canonical_origin": "https://exergy-connect.github.io/33audio.com",
+  "custom_domain": null,
+  "shipping": {
+    "amount": "6.35",
+    "currency": "USD",
+    "summary": "$6.35 flat shipping for any quantity, USA only"
+  },
+  "ebay_feedback_label": "100% positive feedback",
+  "datasheets": {
+    "MM": {
+      "file": "datasheets/mmdata85.jpg",
+      "label": "Type MM datasheet scan (EEM 1985)"
+    },
+    "MS": {
+      "file": "datasheets/msdata85.jpg",
+      "label": "Type MS datasheet scan (EEM 1985)"
+    }
+  },
+  "nrnd": {
+    "families": ["MM"],
+    "summary": "Caddock marks Type MM Not Recommended for New Designs and points new designs to Type MS.",
+    "source_url": "https://www.caddock.com/online-catalog/mrktg-lit/TypeMM.pdf",
+    "source_label": "Caddock Type MM datasheet"
+  },
+  "purchase": {
+    "mode": "ebay",
+    "ask": {
+      "label": "Ask about this part",
+      "email": "mark@33audio.com",
+      "subject": "Question about {part_id}",
+      "body": "Hello,\n\nI have a question about {part_id} ({resistance_label}, {tolerance}).\nListed quantity: {quantity}\nCatalog price: ${price}\n\n"
+    },
+    "ebay": {
+      "seller": "33audiomarko",
+      "store_url": "https://www.ebay.com/str/33audiomarko",
+      "search_url": "https://www.ebay.com/sch/i.html?_ssn={seller}&store_name={seller}&_nkw={query}&_sacat=0",
+      "query": "{series} {resistance} {tolerance}",
+      "buy_label": "Buy on eBay",
+      "matched_note": "Opens the matching listing in the 33audio eBay store.",
+      "search_note": "No single listing is matched yet. This searches the 33audio eBay store for this part."
+    },
+    "checkout": {
+      "buy_label": "Buy",
+      "url": "",
+      "note": "Checkout for {part_id}."
+    }
+  }
+}
